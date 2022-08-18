@@ -531,7 +531,7 @@ public:
 #if RETRO_PLATFORM == RETRO_SWITCH
         return NULL;
 #else
-#if RETRO_PLATFORM == RETRO_WIN
+#if RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_UWP
         return (char*)GetLastErrorAsString();
 #else
         return dlerror();
@@ -540,7 +540,7 @@ public:
     }
 
 private:
-#if RETRO_PLATFORM == RETRO_WIN
+#if RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_UWP
 #if _MSC_VER
     // from here: https://stackoverflow.com/a/17387176
     // WINAPI sucks lol

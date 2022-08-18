@@ -595,7 +595,6 @@
     <ClInclude Include="..\dependencies\all\iniparser\iniparser.h">
       <Filter>Source Files\Dependencies\iniparser</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h" />
     <ClInclude Include="RSDK\Graphics\DX11_UWP\DX11RenderDevice.hpp">
       <Filter>Source Files\RSDK\Graphics\DX11_UWP</Filter>
     </ClInclude>
