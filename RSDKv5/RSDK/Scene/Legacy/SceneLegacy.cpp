@@ -2,6 +2,8 @@
 #include "v3/SceneLegacyv3.cpp"
 #include "v4/SceneLegacyv4.cpp"
 
+using namespace RSDK::Legacy;
+
 int32 RSDK::Legacy::stageMode = 0;
 
 RSDK::Legacy::Camera RSDK::Legacy::cameras[2];

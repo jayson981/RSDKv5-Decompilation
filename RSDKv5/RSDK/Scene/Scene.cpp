@@ -9,9 +9,9 @@ using namespace RSDK;
 uint8 RSDK::tilesetPixels[TILESET_SIZE * 4];
 
 ScanlineInfo *RSDK::scanlines = NULL;
-TileLayer RSDK::tileLayers[LAYER_COUNT];
+RSDK::TileLayer RSDK::tileLayers[LAYER_COUNT];
 CollisionMask RSDK::collisionMasks[CPATH_COUNT][TILE_COUNT * 4];
-TileInfo RSDK::tileInfo[CPATH_COUNT][TILE_COUNT * 4];
+RSDK::TileInfo RSDK::tileInfo[CPATH_COUNT][TILE_COUNT * 4];
 
 #if RETRO_REV02
 bool32 RSDK::forceHardReset = false;

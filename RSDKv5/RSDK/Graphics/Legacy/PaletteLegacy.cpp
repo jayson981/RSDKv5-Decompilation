@@ -1,4 +1,6 @@
 
+using namespace RSDK::Legacy;
+
 // Palettes (as RGB565 Colors)
 uint16 RSDK::Legacy::fullPalette[LEGACY_PALETTE_COUNT][LEGACY_PALETTE_COLOR_COUNT];
 uint16 *RSDK::Legacy::activePalette = fullPalette[0]; // Ptr to the 256 color set thats active

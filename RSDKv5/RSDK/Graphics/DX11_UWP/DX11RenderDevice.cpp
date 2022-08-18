@@ -6,10 +6,6 @@
 
 #include "RSDK/Core/RetroEngine.hpp"
 
-#if RETRO_REV0U
-#include "Legacy/DrawingLegacy.cpp"
-#endif
-
 using namespace RSDK;
 
 // Notes:

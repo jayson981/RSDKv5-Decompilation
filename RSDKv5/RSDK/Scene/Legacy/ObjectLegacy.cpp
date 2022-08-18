@@ -5,6 +5,8 @@
 #include "v4/ObjectLegacyv4.cpp"
 #include "v4/ScriptLegacyv4.cpp"
 
+using namespace RSDK::Legacy;
+
 int32 RSDK::Legacy::OBJECT_BORDER_X1 = 0x80;
 int32 RSDK::Legacy::OBJECT_BORDER_X2 = SCREEN_XSIZE + 0x80;
 int32 RSDK::Legacy::OBJECT_BORDER_X3 = 0x20;

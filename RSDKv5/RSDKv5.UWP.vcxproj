@@ -88,6 +88,38 @@
     <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\UWP\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\v5\UWP\Intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\UWP\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\v5\UWP\Intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\UWP\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\v5\UWP\Intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\UWP\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\v5\UWP\Intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\UWP\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\v5\UWP\Intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\UWP\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\v5\UWP\Intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\UWP\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\v5\UWP\Intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\UWP\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\v5\UWP\Intermediate\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
