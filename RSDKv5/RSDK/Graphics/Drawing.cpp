@@ -133,7 +133,7 @@ RenderVertex RSDK::rsdkVertexBuffer[24] =
 #include "DX9/DX9RenderDevice.cpp"
 #elif RETRO_RENDERDEVICE_DIRECTX11
 #include "DX11/DX11RenderDevice.cpp"
-#elif RETRO_RENDERDEVICE_DIRECTX11_UAP
+#elif RETRO_RENDERDEVICE_DIRECTX11_UWP
 //#include "DX11_UWP/DX11RenderDevice.cpp"
 #elif RETRO_RENDERDEVICE_NX
 #include "NX/NXRenderDevice.cpp"
@@ -311,7 +311,7 @@ void RSDK::GetDisplayInfo(int32 *displayID, int32 *width, int32 *height, int32 *
     if (*displayID == -2) { // -2 == "get FS size display"
         if (videoSettings.fsWidth && videoSettings.fsHeight) {
             for (display = 0; display < RenderDevice::displayCount; ++display) {
-#if RETRO_RENDERDEVICE_DIRECTX11 || RETRO_RENDERDEVICE_DIRECTX11_UAP
+#if RETRO_RENDERDEVICE_DIRECTX11 || RETRO_RENDERDEVICE_DIRECTX11_UWP
                 int32 refresh = RenderDevice::displayInfo.displays[display].refresh_rate.Numerator
                                 / RenderDevice::displayInfo.displays[display].refresh_rate.Denominator;
 #else
@@ -339,7 +339,7 @@ void RSDK::GetDisplayInfo(int32 *displayID, int32 *width, int32 *height, int32 *
     if (display) {
         int32 d = display - 1;
 
-#if RETRO_RENDERDEVICE_DIRECTX11 || RETRO_RENDERDEVICE_DIRECTX11_UAP
+#if RETRO_RENDERDEVICE_DIRECTX11 || RETRO_RENDERDEVICE_DIRECTX11_UWP
         int32 refresh = RenderDevice::displayInfo.displays[d].refresh_rate.Numerator / RenderDevice::displayInfo.displays[d].refresh_rate.Denominator;
 #else
         int32 refresh = RenderDevice::displayInfo.displays[d].refresh_rate;

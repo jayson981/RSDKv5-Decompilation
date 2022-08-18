@@ -244,7 +244,7 @@ private:
 #include "DX9/DX9RenderDevice.hpp"
 #elif RETRO_RENDERDEVICE_DIRECTX11
 #include "DX11/DX11RenderDevice.hpp"
-#elif RETRO_RENDERDEVICE_DIRECTX11_UAP
+#elif RETRO_RENDERDEVICE_DIRECTX11_UWP
 #include "DX11_UWP/DX11RenderDevice.hpp"
 #elif RETRO_RENDERDEVICE_NX
 #include "NX/NXRenderDevice.hpp"

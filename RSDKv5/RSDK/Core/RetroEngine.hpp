@@ -166,7 +166,7 @@ enum GameRegions {
 #define RETRO_RENDERDEVICE_SDL2 (0)
 #define RETRO_RENDERDEVICE_GLFW (0)
 #define RETRO_RENDERDEVICE_EGL  (0)
-#define RETRO_RENDERDEVICE_DIRECTX11_UAP (0)
+#define RETRO_RENDERDEVICE_DIRECTX11_UWP (0)
 
 // ============================
 // AUDIO DEVICE BACKENDS
@@ -209,7 +209,7 @@ enum GameRegions {
 
 // Determines if the engine is RSDKv5 rev01 (all versions of mania pre-plus), rev02 (all versions of mania post-plus) or RSDKv5U (sonic origins)
 #ifndef RETRO_REVISION
-#define RETRO_REVISION (3)
+#define RETRO_REVISION (2)
 #endif
 
 // RSDKv5 Rev02 (Used prior to Sonic Mania Plus)
@@ -290,8 +290,8 @@ enum GameRegions {
 
 #elif RETRO_PLATFORM == RETRO_UWP
 
-#undef RETRO_RENDERDEVICE_DIRECTX11_UAP
-#define RETRO_RENDERDEVICE_DIRECTX11_UAP (1)
+#undef RETRO_RENDERDEVICE_DIRECTX11_UWP
+#define RETRO_RENDERDEVICE_DIRECTX11_UWP (1)
 
 #undef RETRO_AUDIODEVICE_XAUDIO
 #define RETRO_AUDIODEVICE_XAUDIO (1)
@@ -430,7 +430,7 @@ enum GameRegions {
 #include <GLFW/glfw3.h>
 #endif
 
-#if RETRO_RENDERDEVICE_DIRECTX11_UAP
+#if RETRO_RENDERDEVICE_DIRECTX11_UWP
 #include <dxgi.h>
 #include <d3d11_1.h>
 #include <winrt/Windows.Foundation.h>
