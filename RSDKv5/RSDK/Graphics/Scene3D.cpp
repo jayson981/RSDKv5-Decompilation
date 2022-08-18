@@ -862,6 +862,8 @@ void RSDK::Draw3DScene(uint16 sceneID)
         }
 
         // sort vertices by depth
+
+#if RETRO_USE_ORIGINAL_CODE
         for (int32 i = 0; i < scn->faceCount; ++i) {
             for (int32 j = scn->faceCount - 1; j > i; --j) {
                 if (scn->faceBuffer[j].depth > scn->faceBuffer[j - 1].depth) {
@@ -874,6 +876,10 @@ void RSDK::Draw3DScene(uint16 sceneID)
                 }
             }
         }
+#else
+        // this is, unsurprisingly, miles faster.
+        std::sort(scn->faceBuffer, scn->faceBuffer + scn->faceCount, [](Scene3DFace &a, Scene3DFace &b) { return a.depth > b.depth; });
+#endif
 
         uint8 *vertCnt = scn->faceVertCounts;
         Vector2 vertPos[4];
