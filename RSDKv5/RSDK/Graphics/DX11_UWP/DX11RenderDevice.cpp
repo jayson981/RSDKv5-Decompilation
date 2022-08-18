@@ -675,6 +675,10 @@ void RenderDevice::LoadShader(const char *name, bool32 linear)
     void *bytecode      = NULL;
     size_t bytecodeSize = 0;
 
+    // BUGBUG:
+    //  The "None" shader requires features unavailable in Shader Model 2.0, meaning devices with a feature level below 9_3
+    //  can't run it. To keep the Surface RT happy we gracefully fallback to the "Clean" shader, which produces a slightly 
+    //  softer image, but also means we dont have to resort to WARP.
     const char *fileName;
     if (featureLevel < D3D_FEATURE_LEVEL_9_3 && strcmp(name, "None") == 0) {
         fileName = "Clean";
