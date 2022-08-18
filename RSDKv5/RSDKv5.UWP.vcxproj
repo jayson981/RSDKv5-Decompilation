@@ -1,0 +1,780 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <PropertyGroup Label="Globals">
+    <CppWinRTOptimized>true</CppWinRTOptimized>
+    <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
+    <MinimalCoreWin>true</MinimalCoreWin>
+    <ProjectGuid>{5ecc2adb-a0f6-48c0-9861-0f2c5f9f244b}</ProjectGuid>
+    <ProjectName>RSDKv5.UWP</ProjectName>
+    <RootNamespace>RSDKv5_UWP</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsTargetPlatformVersion Condition=" '$(WindowsTargetPlatformVersion)' == '' ">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '16.0'">v142</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="PropertySheet.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros">
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <PackageCertificateKeyFile>RSDKv5.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <WarningLevel>Level4</WarningLevel>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;WINRT_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies/all/tinyxml2/;$(SolutionDir)dependencies/windows/SDL2/include/;$(SolutionDir)dependencies/windows/libogg/include/;$(SolutionDir)dependencies/windows/libtheora/include/;$(SolutionDir)dependencies/all/;$(SolutionDir)RSDKv5/;$(ExecutablePath);$(DXSDK_DIR)Utilities\bin\x86;$(IncludePath);$(DXSDK_DIR)Include;$(LibraryPath);$(DXSDK_DIR)Lib\$(PlatformTargetAsMSBuildArchitecture);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libogg.lib;libtheora_static.lib;d3d11.lib;d3dcompiler.lib;DXGI.lib;XInput.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </ClCompile>
+    <Link>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">libogg.lib;libtheora_static.lib;d3d11.lib;d3dcompiler.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+    </Link>
+    <Link>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">libogg.lib;libtheora_static.lib;d3d11.lib;d3dcompiler.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+    </Link>
+    <Link>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">libogg.lib;libtheora_static.lib;d3d11.lib;d3dcompiler.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+    </Link>
+    <Link>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">libogg.lib;libtheora_static.lib;d3d11.lib;d3dcompiler.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|x64'">libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\LargeTile.scale-100.png" />
+    <Image Include="Assets\LargeTile.scale-125.png" />
+    <Image Include="Assets\LargeTile.scale-150.png" />
+    <Image Include="Assets\LargeTile.scale-200.png" />
+    <Image Include="Assets\LockScreenLogo.scale-200.png" />
+    <Image Include="Assets\SmallTile.scale-100.png" />
+    <Image Include="Assets\SmallTile.scale-125.png" />
+    <Image Include="Assets\SmallTile.scale-150.png" />
+    <Image Include="Assets\SmallTile.scale-200.png" />
+    <Image Include="Assets\SplashScreen.scale-100.png" />
+    <Image Include="Assets\SplashScreen.scale-125.png" />
+    <Image Include="Assets\SplashScreen.scale-150.png" />
+    <Image Include="Assets\SplashScreen.scale-200.png" />
+    <Image Include="Assets\Square150x150Logo.scale-100.png" />
+    <Image Include="Assets\Square150x150Logo.scale-125.png" />
+    <Image Include="Assets\Square150x150Logo.scale-150.png" />
+    <Image Include="Assets\Square150x150Logo.scale-200.png" />
+    <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
+    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Image Include="Assets\Square44x44Logo.scale-100.png" />
+    <Image Include="Assets\Square44x44Logo.scale-125.png" />
+    <Image Include="Assets\Square44x44Logo.scale-150.png" />
+    <Image Include="Assets\Square44x44Logo.scale-200.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Image Include="Assets\StoreLogo.scale-100.png" />
+    <Image Include="Assets\StoreLogo.scale-125.png" />
+    <Image Include="Assets\StoreLogo.scale-150.png" />
+    <Image Include="Assets\StoreLogo.scale-200.png" />
+    <Image Include="Assets\Wide310x150Logo.scale-200.png" />
+    <CopyFileToFolders Include="mods\ManiaTouchControls\Data\Sprites\Global\DPad.gif">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
+    </CopyFileToFolders>
+    <Image Include="Assets\WideTile.scale-100.png" />
+    <Image Include="Assets\WideTile.scale-125.png" />
+    <Image Include="Assets\WideTile.scale-150.png" />
+    <Image Include="Assets\WideTile.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\..\Sonic-Mania-Decompilation\build\ARM64\Release\Game\Game.dll" Condition="'$(Platform)'=='ARM64'">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\..\Sonic-Mania-Decompilation\build\ARM\Release\Game\Game.dll" Condition="'$(Platform)'=='ARM'">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\..\Sonic-Mania-Decompilation\build\Win32\Release\Game\Game.dll" Condition="'$(Platform)'=='Win32'">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\..\Sonic-Mania-Decompilation\build\x64\Release\Game\Game.dll" Condition="'$(Platform)'=='x64'">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\Clean.fso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\Clean.vso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\CRT-Yee64.fso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\CRT-Yee64.vso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\CRT-Yeetron.fso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\CRT-Yeetron.vso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\None.fso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\None.vso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\RGB-Image.fso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\RGB-Image.vso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\YUV-420.fso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\YUV-420.vso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\YUV-422.fso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\YUV-422.vso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\YUV-444.fso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\CSO-DX11\YUV-444.vso">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\Data\Shaders\CSO-DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\mod.ini">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\D3D11Shaders\</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\modconfig.ini">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\ManiaTouchControls\mod.ini">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)\Mods\ManiaTouchControls</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\Mods\ManiaTouchControls\build\Win32\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='Win32'">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)Mods\ManiaTouchControls</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\Mods\ManiaTouchControls\build\x64\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='x64'">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)Mods\ManiaTouchControls</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\Mods\ManiaTouchControls\build\ARM\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='ARM'">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)Mods\ManiaTouchControls</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\Mods\ManiaTouchControls\build\ARM64\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='ARM64'">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders>$(OutDir)Mods\ManiaTouchControls</DestinationFolders>
+    </CopyFileToFolders>
+    <None Include="packages.config" />
+    <None Include="PropertySheet.props" />
+    <None Include="RSDKv5.UWP_TemporaryKey.pfx" />
+    <Text Include="readme.txt">
+      <DeploymentContent>false</DeploymentContent>
+    </Text>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+  </Target>
+  <ItemGroup>
+    <ClCompile Include="..\dependencies\all\iniparser\dictionary.cpp" />
+    <ClCompile Include="..\dependencies\all\iniparser\iniparser.cpp" />
+    <ClCompile Include="..\dependencies\all\miniz\miniz.c" />
+    <ClCompile Include="..\dependencies\all\stb_vorbis\stb_vorbis.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\dependencies\all\tinyxml2\tinyxml2.cpp" />
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="RSDK\Audio\Audio.cpp" />
+    <ClCompile Include="RSDK\Audio\NX\NXAudioDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Audio\SDL2\SDL2AudioDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Audio\XAudio\XAudioDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Core\Link.cpp" />
+    <ClCompile Include="RSDK\Core\Math.cpp" />
+    <ClCompile Include="RSDK\Core\ModAPI.cpp" />
+    <ClCompile Include="RSDK\Core\Reader.cpp" />
+    <ClCompile Include="RSDK\Core\RetroEngine.cpp" />
+    <ClCompile Include="RSDK\Dev\Debug.cpp" />
+    <ClCompile Include="RSDK\Graphics\Animation.cpp" />
+    <ClCompile Include="RSDK\Graphics\Drawing.cpp" />
+    <ClCompile Include="RSDK\Graphics\DX11_UWP\DX11RenderDevice.cpp" />
+    <ClCompile Include="RSDK\Graphics\DX9\DX9RenderDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Graphics\GL3\GL3RenderDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Graphics\NX\NXRenderDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Graphics\Palette.cpp" />
+    <ClCompile Include="RSDK\Graphics\Scene3D.cpp" />
+    <ClCompile Include="RSDK\Graphics\SDL2\SDL2RenderDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Graphics\Sprite.cpp" />
+    <ClCompile Include="RSDK\Graphics\Video.cpp" />
+    <ClCompile Include="RSDK\Input\GLFW\GLFWInputDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Input\Input.cpp" />
+    <ClCompile Include="RSDK\Input\Keyboard\KBInputDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Input\NX\NXInputDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Input\RawInput\RawInputDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Input\SDL2\SDL2InputDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Input\Steam\SteamInputDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Input\WGI\WGIDevice.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Input\XInput\XInputDevice.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\Scene\Collision.cpp" />
+    <ClCompile Include="RSDK\Scene\Object.cpp" />
+    <ClCompile Include="RSDK\Scene\Objects\DefaultObject.cpp" />
+    <ClCompile Include="RSDK\Scene\Objects\DevOutput.cpp" />
+    <ClCompile Include="RSDK\Scene\Scene.cpp" />
+    <ClCompile Include="RSDK\Storage\Storage.cpp" />
+    <ClCompile Include="RSDK\Storage\Text.cpp" />
+    <ClCompile Include="RSDK\User\Core\UserAchievements.cpp" />
+    <ClCompile Include="RSDK\User\Core\UserCore.cpp" />
+    <ClCompile Include="RSDK\User\Core\UserLeaderboards.cpp" />
+    <ClCompile Include="RSDK\User\Core\UserPresence.cpp" />
+    <ClCompile Include="RSDK\User\Core\UserStats.cpp" />
+    <ClCompile Include="RSDK\User\Core\UserStorage.cpp" />
+    <ClCompile Include="RSDK\User\Dummy\DummyAchievements.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\Dummy\DummyCore.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\Dummy\DummyLeaderboards.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\Dummy\DummyPresence.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\Dummy\DummyStats.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\Dummy\DummyStorage.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\EOS\EOSAchievements.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\EOS\EOSCore.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\EOS\EOSLeaderboards.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\EOS\EOSPresence.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\EOS\EOSStats.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\EOS\EOSStorage.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\NX\NXAchievements.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\NX\NXCore.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\NX\NXLeaderboards.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\NX\NXPresence.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\NX\NXStats.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\NX\NXStorage.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\Steam\SteamAchievements.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\Steam\SteamCore.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\Steam\SteamLeaderboards.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\Steam\SteamPresence.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\Steam\SteamStats.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\Steam\SteamStorage.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\dependencies\all\iniparser\dictionary.h" />
+    <ClInclude Include="..\dependencies\all\iniparser\iniparser.h" />
+    <ClInclude Include="..\dependencies\all\miniz\miniz.h" />
+    <ClInclude Include="..\dependencies\all\tinyxml2\tinyxml2.h" />
+    <ClInclude Include="main.hpp" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RSDK\Audio\Audio.hpp" />
+    <ClInclude Include="RSDK\Audio\NX\NXAudioDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Audio\SDL2\SDL2AudioDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Audio\XAudio\XAudioDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Core\Link.hpp" />
+    <ClInclude Include="RSDK\Core\Math.hpp" />
+    <ClInclude Include="RSDK\Core\ModAPI.hpp" />
+    <ClInclude Include="RSDK\Core\Reader.hpp" />
+    <ClInclude Include="RSDK\Core\RetroEngine.hpp" />
+    <ClInclude Include="RSDK\Dev\Debug.hpp" />
+    <ClInclude Include="RSDK\Dev\DevFont.hpp" />
+    <ClInclude Include="RSDK\Graphics\Animation.hpp" />
+    <ClInclude Include="RSDK\Graphics\Drawing.hpp" />
+    <ClInclude Include="RSDK\Graphics\DX11_UWP\DX11RenderDevice.hpp" />
+    <ClInclude Include="RSDK\Graphics\DX9\DX9RenderDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Graphics\GL3\GL3RenderDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Graphics\NX\NXRenderDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Graphics\Palette.hpp" />
+    <ClInclude Include="RSDK\Graphics\Scene3D.hpp" />
+    <ClInclude Include="RSDK\Graphics\SDL2\SDL2RenderDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Graphics\Sprite.hpp" />
+    <ClInclude Include="RSDK\Graphics\Video.hpp" />
+    <ClInclude Include="RSDK\Input\GLFW\GLFWInputDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Input\Input.hpp" />
+    <ClInclude Include="RSDK\Input\Keyboard\KBInputDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Input\NX\NXInputDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Input\RawInput\RawInputDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Input\SDL2\SDL2InputDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Input\Steam\SteamInputDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Input\WGI\WGIDevice.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Input\XInput\XInputDevice.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\Scene\Collision.hpp" />
+    <ClInclude Include="RSDK\Scene\Object.hpp" />
+    <ClInclude Include="RSDK\Scene\Objects\DefaultObject.hpp" />
+    <ClInclude Include="RSDK\Scene\Objects\DevOutput.hpp" />
+    <ClInclude Include="RSDK\Scene\Scene.hpp" />
+    <ClInclude Include="RSDK\Storage\Storage.hpp" />
+    <ClInclude Include="RSDK\Storage\Text.hpp" />
+    <ClInclude Include="RSDK\User\Core\UserAchievements.hpp" />
+    <ClInclude Include="RSDK\User\Core\UserCore.hpp" />
+    <ClInclude Include="RSDK\User\Core\UserLeaderboards.hpp" />
+    <ClInclude Include="RSDK\User\Core\UserPresence.hpp" />
+    <ClInclude Include="RSDK\User\Core\UserStats.hpp" />
+    <ClInclude Include="RSDK\User\Core\UserStorage.hpp" />
+    <ClInclude Include="RSDK\User\Dummy\DummyAchievements.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\Dummy\DummyCore.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\Dummy\DummyLeaderboards.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\Dummy\DummyPresence.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\Dummy\DummyStats.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\Dummy\DummyStorage.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\EOS\EOSAchievements.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\EOS\EOSCore.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\EOS\EOSLeaderboards.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\EOS\EOSPresence.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\EOS\EOSStats.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\EOS\EOSStorage.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\NX\NXAchievements.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\NX\NXCore.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\NX\NXLeaderboards.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\NX\NXPresence.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\NX\NXStats.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\NX\NXStorage.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\Steam\SteamAchievements.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\Steam\SteamCore.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\Steam\SteamLeaderboards.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\Steam\SteamPresence.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\Steam\SteamStats.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\Steam\SteamStorage.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\DX11\Clean.hlsl">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\DX11\CRT-Yee64.hlsl">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\DX11\CRT-Yeetron.hlsl">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\DX11\None.hlsl">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\DX11\RGB-Image.hlsl">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\DX11\YUV-420.hlsl">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\DX11\YUV-422.hlsl">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\DX11\YUV-444.hlsl">
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+</Project>

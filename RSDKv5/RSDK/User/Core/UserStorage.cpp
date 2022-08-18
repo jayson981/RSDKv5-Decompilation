@@ -1022,7 +1022,8 @@ void RSDK::SKU::UserDBStorage_SaveCB8(int32 status)
 
 void (*RSDK::SKU::preLoadSaveFileCB)();
 void (*RSDK::SKU::postLoadSaveFileCB)();
-char RSDK::SKU::userFileDir[0x100];
+
+char RSDK::SKU::userFileDir[MAX_PATH];
 
 bool32 RSDK::SKU::LoadUserFile(const char *filename, void *buffer, uint32 bufSize)
 {
@@ -1163,6 +1164,9 @@ void RSDK::SKU::InitUserDirectory()
 
     SKU::SetUserFileCallbacks("./", NULL, NULL);
 
+#elif RETRO_PLATFORM == RETRO_UWP
+    std::string str = winrt::to_string(winrt::Windows::Storage::ApplicationData::Current().LocalFolder().Path() + L"\\");
+    SKU::SetUserFileCallbacks(str.c_str(), NULL, NULL);
 #else
 
     SKU::SetUserFileCallbacks("", NULL, NULL);

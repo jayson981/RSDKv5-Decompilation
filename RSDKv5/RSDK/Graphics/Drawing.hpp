@@ -244,6 +244,8 @@ private:
 #include "DX9/DX9RenderDevice.hpp"
 #elif RETRO_RENDERDEVICE_DIRECTX11
 #include "DX11/DX11RenderDevice.hpp"
+#elif RETRO_RENDERDEVICE_DIRECTX11_UAP
+#include "DX11_UWP/DX11RenderDevice.hpp"
 #elif RETRO_RENDERDEVICE_NX
 #include "NX/NXRenderDevice.hpp"
 #elif RETRO_RENDERDEVICE_SDL2
@@ -415,6 +417,12 @@ inline void ClearGfxSurfaces()
         }
     }
 }
+
+#if RETRO_REV02
+extern RenderVertex rsdkVertexBuffer[60];
+#else
+extern RenderVertex rsdkVertexBuffer[24];
+#endif
 
 #if RETRO_REV0U
 #include "Legacy/DrawingLegacy.hpp"

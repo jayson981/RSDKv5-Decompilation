@@ -1205,10 +1205,10 @@ void RSDK::InitGameLink()
 #endif
         if (engine.useExternalCode) {
             char buffer[0x100];
-#if RETRO_PLATFORM == RETRO_WIN
+#if RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_UWP
             strcpy_s(buffer, 0x100, gameLogicName);
 #else
-        sprintf(buffer, "%s%s", SKU::userFileDir, gameLogicName);
+            sprintf(buffer, "%s%s", SKU::userFileDir, gameLogicName);
 #endif
             if (!gameLogicHandle)
                 gameLogicHandle = Link::Open(buffer);

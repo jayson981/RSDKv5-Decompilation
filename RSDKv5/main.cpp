@@ -31,8 +31,6 @@ static void initNxLink()
 #if RETRO_RENDERDEVICE_DIRECTX9 || RETRO_RENDERDEVICE_DIRECTX11
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nShowCmd)
 {
-    RSDK::RenderDevice::hInstance     = hInstance;
-    RSDK::RenderDevice::hPrevInstance = hPrevInstance;
     RSDK::RenderDevice::nShowCmd      = nShowCmd;
 
     return RSDK_main(1, &lpCmdLine, RSDK::LinkGameLogic);

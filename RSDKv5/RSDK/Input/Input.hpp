@@ -58,7 +58,10 @@ enum InputDeviceAPIs {
     DEVICE_API_GLFW, // custom-made for GL3, won't be in ANY real RSDKv5 version ever, it's just cool
 #endif
 #if RETRO_INPUTDEVICE_PDBOAT
-    DEVICE_API_PDBOAT // custom-made for android (paddleboat API)
+    DEVICE_API_PDBOAT, // custom-made for android (paddleboat API)
+#endif
+#if RETRO_INPUTDEVICE_WGI
+    DEVICE_API_WGI // Windows.Gaming.Input API for UWP
 #endif
 };
 
@@ -492,6 +495,10 @@ extern int32 gamePadCount;
 
 #if RETRO_INPUTDEVICE_PDBOAT
 #include "Paddleboat/PDBInputDevice.hpp"
+#endif
+
+#if RETRO_INPUTDEVICE_WGI
+#include "WGI/WGIDevice.h"
 #endif
 
 // Initializes the input devices & the backend APIs powering em

@@ -399,20 +399,28 @@ void LinkGameLogic(GameInfo info);
 // ORIGINAL CLASS
 
 // Windows.h already included by master header
-#if !(RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_SWITCH)
+#if !(RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_SWITCH || RETRO_PLATFORM == RETRO_UWP)
 #include <dlfcn.h>
 #endif
 
 // Only define this if you want to prioritize checking libraries first (Game_x64.dll then Game.dll)
 // e.x. -DRETRO_ARCHIITECTURE="x64"
-#ifndef RETRO_ARCHITECTURE
-#define RETRO_ARCHITECTURE NULL
-#endif
+//#if RETRO_PLATFORM == RETRO_UWP
+//#if defined(_M_ARM)
+//#define RETRO_ARCHITECTURE "arm32"
+//#elif defined(_M_ARM64) || defined(_M_ARM64EC)
+//#define RETRO_ARCHITECTURE "arm64"
+//#elif defined(_M_AMD64)
+//#define RETRO_ARCHITECTURE "x64"
+//#else
+//#define RETRO_ARCHITECTURE "x86"
+//#endif
+//#endif
 
 class Link
 {
 public:
-#if RETRO_PLATFORM == RETRO_WIN
+#if RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_UWP
     typedef HMODULE Handle;
     // constexpr was added in C++11 this is safe don't kill me
     static constexpr const char *extention = ".dll";
@@ -435,12 +443,12 @@ public:
         std::string prepath = path;
         // if doesn't end with extention
         if (path.length() <= strlen(extention) || path.compare(path.length() - strlen(extention), strlen(extention), std::string(extention))) {
-#if RETRO_ARCHITECTURE
+#ifdef RETRO_ARCHITECTURE
             path += "_" RETRO_ARCHITECTURE;
 #endif // ! RETRO_ARCHITECTURE
             path += extention;
         }
-#if RETRO_ARCHITECTURE
+#ifdef RETRO_ARCHITECTURE
         else {
             path = path.substr(0, path.size() - strlen(extention));
             path += extention;
@@ -450,6 +458,8 @@ public:
 
 #if RETRO_PLATFORM == RETRO_WIN
         Handle ret = (Handle)LoadLibraryA(path.c_str());
+#elif RETRO_PLATFORM == RETRO_UWP
+        Handle ret = (Handle)LoadPackagedLibrary(std::wstring(path.begin(), path.end()).c_str(), 0);
 #else
 #if RETRO_PLATFORM == RETRO_ANDROID
         // path should only load local libs
@@ -460,7 +470,7 @@ public:
         Handle ret = (Handle)dlopen(path.c_str(), RTLD_LOCAL | RTLD_LAZY);
 #endif // ! RETRO_PLATFORM == WIN
 
-#if RETRO_ARCHITECTURE
+#ifdef RETRO_ARCHITECTURE
         if (!ret) {
             path = prepath;
             if (path.length() <= strlen(extention) || path.compare(path.length() - strlen(extention), strlen(extention), std::string(extention))) {
@@ -468,8 +478,11 @@ public:
             }
 
 #if RETRO_PLATFORM == RETRO_WIN
-            ret = (Handle)LoadLibraryA(path.c_str());
+            Handle ret = (Handle)LoadLibraryA(path.c_str());
+#elif RETRO_PLATFORM == RETRO_UWP
+            Handle ret = (Handle)LoadPackagedLibrary(std::wstring(path.begin(), path.end()).c_str(), 0);
 #else
+
 #if RETRO_PLATFORM == RETRO_ANDROID
             // path should only load local libs
             if (path.find_last_of('/') != std::string::npos)
@@ -490,7 +503,7 @@ public:
         return;
 #else
         if (handle)
-#if RETRO_PLATFORM == RETRO_WIN
+#if RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_UWP
             FreeLibrary(handle);
 #else
             dlclose(handle);
@@ -498,17 +511,17 @@ public:
 #endif
     }
 
-    static inline void *GetSymbol(Handle handle, const char *symbol)
+    static inline void *GetSymbol(Handle handle, const std::string& symbol)
     {
 #if RETRO_PLATFORM == RETRO_SWITCH
         return NULL;
 #else
         if (!handle)
             return NULL;
-#if RETRO_PLATFORM == RETRO_WIN
-        return (void *)GetProcAddress(handle, symbol);
+#if RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_UWP
+        return (void *)GetProcAddress(handle, symbol.c_str());
 #else
-        return (void *)dlsym(handle, symbol);
+        return (void *)dlsym(handle, symbol.c_str());
 #endif
 #endif
     }

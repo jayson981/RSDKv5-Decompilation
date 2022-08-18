@@ -255,37 +255,10 @@ void RSDK::ScanModFolder(ModInfo *info)
             auto data_rdi = fs::recursive_directory_iterator(dataPath, fs::directory_options::follow_directory_symlink);
             for (auto data_de : data_rdi) {
                 if (data_de.is_regular_file()) {
-                    char modBuf[0x100];
-                    strcpy(modBuf, data_de.path().string().c_str());
-                    char folderTest[12][0x10] = { "Data/",     "Data\\",     "data/",     "data\\",
-
-                                                  "Bytecode/", "Bytecode\\", "bytecode/", "bytecode\\",
-
-                                                  "Videos/",   "Videos\\",   "videos/",   "videos\\" };
-                    int32 tokenPos            = -1;
-                    for (int32 i = 0; i < 12; ++i) {
-                        tokenPos = (int32)std::string(modBuf).find(folderTest[i], 0);
-                        if (tokenPos >= 0)
-                            break;
-                    }
-
-                    if (tokenPos >= 0) {
-                        char buffer[0x80];
-                        for (int32 i = (int32)strlen(modBuf); i >= tokenPos; --i) {
-                            buffer[i - tokenPos] = modBuf[i] == '\\' ? '/' : modBuf[i];
-                        }
-
-                        // PrintLog(modBuf);
-                        std::string path(buffer);
-                        std::string modPath(modBuf);
-                        char pathLower[0x100];
-                        memset(pathLower, 0, sizeof(char) * 0x100);
-                        for (int32 c = 0; c < path.size(); ++c) {
-                            pathLower[c] = tolower(path.c_str()[c]);
-                        }
-
-                        info->fileMap.insert(std::pair<std::string, std::string>(pathLower, modBuf));
-                    }
+                    std::string folderPath = data_de.path().string().substr(dataPath.string().length() + 1);
+                    std::transform(folderPath.begin(), folderPath.end(), folderPath.begin(),
+                                   [](unsigned char c) { return c == '\\' ? '/' : std::tolower(c); });
+                    info->fileMap.insert(std::pair<std::string, std::string>(folderPath, data_de.path().string()));
                 }
             }
         } catch (fs::filesystem_error fe) {
@@ -363,8 +336,12 @@ void RSDK::LoadMods(bool newOnly)
     }
 
     using namespace std;
-    char modBuf[0x100];
+    char modBuf[MAX_PATH];
+#if RETRO_PLATFORM == RETRO_UWP
+    sprintf_s(modBuf, (int32)sizeof(modBuf), "%smods/", "");
+#else
     sprintf_s(modBuf, (int32)sizeof(modBuf), "%smods/", SKU::userFileDir);
+#endif
     fs::path modPath(modBuf);
 
     if (fs::exists(modPath) && fs::is_directory(modPath)) {
@@ -480,7 +457,7 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
     info->redirectSaveRAM  = false;
     info->disableGameLogic = false;
 
-    const std::string modDir = modsPath + "/" + folder;
+    const std::string modDir = std::filesystem::path(modsPath).append(folder).string();
 
     FileIO *f = fOpen((modDir + "/mod.ini").c_str(), "r");
     if (f) {
@@ -534,11 +511,9 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
 
                 fs::path file(modDir + "/" + buf);
                 Link::Handle linkHandle = Link::Open(file.string().c_str());
-
                 if (linkHandle) {
                     const ModVersionInfo *modInfo = (const ModVersionInfo *)Link::GetSymbol(linkHandle, "modInfo");
                     if (!modInfo) {
-                        // PrintLog(PRINT_NORMAL, "[MOD] Failed to load mod %s...", folder.c_str());
                         PrintLog(PRINT_NORMAL, "[MOD] ERROR: Failed to find modInfo", file.string().c_str());
 
                         iniparser_freedict(ini);
@@ -567,7 +542,7 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
                         info->linkModLogic.push_back(linkModLogic);
                         linked = true;
                     }
-                    info->unloadMod = (void (*)())Link::GetSymbol(linkHandle, "UnloadMod");
+                    info->unloadMod = (modUnload)Link::GetSymbol(linkHandle, "UnloadMod");
                     info->modLogicHandles.push_back(linkHandle);
                 }
 
@@ -1217,7 +1192,11 @@ void RSDK::SaveSettings()
     if (!currentMod || !currentMod->settings.size())
         return;
 
-    FileIO *file = fOpen((GetModPath_i(currentMod->id.c_str()) + "/modSettings.ini").c_str(), "w");
+    auto filePath = GetModPath_i(currentMod->id.c_str()) + "/modSettings.ini";
+    if (!fs::is_directory(fs::path(filePath).parent_path()))
+        fs::create_directories(fs::path(filePath).parent_path());
+
+    FileIO *file = fOpen(filePath.c_str(), "w");
 
     if (currentMod->settings[""].size()) {
         for (pair<string, string> pair : currentMod->settings[""]) WriteText(file, "%s = %s\n", pair.first.c_str(), pair.second.c_str());

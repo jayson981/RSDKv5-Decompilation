@@ -397,7 +397,7 @@ void UserDBStorage_SaveCB8(int32 status);
 
 extern void (*preLoadSaveFileCB)();
 extern void (*postLoadSaveFileCB)();
-extern char userFileDir[0x100];
+extern char userFileDir[MAX_PATH];
 
 inline void SetUserFileCallbacks(const char *userDir, void (*preCB)(), void (*postCB)())
 {

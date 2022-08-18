@@ -17,6 +17,8 @@ namespace RSDK
 
 #define LEGACY_PLAYERNAME_COUNT (0x10)
 
+extern HINSTANCE hCurrentInstance;
+
 extern std::map<uint32, uint32> superLevels;
 extern int32 inheritLevel;
 
@@ -94,6 +96,7 @@ enum ModFunctionTableIDs {
 typedef void (*ModCallback)(void *data);
 typedef std::function<void(void *data)> ModCallbackSTD;
 
+typedef void (*modUnload)();
 typedef bool (*modLink)(GameInfo *, const char *);
 typedef std::function<bool(GameInfo *, const char *)> modLinkSTD;
 
@@ -137,7 +140,7 @@ struct ModInfo {
     std::vector<ModPublicFunctionInfo> functionList;
     std::vector<Link::Handle> modLogicHandles;
     std::vector<modLinkSTD> linkModLogic;
-    void (*unloadMod)();
+    modUnload unloadMod;
     std::map<std::string, std::map<std::string, std::string>> settings;
     std::map<std::string, std::map<std::string, std::string>> config;
 
@@ -163,6 +166,12 @@ struct ModSettings {
     char playerNames[LEGACY_PLAYERNAME_COUNT][0x20];
     int32 playerCount = 0;
 #endif
+};
+
+struct StaticModFunctions {
+    const ModVersionInfo *modInfo;
+    const modLink modLink;
+    const modUnload unloadMod;
 };
 
 extern ModSettings modSettings;

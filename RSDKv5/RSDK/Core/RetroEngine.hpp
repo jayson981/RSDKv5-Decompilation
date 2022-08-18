@@ -166,6 +166,7 @@ enum GameRegions {
 #define RETRO_RENDERDEVICE_SDL2 (0)
 #define RETRO_RENDERDEVICE_GLFW (0)
 #define RETRO_RENDERDEVICE_EGL  (0)
+#define RETRO_RENDERDEVICE_DIRECTX11_UAP (0)
 
 // ============================
 // AUDIO DEVICE BACKENDS
@@ -188,6 +189,7 @@ enum GameRegions {
 #define RETRO_INPUTDEVICE_SDL2   (0)
 #define RETRO_INPUTDEVICE_GLFW   (0)
 #define RETRO_INPUTDEVICE_PDBOAT (0)
+#define RETRO_INPUTDEVICE_WGI (0)
 
 // ============================
 // USER CORE BACKENDS
@@ -207,7 +209,7 @@ enum GameRegions {
 
 // Determines if the engine is RSDKv5 rev01 (all versions of mania pre-plus), rev02 (all versions of mania post-plus) or RSDKv5U (sonic origins)
 #ifndef RETRO_REVISION
-#define RETRO_REVISION (3)
+#define RETRO_REVISION (2)
 #endif
 
 // RSDKv5 Rev02 (Used prior to Sonic Mania Plus)
@@ -285,6 +287,20 @@ enum GameRegions {
 #undef RETRO_AUDIODEVICE_SDL2
 #define RETRO_AUDIODEVICE_SDL2 (1)
 #endif
+
+#elif RETRO_PLATFORM == RETRO_UWP
+
+#undef RETRO_RENDERDEVICE_DIRECTX11_UAP
+#define RETRO_RENDERDEVICE_DIRECTX11_UAP (1)
+
+#undef RETRO_AUDIODEVICE_XAUDIO
+#define RETRO_AUDIODEVICE_XAUDIO (1)
+
+#undef RETRO_INPUTDEVICE_XINPUT
+#define RETRO_INPUTDEVICE_XINPUT (1)
+
+#undef RETRO_INPUTDEVICE_WGI
+#define RETRO_INPUTDEVICE_WGI (1)
 
 #elif RETRO_PLATFORM == RETRO_XB1
 
@@ -393,7 +409,6 @@ enum GameRegions {
 #endif
 
 // All windows systems need windows API for LoadLibrary()
-#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
 #if RETRO_RENDERDEVICE_DIRECTX9 || RETRO_RENDERDEVICE_DIRECTX11
@@ -413,6 +428,20 @@ enum GameRegions {
 #elif RETRO_RENDERDEVICE_GLFW
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#endif
+
+#if RETRO_RENDERDEVICE_DIRECTX11_UAP
+#include <dxgi.h>
+#include <d3d11_1.h>
+#include <winrt/Windows.Foundation.h>
+#include <winrt/Windows.Foundation.Collections.h>
+#include <winrt/Windows.Graphics.Display.h>
+#include <winrt/Windows.UI.Core.h>
+#include <winrt/Windows.UI.Input.h>
+#include <winrt/Windows.UI.ViewManagement.h>
+#include <winrt/Windows.Storage.h>
+#include <winrt/Windows.Devices.Input.h>
+#include <winrt/Windows.Gaming.Input.h>
 #endif
 
 #if RETRO_RENDERDEVICE_SDL2

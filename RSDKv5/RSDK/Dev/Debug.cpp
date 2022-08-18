@@ -26,6 +26,7 @@ inline void PrintConsole(const char *message) { printf("%s", message); }
 
 void RSDK::PrintLog(int32 mode, const char *message, ...)
 {
+
 #ifndef RETRO_DISABLE_LOG
     if (engineDebugMode) {
         // make the full string
@@ -77,7 +78,7 @@ void RSDK::PrintLog(int32 mode, const char *message, ...)
             PrintConsole(outputString);
         }
         else {
-#if RETRO_PLATFORM == RETRO_WIN
+#if RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_UWP
             OutputDebugStringA(outputString);
 #elif RETRO_PLATFORM == RETRO_ANDROID
             int32 as = ANDROID_LOG_INFO;

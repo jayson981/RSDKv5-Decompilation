@@ -10,7 +10,7 @@ using namespace RSDK;
 
 // clang-format off
 #if RETRO_REV02
-const RenderVertex rsdkVertexBuffer[60] = {
+RenderVertex RSDK::rsdkVertexBuffer[60] = {
     // 1 Screen (0)
     { { -1.0,  1.0,  1.0 }, 0xFFFFFFFF, {  0.0,  0.0 } },
     { { -1.0, -1.0,  1.0 }, 0xFFFFFFFF, {  0.0,  0.9375 } },
@@ -92,7 +92,7 @@ const RenderVertex rsdkVertexBuffer[60] = {
     { {  1.0, -1.0,  1.0 }, 0xFFFFFFFF, {  1.0,  1.0 } }
 };
 #else
-const RenderVertex rsdkVertexBuffer[24] =
+RenderVertex RSDK::rsdkVertexBuffer[24] =
 {
     // 1 Screen (0)
     { { -1.0,  1.0,  1.0 }, 0xFFFFFFFF, {  0.0,  0.0 } },
@@ -133,6 +133,8 @@ const RenderVertex rsdkVertexBuffer[24] =
 #include "DX9/DX9RenderDevice.cpp"
 #elif RETRO_RENDERDEVICE_DIRECTX11
 #include "DX11/DX11RenderDevice.cpp"
+#elif RETRO_RENDERDEVICE_DIRECTX11_UAP
+//#include "DX11_UWP/DX11RenderDevice.cpp"
 #elif RETRO_RENDERDEVICE_NX
 #include "NX/NXRenderDevice.cpp"
 #elif RETRO_RENDERDEVICE_SDL2
@@ -309,7 +311,7 @@ void RSDK::GetDisplayInfo(int32 *displayID, int32 *width, int32 *height, int32 *
     if (*displayID == -2) { // -2 == "get FS size display"
         if (videoSettings.fsWidth && videoSettings.fsHeight) {
             for (display = 0; display < RenderDevice::displayCount; ++display) {
-#if RETRO_RENDERDEVICE_DIRECTX11
+#if RETRO_RENDERDEVICE_DIRECTX11 || RETRO_RENDERDEVICE_DIRECTX11_UAP
                 int32 refresh = RenderDevice::displayInfo.displays[display].refresh_rate.Numerator
                                 / RenderDevice::displayInfo.displays[display].refresh_rate.Denominator;
 #else
@@ -337,7 +339,7 @@ void RSDK::GetDisplayInfo(int32 *displayID, int32 *width, int32 *height, int32 *
     if (display) {
         int32 d = display - 1;
 
-#if RETRO_RENDERDEVICE_DIRECTX11
+#if RETRO_RENDERDEVICE_DIRECTX11 || RETRO_RENDERDEVICE_DIRECTX11_UAP
         int32 refresh = RenderDevice::displayInfo.displays[d].refresh_rate.Numerator / RenderDevice::displayInfo.displays[d].refresh_rate.Denominator;
 #else
         int32 refresh = RenderDevice::displayInfo.displays[d].refresh_rate;
