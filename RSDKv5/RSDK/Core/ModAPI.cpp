@@ -542,8 +542,14 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
                         info->linkModLogic.push_back(linkModLogic);
                         linked = true;
                     }
-                    info->unloadMod = (modUnload)Link::GetSymbol(linkHandle, "UnloadMod");
+                    else {
+                        PrintLog(PRINT_ERROR, "[MOD] ERROR: failed to find 'LinkModLogic' -> %s", Link::GetError());
+                    }
+                    info->unloadMod = (void (*)())Link::GetSymbol(linkHandle, "UnloadMod");
                     info->modLogicHandles.push_back(linkHandle);
+                }
+                else {
+                    PrintLog(PRINT_ERROR, "[MOD] ERROR: Failed to open mod logic file -> %s", Link::GetError());
                 }
 
                 if (!linked) {
