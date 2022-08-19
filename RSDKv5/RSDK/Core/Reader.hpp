@@ -95,11 +95,13 @@ enum FileModes { FMODE_NONE, FMODE_RB, FMODE_WB, FMODE_RB_PLUS };
 
 static const char *openModes[3] = { "rb", "wb", "rb+" };
 
-inline bool32 CheckBigEndian()
+constexpr bool IsBigEndian()
 {
-    uint32 x = 1;
-    uint8 *c = (uint8 *)&x;
-    return ((int32)*c) == 0;
+#if RETRO_BIG_ENDIAN
+    return true;
+#else
+    return false;
+#endif
 }
 
 inline void InitFileInfo(FileInfo *info)
@@ -234,7 +236,7 @@ inline int16 ReadInt16(FileInfo *info)
 
     // if we're on a big endian machine, swap the byte order
     // this is done AFTER reading & decrypting since they expect little endian order on all systems
-    if (CheckBigEndian()) {
+    if (IsBigEndian()) {
         uint8 bytes[sizeof(buffer)];
         memcpy(bytes, &buffer, sizeof(buffer));
 
@@ -291,7 +293,7 @@ inline int32 ReadInt32(FileInfo *info, bool32 swapEndian)
 
     // if we're on a big endian machine, swap the byte order
     // this is done AFTER reading & decrypting since they expect little endian order on all systems
-    if (CheckBigEndian()) {
+    if (IsBigEndian()) {
         uint8 bytes[sizeof(buffer)];
         memcpy(bytes, &buffer, sizeof(buffer));
 
@@ -334,7 +336,7 @@ inline int64 ReadInt64(FileInfo *info)
 
     // if we're on a big endian machine, swap the byte order
     // this is done AFTER reading & decrypting since they expect little endian order on all systems
-    if (CheckBigEndian()) {
+    if (IsBigEndian()) {
         uint8 bytes[sizeof(buffer)];
         memcpy(bytes, &buffer, sizeof(buffer));
 
@@ -378,7 +380,7 @@ inline float ReadSingle(FileInfo *info)
 
     // if we're on a big endian machine, swap the byte order
     // this is done AFTER reading & decrypting since they expect little endian order on all systems
-    if (CheckBigEndian()) {
+    if (IsBigEndian()) {
         uint8 bytes[sizeof(buffer)];
         memcpy(bytes, &buffer, sizeof(buffer));
 

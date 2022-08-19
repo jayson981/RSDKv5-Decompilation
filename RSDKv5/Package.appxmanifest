@@ -26,7 +26,8 @@
         </uap:DefaultTile>
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="landscapeFlipped"/>
-          <uap:Rotation Preference="landscape"/></uap:InitialRotationPreference>
+          <uap:Rotation Preference="landscape"/>
+        </uap:InitialRotationPreference>
       </uap:VisualElements>
     </Application>
   </Applications>
