@@ -18,43 +18,43 @@ __declspec(dllexport) DWORD NvOptimusEnablement                = 0x00000001;
 __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 }
 
-ID3D11DeviceContext *RenderDevice::dx11Context;
-ID3D11Device *RenderDevice::dx11Device;
-UINT RenderDevice::dxAdapter;
-ID3D11Buffer *RenderDevice::dx11VertexBuffer;
-ID3D11Texture2D *RenderDevice::screenTextures[SCREEN_COUNT];
-ID3D11Texture2D *RenderDevice::imageTexture;
-ID3D11ShaderResourceView *RenderDevice::screenTextureViews[SCREEN_COUNT];
-ID3D11ShaderResourceView *RenderDevice::imageTextureView;
-D3D11_VIEWPORT RenderDevice::dx11ViewPort;
-IDXGISwapChain *RenderDevice::swapChain;
-ID3D11RenderTargetView *RenderDevice::renderView;
+ID3D11DeviceContext *D3D11RenderDevice::dx11Context;
+ID3D11Device *D3D11RenderDevice::dx11Device;
+UINT D3D11RenderDevice::dxAdapter;
+ID3D11Buffer *D3D11RenderDevice::dx11VertexBuffer;
+ID3D11Texture2D *D3D11RenderDevice::screenTextures[SCREEN_COUNT];
+ID3D11Texture2D *D3D11RenderDevice::imageTexture;
+ID3D11ShaderResourceView *D3D11RenderDevice::screenTextureViews[SCREEN_COUNT];
+ID3D11ShaderResourceView *D3D11RenderDevice::imageTextureView;
+D3D11_VIEWPORT D3D11RenderDevice::dx11ViewPort;
+IDXGISwapChain *D3D11RenderDevice::swapChain;
+ID3D11RenderTargetView *D3D11RenderDevice::renderView;
 
-ID3D11RasterizerState *RenderDevice::rasterState;
-ID3D11SamplerState *RenderDevice::samplerPoint;
-ID3D11SamplerState *RenderDevice::samplerLinear;
-ID3D11Buffer *RenderDevice::psConstBuffer = NULL;
+ID3D11RasterizerState *D3D11RenderDevice::rasterState;
+ID3D11SamplerState *D3D11RenderDevice::samplerPoint;
+ID3D11SamplerState *D3D11RenderDevice::samplerLinear;
+ID3D11Buffer *D3D11RenderDevice::psConstBuffer = NULL;
 
-int32 RenderDevice::adapterCount = 0;
-RECT RenderDevice::monitorDisplayRect;
-LUID RenderDevice::deviceIdentifier;
+int32 D3D11RenderDevice::adapterCount = 0;
+RECT D3D11RenderDevice::monitorDisplayRect;
+LUID D3D11RenderDevice::deviceIdentifier;
 
-D3D_DRIVER_TYPE RenderDevice::driverType     = D3D_DRIVER_TYPE_NULL;
-D3D_FEATURE_LEVEL RenderDevice::featureLevel = D3D_FEATURE_LEVEL_9_1;
+D3D_DRIVER_TYPE D3D11RenderDevice::driverType     = D3D_DRIVER_TYPE_NULL;
+D3D_FEATURE_LEVEL D3D11RenderDevice::featureLevel = D3D_FEATURE_LEVEL_9_1;
 
-bool RenderDevice::useFrequency = false;
+bool D3D11RenderDevice::useFrequency = false;
 
-std::map<uint32_t, RenderDevice::touch_t> RenderDevice::touches{};
+std::map<uint32_t, D3D11RenderDevice::touch_t> D3D11RenderDevice::touches{};
 
-LARGE_INTEGER RenderDevice::performanceCount;
-LARGE_INTEGER RenderDevice::frequency;
-LARGE_INTEGER RenderDevice::initialFrequency;
-LARGE_INTEGER RenderDevice::curFrequency;
+LARGE_INTEGER D3D11RenderDevice::performanceCount;
+LARGE_INTEGER D3D11RenderDevice::frequency;
+LARGE_INTEGER D3D11RenderDevice::initialFrequency;
+LARGE_INTEGER D3D11RenderDevice::curFrequency;
 
-winrt::Windows::Foundation::Point RenderDevice::cusorPosition{ 0, 0 };
+winrt::Windows::Foundation::Point D3D11RenderDevice::cusorPosition{ 0, 0 };
 
-winrt::Windows::UI::Core::CoreWindow RenderDevice::coreWindow{ nullptr };
-winrt::Windows::UI::Core::CoreDispatcher RenderDevice::coreDispatcher{ nullptr };
+winrt::Windows::UI::Core::CoreWindow D3D11RenderDevice::coreWindow{ nullptr };
+winrt::Windows::UI::Core::CoreDispatcher D3D11RenderDevice::coreDispatcher{ nullptr };
 
 struct ShaderConstants {
     float2 pixelSize;
@@ -63,21 +63,21 @@ struct ShaderConstants {
     float2 screenDim;
 };
 
-bool RenderDevice::Init()
+bool D3D11RenderDevice::Init()
 {
     auto applicationView = winrt::Windows::UI::ViewManagement::ApplicationView::GetForCurrentView();
     applicationView.Title(winrt::to_hstring(gameVerInfo.gameTitle));
     applicationView.PreferredLaunchViewSize(winrt::Windows::Foundation::Size(videoSettings.windowWidth * 2, videoSettings.windowHeight * 2));
     applicationView.PreferredLaunchWindowingMode(winrt::Windows::UI::ViewManagement::ApplicationViewWindowingMode::PreferredLaunchViewSize);
 
-    coreWindow.PointerPressed(&RenderDevice::OnPointerPressed);
-    coreWindow.PointerMoved(&RenderDevice::OnPointerMoved);
-    coreWindow.PointerReleased(&RenderDevice::OnPointerReleased);
+    coreWindow.PointerPressed(&D3D11RenderDevice::OnPointerPressed);
+    coreWindow.PointerMoved(&D3D11RenderDevice::OnPointerMoved);
+    coreWindow.PointerReleased(&D3D11RenderDevice::OnPointerReleased);
 
-    coreWindow.KeyDown(&RenderDevice::OnKeyDown);
-    coreWindow.KeyUp(&RenderDevice::OnKeyUp);
+    coreWindow.KeyDown(&D3D11RenderDevice::OnKeyDown);
+    coreWindow.KeyUp(&D3D11RenderDevice::OnKeyUp);
 
-    coreWindow.SizeChanged(&RenderDevice::OnResized);
+    coreWindow.SizeChanged(&D3D11RenderDevice::OnResized);
 
     if (!SetupRendering() || !AudioDevice::Init())
         return false;
@@ -86,7 +86,7 @@ bool RenderDevice::Init()
     return true;
 }
 
-void RenderDevice::CopyFrameBuffer()
+void D3D11RenderDevice::CopyFrameBuffer()
 {
     for (int32 s = 0; s < videoSettings.screenCount; ++s) {
         D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -129,7 +129,7 @@ void RenderDevice::CopyFrameBuffer()
     }
 }
 
-void RenderDevice::FlipScreen()
+void D3D11RenderDevice::FlipScreen()
 {
     if (windowRefreshDelay > 0) {
         if (!--windowRefreshDelay)
@@ -240,7 +240,7 @@ void RenderDevice::FlipScreen()
         windowRefreshDelay = 8;
 }
 
-void RenderDevice::Release(bool32 isRefresh)
+void D3D11RenderDevice::Release(bool32 isRefresh)
 {
     if (dx11Context)
         dx11Context->ClearState();
@@ -348,9 +348,9 @@ void RenderDevice::Release(bool32 isRefresh)
     }
 }
 
-void RenderDevice::RefreshWindow() { RefreshWindow(winrt::Windows::Foundation::Size(coreWindow.Bounds().Width, coreWindow.Bounds().Height)); }
+void D3D11RenderDevice::RefreshWindow() { RefreshWindow(winrt::Windows::Foundation::Size(coreWindow.Bounds().Width, coreWindow.Bounds().Height)); }
 
-void RenderDevice::RefreshWindow(winrt::Windows::Foundation::Size &size)
+void D3D11RenderDevice::RefreshWindow(winrt::Windows::Foundation::Size &size)
 {
     videoSettings.windowState = WINDOWSTATE_UNINITIALIZED;
     Release(true);
@@ -364,7 +364,7 @@ void RenderDevice::RefreshWindow(winrt::Windows::Foundation::Size &size)
     videoSettings.windowState = WINDOWSTATE_ACTIVE;
 }
 
-void RenderDevice::InitFPSCap()
+void D3D11RenderDevice::InitFPSCap()
 {
     assert(QueryPerformanceFrequency(&frequency));
     useFrequency              = true;
@@ -372,7 +372,7 @@ void RenderDevice::InitFPSCap()
     QueryPerformanceCounter(&performanceCount);
 }
 
-bool RenderDevice::CheckFPSCap()
+bool D3D11RenderDevice::CheckFPSCap()
 {
     QueryPerformanceCounter(&curFrequency);
     if (curFrequency.QuadPart > performanceCount.QuadPart)
@@ -381,9 +381,9 @@ bool RenderDevice::CheckFPSCap()
     return false;
 }
 
-void RenderDevice::UpdateFPSCap() { performanceCount.QuadPart = curFrequency.QuadPart + initialFrequency.LowPart; }
+void D3D11RenderDevice::UpdateFPSCap() { performanceCount.QuadPart = curFrequency.QuadPart + initialFrequency.LowPart; }
 
-void RenderDevice::InitVertexBuffer()
+void D3D11RenderDevice::InitVertexBuffer()
 {
     RenderVertex vertBuffer[sizeof(rsdkVertexBuffer) / sizeof(RenderVertex)];
     memcpy(vertBuffer, rsdkVertexBuffer, sizeof(rsdkVertexBuffer));
@@ -428,7 +428,7 @@ void RenderDevice::InitVertexBuffer()
     dx11Device->CreateBuffer(&cbDesc, NULL, &psConstBuffer);
 }
 
-bool RenderDevice::InitGraphicsAPI()
+bool D3D11RenderDevice::InitGraphicsAPI()
 {
     HRESULT hr = 0;
 
@@ -642,7 +642,7 @@ bool RenderDevice::InitGraphicsAPI()
     return true;
 }
 
-void RenderDevice::LoadShader(const char *name, bool32 linear)
+void D3D11RenderDevice::LoadShader(const char *name, bool32 linear)
 {
     char fullFilePath[0x100];
     FileInfo info;
@@ -888,7 +888,7 @@ void RenderDevice::LoadShader(const char *name, bool32 linear)
     shaderCount++;
 }
 
-bool RenderDevice::InitShaders()
+bool D3D11RenderDevice::InitShaders()
 {
     D3D11_RASTERIZER_DESC rDesc = {};
 
@@ -961,7 +961,7 @@ bool RenderDevice::InitShaders()
     return true;
 }
 
-bool RenderDevice::SetupRendering()
+bool D3D11RenderDevice::SetupRendering()
 {
     // Init DX11 context & device
     UINT createDeviceFlags = 0;
@@ -971,14 +971,17 @@ bool RenderDevice::SetupRendering()
 
     D3D_DRIVER_TYPE driverTypes[] = {
         D3D_DRIVER_TYPE_HARDWARE,
+#ifdef _DEBUG
         D3D_DRIVER_TYPE_WARP,
         D3D_DRIVER_TYPE_REFERENCE,
+#endif
     };
     UINT numDriverTypes = ARRAYSIZE(driverTypes);
 
     D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0, D3D_FEATURE_LEVEL_10_1, D3D_FEATURE_LEVEL_10_0,
                                           D3D_FEATURE_LEVEL_9_3,  D3D_FEATURE_LEVEL_9_2,  D3D_FEATURE_LEVEL_9_1 };
-    UINT numFeatureLevels             = ARRAYSIZE(featureLevels);
+
+    UINT numFeatureLevels = ARRAYSIZE(featureLevels);
 
     HRESULT hr = 0;
     for (UINT driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++) {
@@ -1011,7 +1014,7 @@ bool RenderDevice::SetupRendering()
     return true;
 }
 
-void RenderDevice::GetDisplays()
+void D3D11RenderDevice::GetDisplays()
 {
     std::vector<IDXGIAdapter *> adapterList = GetAdapterList();
     adapterCount                            = (int32)adapterList.size();
@@ -1114,7 +1117,7 @@ void RenderDevice::GetDisplays()
     }
 }
 
-void RenderDevice::GetWindowSize(int32 *width, int32 *height)
+void D3D11RenderDevice::GetWindowSize(int32 *width, int32 *height)
 {
     auto bounds = coreWindow.Bounds();
     if (width) // why
@@ -1123,7 +1126,7 @@ void RenderDevice::GetWindowSize(int32 *width, int32 *height)
         *height = (int)bounds.Height;
 }
 
-bool RenderDevice::ProcessEvents()
+bool D3D11RenderDevice::ProcessEvents()
 {
     coreDispatcher.ProcessEvents(winrt::Windows::UI::Core::CoreProcessEventsOption::ProcessAllIfPresent);
 
@@ -1139,7 +1142,7 @@ bool RenderDevice::ProcessEvents()
     return true;
 }
 
-winrt::Windows::Foundation::Point RenderDevice::TransformPointerPosition(winrt::Windows::Foundation::Point const &rawPosition)
+winrt::Windows::Foundation::Point D3D11RenderDevice::TransformPointerPosition(winrt::Windows::Foundation::Point const &rawPosition)
 {
     winrt::Windows::Foundation::Rect bounds = coreWindow.Bounds();
     winrt::Windows::Foundation::Point outputPosition{};
@@ -1170,7 +1173,7 @@ winrt::Windows::Foundation::Point RenderDevice::TransformPointerPosition(winrt::
     return outputPosition;
 }
 
-void RenderDevice::OnPointerPressed(winrt::Windows::Foundation::IInspectable const &, winrt::Windows::UI::Core::PointerEventArgs const &args)
+void D3D11RenderDevice::OnPointerPressed(winrt::Windows::Foundation::IInspectable const &, winrt::Windows::UI::Core::PointerEventArgs const &args)
 {
     auto pointerPoint = args.CurrentPoint();
     auto device       = pointerPoint.PointerDevice();
@@ -1196,7 +1199,7 @@ void RenderDevice::OnPointerPressed(winrt::Windows::Foundation::IInspectable con
     }
 }
 
-void RenderDevice::OnPointerMoved(winrt::Windows::Foundation::IInspectable const &, winrt::Windows::UI::Core::PointerEventArgs const &args)
+void D3D11RenderDevice::OnPointerMoved(winrt::Windows::Foundation::IInspectable const &, winrt::Windows::UI::Core::PointerEventArgs const &args)
 {
     auto pointerPoint = args.CurrentPoint();
     auto device       = pointerPoint.PointerDevice();
@@ -1216,7 +1219,7 @@ void RenderDevice::OnPointerMoved(winrt::Windows::Foundation::IInspectable const
     }
 }
 
-void RenderDevice::OnPointerReleased(winrt::Windows::Foundation::IInspectable const &, winrt::Windows::UI::Core::PointerEventArgs const &args)
+void D3D11RenderDevice::OnPointerReleased(winrt::Windows::Foundation::IInspectable const &, winrt::Windows::UI::Core::PointerEventArgs const &args)
 {
     auto pointerPoint = args.CurrentPoint();
     auto device       = pointerPoint.PointerDevice();
@@ -1238,40 +1241,40 @@ void RenderDevice::OnPointerReleased(winrt::Windows::Foundation::IInspectable co
     }
 }
 
-void RenderDevice::OnKeyDown(winrt::Windows::Foundation::IInspectable const &sender, winrt::Windows::UI::Core::KeyEventArgs const &args)
+void D3D11RenderDevice::OnKeyDown(winrt::Windows::Foundation::IInspectable const &sender, winrt::Windows::UI::Core::KeyEventArgs const &args)
 {
     SKU::UpdateKeyState((int32)args.VirtualKey());
 }
 
-void RenderDevice::OnKeyUp(winrt::Windows::Foundation::IInspectable const &sender, winrt::Windows::UI::Core::KeyEventArgs const &args)
+void D3D11RenderDevice::OnKeyUp(winrt::Windows::Foundation::IInspectable const &sender, winrt::Windows::UI::Core::KeyEventArgs const &args)
 {
     SKU::ClearKeyState((int32)args.VirtualKey());
 }
 
-void RenderDevice::OnResized(winrt::Windows::UI::Core::CoreWindow const &sender, winrt::Windows::UI::Core::WindowSizeChangedEventArgs const &args)
+void D3D11RenderDevice::OnResized(winrt::Windows::UI::Core::CoreWindow const &sender, winrt::Windows::UI::Core::WindowSizeChangedEventArgs const &args)
 {
     RefreshWindow();
 }
 
-void RenderDevice::ShowCursor(bool32 visible)
+void D3D11RenderDevice::ShowCursor(bool32 visible)
 {
     coreWindow.PointerCursor(visible ? winrt::Windows::UI::Core::CoreCursor(winrt::Windows::UI::Core::CoreCursorType::Arrow, 0) : nullptr);
 }
 
-bool RenderDevice::GetCursorPos(Vector2 *pos)
+bool D3D11RenderDevice::GetCursorPos(Vector2 *pos)
 {
     pos->x = cusorPosition.X;
     pos->y = cusorPosition.Y;
     return true;
 }
 
-void RenderDevice::SetWindowTitle()
+void D3D11RenderDevice::SetWindowTitle()
 {
     auto applicationView = winrt::Windows::UI::ViewManagement::ApplicationView::GetForCurrentView();
     applicationView.Title(winrt::to_hstring(gameVerInfo.gameTitle));
 }
 
-void RenderDevice::SetupImageTexture(int32 width, int32 height, uint8 *imagePixels)
+void D3D11RenderDevice::SetupImageTexture(int32 width, int32 height, uint8 *imagePixels)
 {
     if (!imagePixels)
         return;
@@ -1294,7 +1297,7 @@ void RenderDevice::SetupImageTexture(int32 width, int32 height, uint8 *imagePixe
     }
 }
 
-void RenderDevice::SetupVideoTexture_YUV420(int32 width, int32 height, uint8 *yPlane, uint8 *uPlane, uint8 *vPlane, int32 strideY, int32 strideU,
+void D3D11RenderDevice::SetupVideoTexture_YUV420(int32 width, int32 height, uint8 *yPlane, uint8 *uPlane, uint8 *vPlane, int32 strideY, int32 strideU,
                                             int32 strideV)
 {
     D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -1327,7 +1330,7 @@ void RenderDevice::SetupVideoTexture_YUV420(int32 width, int32 height, uint8 *yP
         dx11Context->Unmap(imageTexture, 0);
     }
 }
-void RenderDevice::SetupVideoTexture_YUV422(int32 width, int32 height, uint8 *yPlane, uint8 *uPlane, uint8 *vPlane, int32 strideY, int32 strideU,
+void D3D11RenderDevice::SetupVideoTexture_YUV422(int32 width, int32 height, uint8 *yPlane, uint8 *uPlane, uint8 *vPlane, int32 strideY, int32 strideU,
                                             int32 strideV)
 {
     D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -1360,7 +1363,7 @@ void RenderDevice::SetupVideoTexture_YUV422(int32 width, int32 height, uint8 *yP
         dx11Context->Unmap(imageTexture, 0);
     }
 }
-void RenderDevice::SetupVideoTexture_YUV444(int32 width, int32 height, uint8 *yPlane, uint8 *uPlane, uint8 *vPlane, int32 strideY, int32 strideU,
+void D3D11RenderDevice::SetupVideoTexture_YUV444(int32 width, int32 height, uint8 *yPlane, uint8 *uPlane, uint8 *vPlane, int32 strideY, int32 strideU,
                                             int32 strideV)
 {
     D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -1386,4 +1389,23 @@ void RenderDevice::SetupVideoTexture_YUV444(int32 width, int32 height, uint8 *yP
 
         dx11Context->Unmap(imageTexture, 0);
     }
+}
+
+void D3D11RenderDevice::ShowErrorDialog(const char* title, const char *format, ...) {
+    va_list args, args2;
+    va_start(args, format);
+    va_copy(args2, args);
+
+    int len = vsnprintf(nullptr, 0, format, args) + 1;
+    va_end(args);
+
+    if (len <= 0)
+        return;
+
+    char *data = new char[len]{0};
+    vsnprintf(data, len, format, args2);
+    va_end(args2);
+
+    winrt::Windows::UI::Popups::MessageDialog dialog(winrt::to_hstring(data), winrt::to_hstring(title));
+    dialog.ShowAsync();
 }

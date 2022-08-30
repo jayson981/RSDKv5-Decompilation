@@ -209,7 +209,7 @@ enum GameRegions {
 
 // Determines if the engine is RSDKv5 rev01 (all versions of mania pre-plus), rev02 (all versions of mania post-plus) or RSDKv5U (sonic origins)
 #ifndef RETRO_REVISION
-#define RETRO_REVISION (2)
+#define RETRO_REVISION (3)
 #endif
 
 // RSDKv5 Rev02 (Used prior to Sonic Mania Plus)
@@ -435,13 +435,16 @@ enum GameRegions {
 #include <d3d11_1.h>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Foundation.Collections.h>
-#include <winrt/Windows.Graphics.Display.h>
+#include <winrt/Windows.ApplicationModel.h>
+#include <winrt/Windows.ApplicationModel.Core.h>
+#include <winrt/Windows.Storage.h>
 #include <winrt/Windows.UI.Core.h>
 #include <winrt/Windows.UI.Input.h>
+#include <winrt/Windows.UI.Popups.h>
 #include <winrt/Windows.UI.ViewManagement.h>
-#include <winrt/Windows.Storage.h>
 #include <winrt/Windows.Devices.Input.h>
 #include <winrt/Windows.Gaming.Input.h>
+#include <winrt/Windows.Graphics.Display.h>
 #endif
 
 #if RETRO_RENDERDEVICE_SDL2

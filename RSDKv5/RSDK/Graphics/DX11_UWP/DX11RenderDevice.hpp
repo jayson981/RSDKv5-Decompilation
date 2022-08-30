@@ -2,7 +2,7 @@
 
 #include <map>
 
-class RenderDevice : public RenderDeviceBase
+class D3D11RenderDevice : public RenderDeviceBase
 {
 public:
     struct WindowInfo {
@@ -46,6 +46,8 @@ public:
     static bool GetCursorPos(Vector2 *pos);
 
     static void SetWindowTitle();
+
+    static void ShowErrorDialog(const char* title, const char *format, ...);
 
     static ID3D11Texture2D *imageTexture;
     static ID3D11DeviceContext *dx11Context;

@@ -246,6 +246,7 @@ private:
 #include "DX11/DX11RenderDevice.hpp"
 #elif RETRO_RENDERDEVICE_DIRECTX11_UWP
 #include "DX11_UWP/DX11RenderDevice.hpp"
+typedef D3D11RenderDevice RenderDevice;
 #elif RETRO_RENDERDEVICE_NX
 #include "NX/NXRenderDevice.hpp"
 #elif RETRO_RENDERDEVICE_SDL2

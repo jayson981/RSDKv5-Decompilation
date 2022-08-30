@@ -178,10 +178,10 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
                         globalVarsPtr    = NULL;
                         globalVarsInitCB = NULL;
 
-                        dataStorage[DATASET_STG].entryCount     = 0;
-                        dataStorage[DATASET_STG].usedStorage    = 0;
-                        dataStorage[DATASET_SFX].entryCount     = 0;
-                        dataStorage[DATASET_SFX].usedStorage    = 0;
+                        dataStorage[DATASET_STG].entryCount  = 0;
+                        dataStorage[DATASET_STG].usedStorage = 0;
+                        dataStorage[DATASET_SFX].entryCount  = 0;
+                        dataStorage[DATASET_SFX].usedStorage = 0;
 
                         for (int32 o = 0; o < objectClassCount; ++o) {
                             if (objectClassList[o].staticVars && *objectClassList[o].staticVars)
@@ -209,13 +209,13 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
                         }
 
 #else
-                    SceneInfo pre = sceneInfo;
-                    InitEngine();
-                    sceneInfo.classCount = pre.classCount;
-                    if (pre.state == ENGINESTATE_LOAD) {
-                        sceneInfo.activeCategory = pre.activeCategory;
-                        sceneInfo.listPos        = pre.listPos;
-                    }
+                        SceneInfo pre = sceneInfo;
+                        InitEngine();
+                        sceneInfo.classCount = pre.classCount;
+                        if (pre.state == ENGINESTATE_LOAD) {
+                            sceneInfo.activeCategory = pre.activeCategory;
+                            sceneInfo.listPos        = pre.listPos;
+                        }
 #endif
                         RenderDevice::SetWindowTitle();
                         sceneInfo.state = ENGINESTATE_LOAD;
@@ -236,7 +236,7 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
                         case 3: Legacy::v3::ProcessEngine(); break;
                     }
 #else
-                ProcessEngine();
+                    ProcessEngine();
 #endif
                 }
 
@@ -775,7 +775,7 @@ void RSDK::LoadXMLSoundFX()
                                 sfxPath = valAttr->Value();
 
                             const tinyxml2::XMLAttribute *playsAttr = sfxElement->FindAttribute("maxConcurrentPlays");
-                            int32 maxConcurrentPlays = 0;
+                            int32 maxConcurrentPlays                = 0;
                             if (playsAttr)
                                 maxConcurrentPlays = playsAttr->IntValue();
 
@@ -1171,7 +1171,7 @@ void RSDK::InitGameLink()
 #if RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_UWP
             strcpy_s(buffer, 0x100, gameLogicName);
 #else
-            sprintf(buffer, "%s%s", SKU::userFileDir, gameLogicName);
+        sprintf(buffer, "%s%s", SKU::userFileDir, gameLogicName);
 #endif
             if (!gameLogicHandle)
                 gameLogicHandle = Link::Open(buffer);
@@ -1183,7 +1183,7 @@ void RSDK::InitGameLink()
                 if (RSDKRevision) {
                     canLink = *RSDKRevision == RETRO_REVISION;
                     if (!canLink)
-                        PrintLog(PRINT_NORMAL, "ERROR: Game Logic RSDK Revision doesn't match Engine RSDK Revision!");
+                        RenderDevice::ShowErrorDialog("Game failed to launch", "Game Logic RSDK Revision doesn't match Engine RSDK Revision!");
                 }
 #endif
 
@@ -1197,15 +1197,16 @@ void RSDK::InitGameLink()
                     linked = true;
                 }
                 else if (canLink && !linkGameLogic) {
-                    PrintLog(PRINT_ERROR, "ERROR: Failed to find 'LinkGameLogicDLL' -> %s", Link::GetError());
+                    RenderDevice::ShowErrorDialog("Game failed to launch", "Failed to find 'LinkGameLogicDLL' -> %s", Link::GetError());
                 }
             }
             else {
-                PrintLog(PRINT_ERROR, "ERROR: Failed to open game logic file -> %s", Link::GetError());
+                RenderDevice::ShowErrorDialog("Game failed to launch", "Failed to open game logic file -> %s", Link::GetError());
             }
 
-            if (!linked)
-                PrintLog(PRINT_NORMAL, "ERROR: Failed to link game logic!");
+            if (!linked) {
+                RSDK::SKU::ExitGame();
+            }
         }
         else {
 #if RETRO_REV02
