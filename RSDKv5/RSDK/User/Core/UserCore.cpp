@@ -117,7 +117,7 @@ void RSDK::SKU::InitUserCore()
     RegisterAchievement("ACH_FBZ", "Window Shopping", "Let the wind take you through");
     RegisterAchievement("ACH_PGZ", "Crate Expectations", "Wreak havoc at the propaganda factory");
     RegisterAchievement("ACH_SSZ", "King of Speed", "Get through Stardust Speedway Zone as quickly as possible");
-    RegisterAchievement("ACH_HCZ", "Boat Enthusiast", "Try pushing a barrel to see how far it goes");
+    RegisterAchievement("ACH_HCZ", "Boat Enthusiast", "We really like boats");
     RegisterAchievement("ACH_MSZ", "The Password is \"Special Stage\"", "Try pushing a barrel to see how far it goes");
     RegisterAchievement("ACH_OOZ", "Secret Sub", "You might have to submerge to find it");
     RegisterAchievement("ACH_LRZ", "Without a Trace", "Barrel through the lava, don't let anything stop you");
@@ -292,7 +292,7 @@ void RSDK::LoadSettingsINI()
           KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING },
 
         { VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT, VK_A, VK_S, VK_D, VK_Q, VK_W, VK_E, VK_RETURN, VK_TAB },
-        { VK_NUMPAD8, VK_NUMPAD5, VK_NUMPAD4, VK_NUMPAD6, VK_J, VK_J, KEYMAP_NO_MAPPING, VK_U, VK_I, KEYMAP_NO_MAPPING, VK_OEM_4, VK_OEM_6 },
+        { VK_NUMPAD8, VK_NUMPAD5, VK_NUMPAD4, VK_NUMPAD6, VK_J, VK_K, KEYMAP_NO_MAPPING, VK_U, VK_I, KEYMAP_NO_MAPPING, VK_OEM_4, VK_OEM_6 },
 
         { KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING,
           KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING, KEYMAP_NO_MAPPING },
@@ -550,13 +550,6 @@ void RSDK::LoadSettingsINI()
 
 void RSDK::SaveSettingsINI(bool32 writeToFile)
 {
-#if !RETRO_USE_ORIGINAL_CODE
-    if (gamePadCount && gamePadMappings)
-        free(gamePadMappings);
-    gamePadMappings = NULL;
-    gamePadCount    = 0;
-#endif
-
     // only done on windows and "dev", consoles use "options.bin"
 #if RETRO_REV02
     if (SKU::curSKU.platform != PLATFORM_PC && SKU::curSKU.platform != PLATFORM_DEV)
@@ -726,4 +719,11 @@ void RSDK::SaveSettingsINI(bool32 writeToFile)
         iniparser_freedict(ini);
         fClose(file);
     }
+
+#if !RETRO_USE_ORIGINAL_CODE
+    if (gamePadCount && gamePadMappings)
+        delete[] gamePadMappings;
+    gamePadMappings = NULL;
+    gamePadCount    = 0;
+#endif
 }

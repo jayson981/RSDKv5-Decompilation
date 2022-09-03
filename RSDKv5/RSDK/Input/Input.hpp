@@ -106,7 +106,7 @@ enum WinMappings {
     KEYMAP_AUTO_MAPPING = -1,
     KEYMAP_NO_MAPPING   = 0,
 
-#if !VK_LBUTTON
+#ifndef VK_LBUTTON
     VK_LBUTTON    = 0x01,
     VK_RBUTTON    = 0x02,
     VK_CANCEL     = 0x03,
@@ -187,7 +187,7 @@ enum WinMappings {
     VK_X = 0x58,
     VK_Y = 0x59,
     VK_Z = 0x5A,
-#if !VK_LBUTTON
+#ifndef VK_LBUTTON
     VK_LWIN                            = 0x5B,
     VK_RWIN                            = 0x5C,
     VK_APPS                            = 0x5D,
@@ -232,6 +232,8 @@ enum WinMappings {
     VK_F22                             = 0x85,
     VK_F23                             = 0x86,
     VK_F24                             = 0x87,
+#endif
+#ifndef VK_NAVIGATION_VIEW
     VK_NAVIGATION_VIEW                 = 0x88,
     VK_NAVIGATION_MENU                 = 0x89,
     VK_NAVIGATION_UP                   = 0x8A,
@@ -240,6 +242,8 @@ enum WinMappings {
     VK_NAVIGATION_RIGHT                = 0x8D,
     VK_NAVIGATION_ACCEPT               = 0x8E,
     VK_NAVIGATION_CANCEL               = 0x8F,
+#endif
+#ifndef VK_LBUTTON
     VK_NUMLOCK                         = 0x90,
     VK_SCROLL                          = 0x91,
     VK_OEM_NEC_EQUAL                   = 0x92,
@@ -279,6 +283,8 @@ enum WinMappings {
     VK_OEM_PERIOD                      = 0xBE,
     VK_OEM_2                           = 0xBF,
     VK_OEM_3                           = 0xC0,
+#endif
+#ifndef VK_GAMEPAD_A
     VK_GAMEPAD_A                       = 0xC3,
     VK_GAMEPAD_B                       = 0xC4,
     VK_GAMEPAD_X                       = 0xC5,
@@ -303,6 +309,8 @@ enum WinMappings {
     VK_GAMEPAD_RIGHT_THUMBSTICK_DOWN   = 0xD8,
     VK_GAMEPAD_RIGHT_THUMBSTICK_RIGHT  = 0xD9,
     VK_GAMEPAD_RIGHT_THUMBSTICK_LEFT   = 0xDA,
+#endif
+#ifndef VK_LBUTTON
     VK_OEM_4                           = 0xDB,
     VK_OEM_5                           = 0xDC,
     VK_OEM_6                           = 0xDD,
@@ -509,6 +517,8 @@ void ClearInput();
 void ProcessInput();
 // used to process various events on input devices, switch uses it to controller connects/disconnects/changes
 void ProcessInputDevices();
+// Releases the input devices & closes the backend APIs powering em
+void ReleaseInputDevices();
 
 void RemoveInputDevice(InputDevice *targetDevice);
 

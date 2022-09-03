@@ -26,23 +26,8 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
 {
     ParseArguments(argc, argv);
 
-    if (engine.consoleEnabled) {
-#if RETRO_PLATFORM == RETRO_WIN
-        AllocConsole();
-        AttachConsole(GetCurrentProcessId());
-
-        freopen("CON", "w", stdout);
-#endif
-#if RETRO_PLATFORM == RETRO_SWITCH
-        consoleInit(NULL);
-#endif
-    }
-
-#if RETRO_RENDERDEVICE_DIRECTX9 || RETRO_RENDERDEVICE_DIRECTX11
-    MSG Msg;
-    PeekMessage(&Msg, NULL, 0, 0, PM_REMOVE);
-    InitCommonControls();
-#endif
+    if (engine.consoleEnabled)
+        InitConsole();
 
     RenderDevice::isRunning = false;
     if (InitStorage()) {
@@ -52,10 +37,10 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
 #if RETRO_USE_MOD_LOADER
 #if RETRO_REV0U
         engine.version = 0;
-#endif
         InitModAPI(); // setup mods & the mod API table
-#if RETRO_REV0U
         engine.version = 5;
+#else
+        InitModAPI(); // setup mods & the mod API table
 #endif
 #endif
 
@@ -87,9 +72,7 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
         }
         else {
             // No render device, throw a "QUIT" msg onto the message loop and call it a day :)
-#if RETRO_RENDERDEVICE_DIRECTX9 || RETRO_RENDERDEVICE_DIRECTX11
-            PostQuitMessage(0);
-#endif
+            SendQuitMsg();
         }
     }
 
@@ -116,17 +99,38 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
 #if !RETRO_USE_ORIGINAL_CODE
             if (customSettings.disableFocusPause)
                 engine.focusState = 0;
-            else
+            else if (SKU::userCore->CheckFocusLost()) {
+#else
+            if (SKU::userCore->CheckFocusLost()) {
 #endif
-                if (SKU::userCore->CheckFocusLost()) {
                 if (!(engine.focusState & 1)) {
                     engine.focusState = 1;
+
+#if !RETRO_USE_ORIGINAL_CODE
+                    for (int32 c = 0; c < CHANNEL_COUNT; ++c) {
+                        engine.focusPausedChannel[c] = false;
+                        if (!(channels[c].state & CHANNEL_PAUSED)) {
+                            PauseChannel(c);
+                            engine.focusPausedChannel[c] = true;
+                        }
+                    }
+#else
                     PauseSound();
+#endif
                 }
             }
             else if (engine.focusState) {
                 engine.focusState = 0;
+
+#if !RETRO_USE_ORIGINAL_CODE
+                for (int32 c = 0; c < CHANNEL_COUNT; ++c) {
+                    if (engine.focusPausedChannel[c])
+                        ResumeChannel(c);
+                    engine.focusPausedChannel[c] = false;
+                }
+#else
                 ResumeSound();
+#endif
             }
 #endif
 
@@ -286,6 +290,7 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
 
     // Shutdown
 
+    ReleaseInputDevices();
     AudioDevice::Release();
     RenderDevice::Release(false);
     SaveSettingsINI(false);
@@ -298,11 +303,8 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
     Link::Close(gameLogicHandle);
     gameLogicHandle = NULL;
 
-    if (engine.consoleEnabled) {
-#if RETRO_PLATFORM == RETRO_WIN
-        FreeConsole();
-#endif
-    }
+    if (engine.consoleEnabled)
+        ReleaseConsole();
 
     return 0;
 }
@@ -1253,7 +1255,7 @@ void RSDK::ProcessDebugCommands()
 
 #if RETRO_REV0U
     int32 state          = engine.version == 5 ? sceneInfo.state : Legacy::stageMode;
-    const int32 stepOver = engine.version == 5 ? ENGINESTATE_STEPOVER : Legacy::STAGEMODE_STEPOVER;
+    const int32 stepOver = engine.version == 5 ? (int32)ENGINESTATE_STEPOVER : (int32)Legacy::STAGEMODE_STEPOVER;
 #else
     uint8 state = sceneInfo.state;
     const uint8 stepOver = ENGINESTATE_STEPOVER;
@@ -1323,5 +1325,84 @@ void RSDK::ProcessDebugCommands()
         if (framePaused)
             sceneInfo.state ^= ENGINESTATE_STEPOVER;
     }
+#endif
+}
+
+#ifdef __SWITCH__
+#include <switch.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <sys/errno.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+
+static int32 s_nxlinkSock = -1;
+
+static void initNxLink()
+{
+    if (R_FAILED(socketInitializeDefault()))
+        return;
+
+    s_nxlinkSock = nxlinkStdio();
+    if (s_nxlinkSock >= 0)
+        printf("printf output now goes to nxlink server\n");
+    else
+        socketExit();
+}
+#endif
+
+void RSDK::InitCoreAPI()
+{
+#if RETRO_RENDERDEVICE_DIRECTX9 || RETRO_RENDERDEVICE_DIRECTX11
+    MSG Msg;
+    PeekMessage(&Msg, NULL, 0, 0, PM_REMOVE);
+    InitCommonControls();
+#endif
+
+#ifdef __SWITCH__
+    // initNxLink();
+#endif
+
+#if RETRO_RENDERDEVICE_SDL2 || RETRO_AUDIODEVICE_SDL2 || RETRO_INPUTDEVICE_SDL2
+    SDL_Init(0);
+#endif
+}
+void RSDK::ReleaseCoreAPI()
+{
+#if RETRO_RENDERDEVICE_SDL2 || RETRO_AUDIODEVICE_SDL2 || RETRO_INPUTDEVICE_SDL2
+    SDL_Quit();
+#endif
+
+#ifdef __SWITCH__
+    // socketExit();
+#endif
+}
+
+void RSDK::InitConsole()
+{
+#if RETRO_PLATFORM == RETRO_WIN
+    AllocConsole();
+    AttachConsole(GetCurrentProcessId());
+
+    freopen("CON", "w", stdout);
+#endif
+
+#if RETRO_PLATFORM == RETRO_SWITCH
+    consoleInit(NULL);
+#endif
+}
+void RSDK::ReleaseConsole()
+{
+#if RETRO_PLATFORM == RETRO_WIN
+    FreeConsole();
+#endif
+}
+
+void RSDK::SendQuitMsg()
+{
+#if RETRO_RENDERDEVICE_DIRECTX9 || RETRO_RENDERDEVICE_DIRECTX11
+    PostQuitMessage(0);
 #endif
 }

@@ -842,7 +842,7 @@ void RSDK::DevMenu_OptionsMenu()
         switch (devMenu.selection) {
             case 0: {
                 devMenu.windowed    = videoSettings.windowed;
-                devMenu.windowScale = (videoSettings.windowWidth / videoSettings.pixWidth) - 1;
+                devMenu.windowScale = (videoSettings.windowHeight / videoSettings.pixHeight) - 1;
 
                 int32 aspect = (int32)((videoSettings.windowWidth / (float)videoSettings.windowHeight) * (float)SCREEN_YSIZE) >> 3;
                 switch (aspect) {
@@ -1045,6 +1045,7 @@ void RSDK::DevMenu_VideoOptionsMenu()
                 shaderList[0].linear   = !devMenu.windowed;
                 if (!devMenu.windowScale)
                     videoSettings.shaderID = SHADER_NONE;
+                devMenu.windowScale++;
 
                 int32 width = 0;
                 switch (devMenu.windowAspect) {
@@ -1065,8 +1066,8 @@ void RSDK::DevMenu_VideoOptionsMenu()
                     width = DEFAULT_PIXWIDTH;
 #endif
 
-                videoSettings.windowWidth  = width * (devMenu.windowScale + 1);
-                videoSettings.windowHeight = videoSettings.pixHeight * (devMenu.windowScale + 1);
+                videoSettings.windowWidth  = width * devMenu.windowScale;
+                videoSettings.windowHeight = videoSettings.pixHeight * devMenu.windowScale;
                 UpdateGameWindow();
 
                 devMenu.state     = DevMenu_OptionsMenu;
