@@ -193,6 +193,8 @@
     <Image Include="Assets\SplashScreen.scale-100.png" />
     <Image Include="Assets\SplashScreen.scale-125.png" />
     <Image Include="Assets\SplashScreen.scale-150.png" />
+    <Image Include="Assets\SplashScreen.scale-200.png" />
+    <Image Include="Assets\SplashScreen.scale-400.png" />
     <Image Include="Assets\Square150x150Logo.scale-100.png" />
     <Image Include="Assets\Square150x150Logo.scale-125.png" />
     <Image Include="Assets\Square150x150Logo.scale-150.png" />

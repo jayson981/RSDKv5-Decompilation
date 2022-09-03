@@ -3,10 +3,10 @@
   <Identity
     Name="453aba0f-8dc8-459d-b7c8-9b6ed18e27b0"
     Publisher="CN=Thomas"
-    Version="1.0.22.0" />
+    Version="1.1.24.0" />
   <mp:PhoneIdentity PhoneProductId="453aba0f-8dc8-459d-b7c8-9b6ed18e27b0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
   <Properties>
-    <DisplayName>Sonic Mania</DisplayName>
+    <DisplayName>RSDKv5</DisplayName>
     <PublisherDisplayName>SEGA</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
