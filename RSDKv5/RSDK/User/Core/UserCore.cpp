@@ -64,6 +64,10 @@ void RSDK::SKU::InitUserCore()
     userCore = InitNXCore();
 #endif
 
+#if RETRO_USERCORE_XB1
+    userCore = InitXBLCore();
+#endif
+
 #if RETRO_USERCORE_DUMMY
     if (!userCore) { // no platform core, so default to dummy funcs
         userCore = dummyCore;
@@ -313,7 +317,7 @@ void RSDK::LoadSettingsINI()
             engine.devMenu = iniparser_getboolean(ini, "Game:devMenu", false);
 
 #if !RETRO_USE_ORIGINAL_CODE
-        customSettings.region                    = iniparser_getint(ini, "Game:region", -1);
+        customSettings.region = iniparser_getint(ini, "Game:region", -1);
         // customSettings.confirmButtonFlip         = iniparser_getboolean(ini, "Game:confirmButtonFlip", false);
         // customSettings.xyButtonFlip              = iniparser_getboolean(ini, "Game:xyButtonFlip", false);
         customSettings.confirmButtonFlip         = iniparser_getboolean(ini, "Game:faceButtonFlip", false);

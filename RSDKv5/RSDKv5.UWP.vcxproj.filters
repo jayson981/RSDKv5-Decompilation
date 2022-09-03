@@ -149,6 +149,9 @@
     <Filter Include="Source Files\RSDK\Input\WGI">
       <UniqueIdentifier>{43877571-9446-43d2-827a-26382d9a6ce9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\RSDK\User\XBL">
+      <UniqueIdentifier>{6f7b1675-6f02-49c4-a2d7-876b275fee3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\dependencies\all\tinyxml2\tinyxml2.cpp">
@@ -372,6 +375,24 @@
     </ClCompile>
     <ClCompile Include="RSDK\Input\WGI\WGIDevice.cpp">
       <Filter>Source Files\RSDK\Input\WGI</Filter>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\XBL\XBLStorage.cpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\XBL\XBLAchievements.cpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\XBL\XBLCore.cpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\XBL\XBLLeaderboards.cpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\XBL\XBLPresence.cpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
+    </ClCompile>
+    <ClCompile Include="RSDK\User\XBL\XBLStats.cpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -597,6 +618,24 @@
     <ClInclude Include="RSDK\Input\WGI\WGIDevice.h">
       <Filter>Source Files\RSDK\Input\WGI</Filter>
     </ClInclude>
+    <ClInclude Include="RSDK\User\XBL\XBLAchievements.hpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\XBL\XBLCore.hpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\XBL\XBLLeaderboards.hpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\XBL\XBLPresence.hpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\XBL\XBLStats.hpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
+    </ClInclude>
+    <ClInclude Include="RSDK\User\XBL\XBLStorage.hpp">
+      <Filter>Source Files\RSDK\User\XBL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\SmallTile.scale-100.png">
@@ -720,6 +759,27 @@
       <Filter>Assets</Filter>
     </Image>
     <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-24.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SmallTile.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\WideTile.scale-400.png">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>

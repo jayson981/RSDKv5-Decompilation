@@ -47,7 +47,8 @@ public:
 
     static void SetWindowTitle();
 
-    static void ShowErrorDialog(const char* title, const char *format, ...);
+    static void ShowErrorDialog(const char* title,
+        const char *format, ...);
 
     static ID3D11Texture2D *imageTexture;
     static ID3D11DeviceContext *dx11Context;

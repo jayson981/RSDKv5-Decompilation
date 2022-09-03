@@ -184,16 +184,20 @@
     <Image Include="Assets\LargeTile.scale-125.png" />
     <Image Include="Assets\LargeTile.scale-150.png" />
     <Image Include="Assets\LargeTile.scale-200.png" />
+    <Image Include="Assets\LargeTile.scale-400.png" />
     <Image Include="Assets\SmallTile.scale-100.png" />
     <Image Include="Assets\SmallTile.scale-125.png" />
     <Image Include="Assets\SmallTile.scale-150.png" />
     <Image Include="Assets\SmallTile.scale-200.png" />
+    <Image Include="Assets\SmallTile.scale-400.png" />
     <Image Include="Assets\SplashScreen.scale-100.png" />
     <Image Include="Assets\SplashScreen.scale-125.png" />
     <Image Include="Assets\SplashScreen.scale-150.png" />
     <Image Include="Assets\Square150x150Logo.scale-100.png" />
     <Image Include="Assets\Square150x150Logo.scale-125.png" />
     <Image Include="Assets\Square150x150Logo.scale-150.png" />
+    <Image Include="Assets\Square150x150Logo.scale-200.png" />
+    <Image Include="Assets\Square150x150Logo.scale-400.png" />
     <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
     <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
     <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
@@ -208,6 +212,7 @@
     <Image Include="Assets\Square44x44Logo.scale-125.png" />
     <Image Include="Assets\Square44x44Logo.scale-150.png" />
     <Image Include="Assets\Square44x44Logo.scale-200.png" />
+    <Image Include="Assets\Square44x44Logo.scale-400.png" />
     <Image Include="Assets\Square44x44Logo.targetsize-16.png" />
     <Image Include="Assets\Square44x44Logo.targetsize-24.png" />
     <Image Include="Assets\Square44x44Logo.targetsize-256.png" />
@@ -227,10 +232,12 @@
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
     </CopyFileToFolders>
+    <Image Include="Assets\StoreLogo.scale-400.png" />
     <Image Include="Assets\WideTile.scale-100.png" />
     <Image Include="Assets\WideTile.scale-125.png" />
     <Image Include="Assets\WideTile.scale-150.png" />
     <Image Include="Assets\WideTile.scale-200.png" />
+    <Image Include="Assets\WideTile.scale-400.png" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\..\Sonic-Mania-Decompilation\build\ARM64\Release\Game\Game.dll" Condition="'$(Platform)'=='ARM64'">
@@ -544,6 +551,12 @@
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RSDK\User\XBL\XBLAchievements.cpp" />
+    <ClCompile Include="RSDK\User\XBL\XBLCore.cpp" />
+    <ClCompile Include="RSDK\User\XBL\XBLLeaderboards.cpp" />
+    <ClCompile Include="RSDK\User\XBL\XBLPresence.cpp" />
+    <ClCompile Include="RSDK\User\XBL\XBLStats.cpp" />
+    <ClCompile Include="RSDK\User\XBL\XBLStorage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\dependencies\all\iniparser\dictionary.h" />
@@ -705,6 +718,12 @@
     <ClInclude Include="RSDK\User\Steam\SteamStorage.hpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="RSDK\User\XBL\XBLAchievements.hpp" />
+    <ClInclude Include="RSDK\User\XBL\XBLCore.hpp" />
+    <ClInclude Include="RSDK\User\XBL\XBLLeaderboards.hpp" />
+    <ClInclude Include="RSDK\User\XBL\XBLPresence.hpp" />
+    <ClInclude Include="RSDK\User\XBL\XBLStats.hpp" />
+    <ClInclude Include="RSDK\User\XBL\XBLStorage.hpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="mods\D3D11Shaders\Data\Shaders\DX11\Clean.hlsl">

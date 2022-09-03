@@ -399,23 +399,15 @@ void LinkGameLogic(GameInfo info);
 // ORIGINAL CLASS
 
 // Windows.h already included by master header
-#if !(RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_SWITCH || RETRO_PLATFORM == RETRO_UWP)
+#if !(RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_UWP || RETRO_PLATFORM == RETRO_SWITCH)
 #include <dlfcn.h>
 #endif
 
 // Only define this if you want to prioritize checking libraries first (Game_x64.dll then Game.dll)
 // e.x. -DRETRO_ARCHIITECTURE="x64"
-//#if RETRO_PLATFORM == RETRO_UWP
-//#if defined(_M_ARM)
-//#define RETRO_ARCHITECTURE "arm32"
-//#elif defined(_M_ARM64) || defined(_M_ARM64EC)
-//#define RETRO_ARCHITECTURE "arm64"
-//#elif defined(_M_AMD64)
-//#define RETRO_ARCHITECTURE "x64"
-//#else
-//#define RETRO_ARCHITECTURE "x86"
-//#endif
-//#endif
+#ifndef RETRO_ARCHITECTURE
+#define RETRO_ARCHITECTURE NULL
+#endif
 
 class Link
 {
@@ -435,14 +427,15 @@ public:
 
 #if RETRO_PLATFORM == RETRO_SWITCH
     // do nothing for switch
-    static inline Handle PlatformLoadLibrary(std::string path) { return NULL; }
+    static inline Handle Open(std::string path) { return NULL; }
 #else
     static inline Handle PlatformLoadLibrary(std::string path)
     {
         Handle ret;
 #if RETRO_PLATFORM == RETRO_WIN
         ret = (Handle)LoadLibraryA(path.c_str());
-#elif RETRO_PLATFORM == RETRO_UWP
+#else
+#if RETRO_PLATFORM == RETRO_UWP
         ret = (Handle)LoadPackagedLibrary(std::wstring(path.begin(), path.end()).c_str(), 0);
 #else
 #if RETRO_PLATFORM == RETRO_ANDROID
@@ -451,29 +444,15 @@ public:
             path = path.substr(path.find_last_of('/') + 1);
         path = "lib" + path;
 #endif // ! RETRO_PLATFORM == ANDROID
-        Handle ret = (Handle)dlopen(path.c_str(), RTLD_LOCAL | RTLD_LAZY);
-#endif // ! RETRO_PLATFORM == WIN
-
-#ifdef RETRO_ARCHITECTURE
+        ret  = (Handle)dlopen(path.c_str(), RTLD_LOCAL | RTLD_LAZY);
+        // try loading the library globally on linux
         if (!ret) {
-            path = prepath;
-            if (path.length() <= strlen(extention) || path.compare(path.length() - strlen(extention), strlen(extention), std::string(extention))) {
-                path += extention;
-            }
-
-#if RETRO_PLATFORM == RETRO_WIN
-            Handle ret = (Handle)LoadLibraryA(path.c_str());
-#elif RETRO_PLATFORM == RETRO_UWP
-            Handle ret = (Handle)LoadPackagedLibrary(std::wstring(path.begin(), path.end()).c_str(), 0);
-#else
-
-#if RETRO_PLATFORM == RETRO_ANDROID
-            // path should only load local libs
             if (path.find_last_of('/') != std::string::npos)
                 path = path.substr(path.find_last_of('/') + 1);
             ret = (Handle)dlopen(path.c_str(), RTLD_LOCAL | RTLD_LAZY);
         }
 #endif // ! RETRO_PLATFORM == WIN
+#endif
         return ret;
     }
 
@@ -518,7 +497,7 @@ public:
 #endif
     }
 
-    static inline void *GetSymbol(Handle handle, const std::string& symbol)
+    static inline void *GetSymbol(Handle handle, const char *symbol)
     {
 #if RETRO_PLATFORM == RETRO_SWITCH
         return NULL;
@@ -526,9 +505,9 @@ public:
         if (!handle)
             return NULL;
 #if RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_UWP
-        return (void *)GetProcAddress(handle, symbol.c_str());
+        return (void *)GetProcAddress(handle, symbol);
 #else
-        return (void *)dlsym(handle, symbol.c_str());
+        return (void *)dlsym(handle, symbol);
 #endif
 #endif
     }
@@ -539,7 +518,7 @@ public:
         return NULL;
 #else
 #if RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_UWP
-        return (char*)GetLastErrorAsString();
+        return (char *)GetLastErrorAsString();
 #else
         return dlerror();
 #endif
