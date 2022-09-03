@@ -44,8 +44,25 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
 #endif
 #endif
 
+
 #if RETRO_REV0U
         DetectEngineVersion();
+#endif
+
+#if RETRO_PLATFORM == RETRO_UWP
+        {
+            FileInfo info{};
+            if (!LoadFile(&info, "Data/Game/GameConfig.bin", FMODE_RB)) {
+                if (RenderDevice::OpenRSDKFile()) {
+                    SKU::ReleaseUserCore();
+                    ReleaseStorage();
+                    return RunRetroEngine(argc, argv);
+                }
+            }
+            else {
+                CloseFile(&info);
+            }
+        }
 #endif
 
         // By Default we use the dummy system so this'll never be false

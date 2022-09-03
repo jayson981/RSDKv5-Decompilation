@@ -1251,7 +1251,8 @@ void D3D11RenderDevice::OnKeyUp(winrt::Windows::Foundation::IInspectable const &
     SKU::ClearKeyState((int32)args.VirtualKey());
 }
 
-void D3D11RenderDevice::OnResized(winrt::Windows::UI::Core::CoreWindow const &sender, winrt::Windows::UI::Core::WindowSizeChangedEventArgs const &args)
+void D3D11RenderDevice::OnResized(winrt::Windows::UI::Core::CoreWindow const &sender,
+                                  winrt::Windows::UI::Core::WindowSizeChangedEventArgs const &args)
 {
     RefreshWindow();
 }
@@ -1298,7 +1299,7 @@ void D3D11RenderDevice::SetupImageTexture(int32 width, int32 height, uint8 *imag
 }
 
 void D3D11RenderDevice::SetupVideoTexture_YUV420(int32 width, int32 height, uint8 *yPlane, uint8 *uPlane, uint8 *vPlane, int32 strideY, int32 strideU,
-                                            int32 strideV)
+                                                 int32 strideV)
 {
     D3D11_MAPPED_SUBRESOURCE mappedResource;
     if (SUCCEEDED(dx11Context->Map(imageTexture, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource))) {
@@ -1331,7 +1332,7 @@ void D3D11RenderDevice::SetupVideoTexture_YUV420(int32 width, int32 height, uint
     }
 }
 void D3D11RenderDevice::SetupVideoTexture_YUV422(int32 width, int32 height, uint8 *yPlane, uint8 *uPlane, uint8 *vPlane, int32 strideY, int32 strideU,
-                                            int32 strideV)
+                                                 int32 strideV)
 {
     D3D11_MAPPED_SUBRESOURCE mappedResource;
     if (SUCCEEDED(dx11Context->Map(imageTexture, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource))) {
@@ -1364,7 +1365,7 @@ void D3D11RenderDevice::SetupVideoTexture_YUV422(int32 width, int32 height, uint
     }
 }
 void D3D11RenderDevice::SetupVideoTexture_YUV444(int32 width, int32 height, uint8 *yPlane, uint8 *uPlane, uint8 *vPlane, int32 strideY, int32 strideU,
-                                            int32 strideV)
+                                                 int32 strideV)
 {
     D3D11_MAPPED_SUBRESOURCE mappedResource;
     if (SUCCEEDED(dx11Context->Map(imageTexture, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource))) {
@@ -1391,7 +1392,20 @@ void D3D11RenderDevice::SetupVideoTexture_YUV444(int32 width, int32 height, uint
     }
 }
 
-void D3D11RenderDevice::ShowErrorDialog(const char* title, const char *format, ...) {
+template <typename T> T D3D11RenderDevice::WaitOnPromise(winrt::Windows::Foundation::IAsyncOperation<T> action)
+{
+    while (action.Status() == winrt::Windows::Foundation::AsyncStatus::Started) {
+        coreDispatcher.ProcessEvents(winrt::Windows::UI::Core::CoreProcessEventsOption::ProcessAllIfPresent);
+    }
+
+    if (action.Status() == winrt::Windows::Foundation::AsyncStatus::Error)
+        winrt::throw_hresult(action.ErrorCode());
+
+    return action.GetResults();
+}
+
+void D3D11RenderDevice::ShowErrorDialog(const char *title, const char *format, ...)
+{
     va_list args, args2;
     va_start(args, format);
     va_copy(args2, args);
@@ -1402,10 +1416,31 @@ void D3D11RenderDevice::ShowErrorDialog(const char* title, const char *format, .
     if (len <= 0)
         return;
 
-    char *data = new char[len]{0};
+    char *data = new char[len]{ 0 };
     vsnprintf(data, len, format, args2);
     va_end(args2);
 
     winrt::Windows::UI::Popups::MessageDialog dialog(winrt::to_hstring(data), winrt::to_hstring(title));
-    dialog.ShowAsync();
+    auto result = dialog.ShowAsync();
+}
+
+bool D3D11RenderDevice::OpenRSDKFile()
+{
+    try {
+        winrt::Windows::Storage::Pickers::FileOpenPicker filePicker{};
+        filePicker.FileTypeFilter().Append(L".rsdk");
+        filePicker.ViewMode(winrt::Windows::Storage::Pickers::PickerViewMode::List);
+
+        auto result = WaitOnPromise(filePicker.PickSingleFileAsync());
+        if (result == nullptr) {
+            // fail
+            return false;
+        }
+
+        auto result2 = WaitOnPromise(result.CopyAsync(winrt::Windows::Storage::ApplicationData::Current().LocalFolder()));
+    } catch (winrt::hresult_error &error) {
+        return false;
+    }
+
+    return true;
 }

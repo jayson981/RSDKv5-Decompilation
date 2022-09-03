@@ -47,8 +47,9 @@ public:
 
     static void SetWindowTitle();
 
-    static void ShowErrorDialog(const char* title,
-        const char *format, ...);
+    // uwp specific functions that shouldn't *really* be here but we need access to CoreDispatcher so
+    static void ShowErrorDialog(const char *title, const char *format, ...);
+    static bool OpenRSDKFile();
 
     static ID3D11Texture2D *imageTexture;
     static ID3D11DeviceContext *dx11Context;
@@ -67,7 +68,7 @@ private:
     static bool InitGraphicsAPI();
 
     static void GetDisplays();
-    
+
     static void RefreshWindow(winrt::Windows::Foundation::Size &size);
 
     static void OnPointerPressed(winrt::Windows::Foundation::IInspectable const &, winrt::Windows::UI::Core::PointerEventArgs const &args);
@@ -79,7 +80,7 @@ private:
 
     static void OnResized(winrt::Windows::UI::Core::CoreWindow const &sender, winrt::Windows::UI::Core::WindowSizeChangedEventArgs const &args);
 
-    static winrt::Windows::Foundation::Point TransformPointerPosition(winrt::Windows::Foundation::Point const& point);
+    static winrt::Windows::Foundation::Point TransformPointerPosition(winrt::Windows::Foundation::Point const &point);
     static winrt::Windows::Foundation::Point cusorPosition;
 
     struct touch_t {
@@ -89,6 +90,8 @@ private:
     };
 
     static std::map<uint32_t, touch_t> touches;
+
+    template <typename T> static T WaitOnPromise(winrt::Windows::Foundation::IAsyncOperation<T> action);
 
     inline static std::vector<IDXGIAdapter *> GetAdapterList()
     {
