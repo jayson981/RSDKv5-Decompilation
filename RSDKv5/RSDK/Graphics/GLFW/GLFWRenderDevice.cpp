@@ -390,7 +390,9 @@ void RenderDevice::CopyFrameBuffer()
 bool RenderDevice::ProcessEvents()
 {
     glfwPollEvents();
-    return !glfwWindowShouldClose(window);
+    if (glfwWindowShouldClose(window))
+        isRunning = false;
+    return false;
 }
 
 void RenderDevice::FlipScreen()
@@ -698,9 +700,26 @@ void RenderDevice::RefreshWindow()
 
     if (!InitGraphicsAPI() || !InitShaders())
         return;
+
+    videoSettings.windowState = WINDOWSTATE_ACTIVE;
 }
 
-void RenderDevice::GetWindowSize(int32 *width, int32 *height) { glfwGetWindowSize(window, width, height); }
+void RenderDevice::GetWindowSize(int32 *width, int32 *height)
+{
+    int32 widest = 0, highest = 0, count = 0;
+    GLFWmonitor **monitors = glfwGetMonitors(&count);
+    for (int32 i = 0; i < count; i++) {
+        const GLFWvidmode *mode = glfwGetVideoMode(monitors[i]);
+        if (mode->height > highest) {
+            highest = mode->height;
+            widest  = mode->width;
+        }
+    }
+    if (width)
+        *width = widest;
+    if (height)
+        *height = highest;
+}
 
 void RenderDevice::SetupImageTexture(int32 width, int32 height, uint8 *imagePixels)
 {
@@ -890,29 +909,51 @@ void RenderDevice::ProcessKeyEvent(GLFWwindow *, int32 key, int32 scancode, int3
 
 #if !RETRO_USE_ORIGINAL_CODE
                 case GLFW_KEY_F1:
-                    sceneInfo.listPos--;
-                    if (sceneInfo.listPos < sceneInfo.listCategory[sceneInfo.activeCategory].sceneOffsetStart) {
-                        sceneInfo.activeCategory--;
-                        if (sceneInfo.activeCategory >= sceneInfo.categoryCount) {
-                            sceneInfo.activeCategory = sceneInfo.categoryCount - 1;
+                    if (engine.devMenu) {
+                        sceneInfo.listPos--;
+                        if (sceneInfo.listPos < sceneInfo.listCategory[sceneInfo.activeCategory].sceneOffsetStart) {
+                            sceneInfo.activeCategory--;
+                            if (sceneInfo.activeCategory >= sceneInfo.categoryCount) {
+                                sceneInfo.activeCategory = sceneInfo.categoryCount - 1;
+                            }
+                            sceneInfo.listPos = sceneInfo.listCategory[sceneInfo.activeCategory].sceneOffsetEnd - 1;
                         }
-                        sceneInfo.listPos = sceneInfo.listCategory[sceneInfo.activeCategory].sceneOffsetEnd - 1;
-                    }
 
-                    LoadScene();
+#if RETRO_REV0U
+                        switch (engine.version) {
+                            default: break;
+                            case 5: LoadScene(); break;
+                            case 4:
+                            case 3: RSDK::Legacy::stageMode = RSDK::Legacy::STAGEMODE_LOAD; break;
+                        }
+#else
+                        LoadScene();
+#endif
+                    }
                     break;
 
                 case GLFW_KEY_F2:
-                    sceneInfo.listPos++;
-                    if (sceneInfo.listPos >= sceneInfo.listCategory[sceneInfo.activeCategory].sceneOffsetEnd) {
-                        sceneInfo.activeCategory++;
-                        if (sceneInfo.activeCategory >= sceneInfo.categoryCount) {
-                            sceneInfo.activeCategory = 0;
+                    if (engine.devMenu) {
+                        sceneInfo.listPos++;
+                        if (sceneInfo.listPos >= sceneInfo.listCategory[sceneInfo.activeCategory].sceneOffsetEnd) {
+                            sceneInfo.activeCategory++;
+                            if (sceneInfo.activeCategory >= sceneInfo.categoryCount) {
+                                sceneInfo.activeCategory = 0;
+                            }
+                            sceneInfo.listPos = sceneInfo.listCategory[sceneInfo.activeCategory].sceneOffsetStart;
                         }
-                        sceneInfo.listPos = sceneInfo.listCategory[sceneInfo.activeCategory].sceneOffsetStart;
-                    }
 
-                    LoadScene();
+#if RETRO_REV0U
+                        switch (engine.version) {
+                            default: break;
+                            case 5: LoadScene(); break;
+                            case 4:
+                            case 3: RSDK::Legacy::stageMode = RSDK::Legacy::STAGEMODE_LOAD; break;
+                        }
+#else
+                        LoadScene();
+#endif
+                    }
                     break;
 #endif
 
@@ -923,8 +964,19 @@ void RenderDevice::ProcessKeyEvent(GLFWwindow *, int32 key, int32 scancode, int3
 
 #if !RETRO_USE_ORIGINAL_CODE
                 case GLFW_KEY_F5:
-                    // Quick-Reload
-                    LoadScene();
+                    if (engine.devMenu) {
+                        // Quick-Reload
+#if RETRO_REV0U
+                        switch (engine.version) {
+                            default: break;
+                            case 5: LoadScene(); break;
+                            case 4:
+                            case 3: RSDK::Legacy::stageMode = RSDK::Legacy::STAGEMODE_LOAD; break;
+                        }
+#else
+                        LoadScene();
+#endif
+                    }
                     break;
 
                 case GLFW_KEY_F6:
