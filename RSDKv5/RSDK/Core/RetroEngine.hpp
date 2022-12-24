@@ -65,6 +65,11 @@ enum GameRegions {
 #undef __linux__
 #endif
 
+#ifdef _INTELLISENSE_ANDROID
+#undef _WIN32
+#undef _LIBCPP_MSVCRT_LIKE
+#endif
+
 #ifndef RETRO_USE_ORIGINAL_CODE
 #define RETRO_USE_ORIGINAL_CODE (0)
 #endif
@@ -93,7 +98,7 @@ enum GameRegions {
 #define RETRO_STANDARD (0)
 #define RETRO_MOBILE   (1)
 
-#define sprintf_s(x, _, ...) sprintf(x, __VA_ARGS__)
+#define sprintf_s(x, _, ...) snprintf(x, _, __VA_ARGS__)
 
 #if defined _WIN32
 #undef sprintf_s
@@ -161,7 +166,6 @@ enum GameRegions {
 // ============================
 #define RETRO_RENDERDEVICE_DIRECTX9  (0)
 #define RETRO_RENDERDEVICE_DIRECTX11 (0)
-#define RETRO_RENDERDEVICE_NX        (0)
 // CUSTOM
 #define RETRO_RENDERDEVICE_SDL2 (0)
 #define RETRO_RENDERDEVICE_GLFW (0)
@@ -172,7 +176,6 @@ enum GameRegions {
 // AUDIO DEVICE BACKENDS
 // ============================
 #define RETRO_AUDIODEVICE_XAUDIO (0)
-#define RETRO_AUDIODEVICE_NX     (0)
 // CUSTOM
 #define RETRO_AUDIODEVICE_SDL2 (0)
 #define RETRO_AUDIODEVICE_OBOE (0)
@@ -234,7 +237,7 @@ enum GameRegions {
 
 // defines the version of the mod loader, this should be changed ONLY if the ModFunctionTable is updated in any way
 #ifndef RETRO_MOD_LOADER_VER
-#define RETRO_MOD_LOADER_VER (1)
+#define RETRO_MOD_LOADER_VER (2)
 #endif
 
 // ============================
@@ -270,14 +273,14 @@ enum GameRegions {
 #undef RETRO_INPUTDEVICE_RAWINPUT
 #define RETRO_INPUTDEVICE_RAWINPUT (1)
 
-#elif defined(RSDK_USE_GL3)
+#elif defined(RSDK_USE_OGL)
 #undef RETRO_RENDERDEVICE_GLFW
 #define RETRO_RENDERDEVICE_GLFW (1)
 
 #undef RETRO_INPUTDEVICE_GLFW
 #define RETRO_INPUTDEVICE_GLFW (1)
 #else
-#error One of RSDK_USE_DX9, RSDK_USE_DX11, RSDK_USE_SDL2, or RSDK_USE_GL3 must be defined.
+#error One of RSDK_USE_DX9, RSDK_USE_DX11, RSDK_USE_SDL2, or RSDK_USE_OGL must be defined.
 #endif
 
 #if !defined(_MINGW) && !defined(RSDK_USE_SDL2)
@@ -323,7 +326,7 @@ enum GameRegions {
 #undef RETRO_INPUTDEVICE_SDL2
 #define RETRO_INPUTDEVICE_SDL2 (1)
 
-#elif defined(RSDK_USE_GL3)
+#elif defined(RSDK_USE_OGL)
 #undef RETRO_RENDERDEVICE_GLFW
 #define RETRO_RENDERDEVICE_GLFW (1)
 #undef RETRO_INPUTDEVICE_GLFW
@@ -332,7 +335,7 @@ enum GameRegions {
 #define RETRO_AUDIODEVICE_SDL2 (1)
 
 #else
-#error RSDK_USE_SDL2 or RSDK_USE_GL3 must be defined.
+#error RSDK_USE_SDL2 or RSDK_USE_OGL must be defined.
 #endif //! RSDK_USE_SDL2
 
 #elif RETRO_PLATFORM == RETRO_SWITCH
@@ -348,7 +351,7 @@ enum GameRegions {
 #undef RETRO_INPUTDEVICE_SDL2
 #define RETRO_INPUTDEVICE_SDL2 (1)
 
-#elif defined(RSDK_USE_GL3)
+#elif defined(RSDK_USE_OGL)
 #undef RETRO_RENDERDEVICE_EGL
 #define RETRO_RENDERDEVICE_EGL (1)
 #undef RETRO_INPUTDEVICE_NX
@@ -356,16 +359,8 @@ enum GameRegions {
 #undef RETRO_AUDIODEVICE_SDL2
 #define RETRO_AUDIODEVICE_SDL2 (1)
 
-#elif defined(RSDK_USE_NX)
-#undef RETRO_RENDERDEVICE_NX
-#define RETRO_RENDERDEVICE_NX (1)
-#undef RETRO_INPUTDEVICE_NX
-#define RETRO_INPUTDEVICE_NX (1)
-#undef RETRO_AUDIODEVICE_NX
-#define RETRO_AUDIODEVICE_NX (1)
 #else
-
-#error RSDK_USE_NX, RSDK_USE_SDL2, or RSDK_USE_GL3 must be defined.
+#error RSDK_USE_SDL2 or RSDK_USE_OGL must be defined.
 #endif //! RSDK_USE_SDL2
 
 #undef RETRO_INPUTDEVICE_KEYBOARD
@@ -374,7 +369,7 @@ enum GameRegions {
 
 #elif RETRO_PLATFORM == RETRO_ANDROID
 
-#if defined RSDK_USE_GL3
+#if defined RSDK_USE_OGL
 #undef RETRO_RENDERDEVICE_EGL
 #define RETRO_RENDERDEVICE_EGL (1)
 #undef RETRO_INPUTDEVICE_PDBOAT
@@ -382,7 +377,7 @@ enum GameRegions {
 #undef RETRO_AUDIODEVICE_OBOE
 #define RETRO_AUDIODEVICE_OBOE (1)
 #else
-#error RSDK_USE_GL3 must be defined.
+#error RSDK_USE_OGL must be defined.
 #endif
 
 #elif RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_iOS
@@ -487,7 +482,7 @@ enum GameRegions {
 
 #if RETRO_RENDERDEVICE_EGL
 #include <EGL/egl.h> // EGL library
-#include <GLES3/gl31.h>
+#include <GLES2/gl2.h>
 #endif
 
 #include <androidHelpers.hpp>
@@ -496,9 +491,14 @@ enum GameRegions {
 #endif
 
 #if RETRO_RENDERDEVICE_SDL2 || RETRO_INPUTDEVICE_SDL2 || RETRO_AUDIODEVICE_SDL2
+#if RETRO_PLATFORM == RETRO_OSX
+// yeah, I dunno how you're meant to do the below with macOS frameworks so leaving this as is for rn :P
+#include <SDL2/SDL.h>
+#else
 // This is the way of including SDL that is recommended by the devs themselves:
 // https://wiki.libsdl.org/FAQDevelopment#do_i_include_sdl.h_or_sdlsdl.h
 #include "SDL.h"
+#endif
 #endif
 
 #include <theora/theoradec.h>
@@ -542,8 +542,10 @@ enum GameRegions {
 
 #if !RETRO_REV0U
 #define ENGINE_VERSION (5)
+#define ENGINE_V_NAME "v5"
 #else
 #define ENGINE_VERSION (engine.version)
+#define ENGINE_V_NAME "v5U"
 #endif
 
 namespace RSDK
@@ -592,6 +594,8 @@ struct RetroEngine {
     int32 fastForwardSpeed    = 8;
     bool32 frameStep          = false;
     bool32 showPaletteOverlay = false;
+    uint8 showUpdateRanges    = 0;
+    uint8 showEntityInfo      = 0;
     bool32 drawGroupVisible[DRAWGROUP_COUNT];
 
     // Image/Video support
@@ -601,8 +605,8 @@ struct RetroEngine {
     bool32 (*skipCallback)() = NULL;
 
     bool32 streamsEnabled = true;
-    float streamVolume    = 1.0;
-    float soundFXVolume   = 1.0;
+    float streamVolume    = 1.0f;
+    float soundFXVolume   = 1.0f;
 };
 
 extern RetroEngine engine;

@@ -26,8 +26,6 @@ struct AudioDevice : public AudioDeviceBase {
     static bool32 Init();
     static void Release();
 
-    static void ProcessAudioMixing(void *stream, int32 length);
-
     static void FrameInit();
 
     static void HandleStreamLoad(ChannelInfo *channel, bool32 async);
@@ -41,6 +39,9 @@ struct AudioDevice : public AudioDeviceBase {
     static AudioEngineCallback engineCallback;
 
     static RTL_CRITICAL_SECTION criticalSection;
+
+    static int32 mixBufferID;
+    static SAMPLE_FORMAT mixBuffer[3][MIX_BUFFER_SIZE];
 
 private:
     static void InitAudioChannels();
