@@ -16,25 +16,25 @@ namespace fs = std::filesystem;
 #else
 bool fs::exists(fs::path path)
 {
-    auto *jni = GetJNISetup();
+    auto *jni        = GetJNISetup();
     jbyteArray array = jni->env->NewByteArray(path.string().length());
-    jni->env->SetByteArrayRegion(array, 0, path.string().length(), (jbyte*)path.string().c_str());
+    jni->env->SetByteArrayRegion(array, 0, path.string().length(), (jbyte *)path.string().c_str());
     return jni->env->CallBooleanMethod(jni->thiz, fsExists, array);
 }
 
 bool fs::is_directory(fs::path path)
 {
-    auto *jni = GetJNISetup();
+    auto *jni        = GetJNISetup();
     jbyteArray array = jni->env->NewByteArray(path.string().length());
-    jni->env->SetByteArrayRegion(array, 0, path.string().length(), (jbyte*)path.string().c_str());
+    jni->env->SetByteArrayRegion(array, 0, path.string().length(), (jbyte *)path.string().c_str());
     return jni->env->CallBooleanMethod(jni->thiz, fsIsDir, array);
 }
 
 fs::path_list fs::directory_iterator(fs::path path)
 {
-    auto *jni = GetJNISetup();
+    auto *jni        = GetJNISetup();
     jbyteArray array = jni->env->NewByteArray(path.string().length());
-    jni->env->SetByteArrayRegion(array, 0, path.string().length(), (jbyte*)path.string().c_str());
+    jni->env->SetByteArrayRegion(array, 0, path.string().length(), (jbyte *)path.string().c_str());
     return fs::path_list((jobjectArray)jni->env->CallObjectMethod(jni->thiz, fsDirIter, array));
 }
 #endif
@@ -673,6 +673,11 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
         else
             info->targetVersion = info->forceVersion;
         info->forceScripts = iniparser_getboolean(ini, ":TxtScripts", false);
+
+        if (info->name == "ManiaTouchControls") {
+            // BUGBUG: ew ew ew ew ew ew ew ew ew
+            active = winrt::Windows::Devices::Input::TouchCapabilities().TouchPresent(); 
+        }
 
         if (!active)
             return true;

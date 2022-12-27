@@ -52,9 +52,12 @@ LARGE_INTEGER D3D11RenderDevice::initialFrequency;
 LARGE_INTEGER D3D11RenderDevice::curFrequency;
 
 winrt::Windows::Foundation::Point D3D11RenderDevice::cusorPosition{ 0, 0 };
+winrt::Windows::Devices::Input::PointerDeviceType D3D11RenderDevice::lastDevice{ 0 };
 
 winrt::Windows::UI::Core::CoreWindow D3D11RenderDevice::coreWindow{ nullptr };
 winrt::Windows::UI::Core::CoreDispatcher D3D11RenderDevice::coreDispatcher{ nullptr };
+
+double D3D11RenderDevice::dpi = 1.0;
 
 struct ShaderConstants {
     float2 pixelSize;
@@ -78,6 +81,13 @@ bool D3D11RenderDevice::Init()
     coreWindow.KeyUp(&D3D11RenderDevice::OnKeyUp);
 
     coreWindow.SizeChanged(&D3D11RenderDevice::OnResized);
+
+    auto displayInformation = winrt::Windows::Graphics::Display::DisplayInformation::GetForCurrentView();
+    displayInformation.DpiChanged([](auto &sender, auto &args) { dpi = sender.RawPixelsPerViewPixel(); });
+    dpi = displayInformation.RawPixelsPerViewPixel();
+
+    auto systemNavigationManager = winrt::Windows::UI::Core::SystemNavigationManager::GetForCurrentView();
+    systemNavigationManager.BackRequested([](auto &sender, auto &args) { args.Handled(true); });
 
     if (!SetupRendering() || !AudioDevice::Init())
         return false;
@@ -1129,21 +1139,32 @@ void D3D11RenderDevice::GetWindowSize(int32 *width, int32 *height)
 bool D3D11RenderDevice::ProcessEvents()
 {
     coreDispatcher.ProcessEvents(winrt::Windows::UI::Core::CoreProcessEventsOption::ProcessAllIfPresent);
+    touchInfo.count = 0;
 
+    std::vector<uint32_t> released;
     for (auto &&touch : touches) {
-        if (touch.second.state) {
-            touchInfo.down[touchInfo.count] = touch.second.state;
-            touchInfo.x[touchInfo.count]    = touch.second.x;
-            touchInfo.y[touchInfo.count]    = touch.second.y;
-            touchInfo.count++;
-        }
+        touchInfo.down[touchInfo.count] = touch.second.state;
+        touchInfo.x[touchInfo.count]    = touch.second.x;
+        touchInfo.y[touchInfo.count]    = touch.second.y;
+        touchInfo.count++;
+
+        if (!touch.second.state)
+            released.push_back(touch.first);
     }
+
+    for (auto &&releasedId : released) touches.erase(releasedId);
 
     return true;
 }
 
-winrt::Windows::Foundation::Point D3D11RenderDevice::TransformPointerPosition(winrt::Windows::Foundation::Point const &rawPosition)
+winrt::Windows::Foundation::Point D3D11RenderDevice::TransformPointerPosition(winrt::Windows::UI::Input::PointerPoint const &point)
 {
+    auto &rawPosition = point.Position();
+    auto &device      = point.PointerDevice();
+
+    if (device.PointerDeviceType() == winrt::Windows::Devices::Input::PointerDeviceType::Mouse)
+        return rawPosition;
+
     winrt::Windows::Foundation::Rect bounds = coreWindow.Bounds();
     winrt::Windows::Foundation::Point outputPosition{};
 
@@ -1177,25 +1198,22 @@ void D3D11RenderDevice::OnPointerPressed(winrt::Windows::Foundation::IInspectabl
 {
     auto pointerPoint = args.CurrentPoint();
     auto device       = pointerPoint.PointerDevice();
-    auto position     = TransformPointerPosition(pointerPoint.Position());
+    auto position     = TransformPointerPosition(pointerPoint);
 
     coreWindow.SetPointerCapture();
 
-    if (device.PointerDeviceType() != winrt::Windows::Devices::Input::PointerDeviceType::Mouse) {
-        if (touches.find(pointerPoint.PointerId()) == touches.end()) {
-            touches.insert({ pointerPoint.PointerId(), { position.X, position.Y, 1 } });
-        }
-        else {
-            auto &touch = touches.at(pointerPoint.PointerId());
-            touch.x     = position.X;
-            touch.y     = position.Y;
-            touch.state = 1;
-        }
+    if ((lastDevice = device.PointerDeviceType()) == winrt::Windows::Devices::Input::PointerDeviceType::Mouse) {
+        cusorPosition = pointerPoint.Position();
+    }
+
+    if (touches.count(pointerPoint.PointerId()) == 0) {
+        touches.insert({ pointerPoint.PointerId(), { position.X, position.Y, 1 } });
     }
     else {
-        touchInfo.down[0] = 1;
-        touchInfo.count   = 1;
-        cusorPosition     = pointerPoint.Position();
+        auto &touch = touches.at(pointerPoint.PointerId());
+        touch.x     = position.X;
+        touch.y     = position.Y;
+        touch.state = 1;
     }
 }
 
@@ -1203,19 +1221,16 @@ void D3D11RenderDevice::OnPointerMoved(winrt::Windows::Foundation::IInspectable 
 {
     auto pointerPoint = args.CurrentPoint();
     auto device       = pointerPoint.PointerDevice();
-    auto position     = TransformPointerPosition(pointerPoint.Position());
+    auto position     = TransformPointerPosition(pointerPoint);
 
-    if (device.PointerDeviceType() != winrt::Windows::Devices::Input::PointerDeviceType::Mouse) {
-        if (touches.find(pointerPoint.PointerId()) != touches.end()) {
-            auto &touch = touches.at(pointerPoint.PointerId());
-            if (touch.state) {
-                touch.x = position.X;
-                touch.y = position.Y;
-            }
-        }
-    }
-    else {
+    if ((lastDevice = device.PointerDeviceType()) == winrt::Windows::Devices::Input::PointerDeviceType::Mouse) {
         cusorPosition = pointerPoint.Position();
+    }
+
+    if (touches.count(pointerPoint.PointerId()) != 0) {
+        auto &touch = touches.at(pointerPoint.PointerId());
+        touch.x     = position.X;
+        touch.y     = position.Y;
     }
 }
 
@@ -1223,21 +1238,19 @@ void D3D11RenderDevice::OnPointerReleased(winrt::Windows::Foundation::IInspectab
 {
     auto pointerPoint = args.CurrentPoint();
     auto device       = pointerPoint.PointerDevice();
-    auto position     = TransformPointerPosition(pointerPoint.Position());
+    auto position     = TransformPointerPosition(pointerPoint);
 
     coreWindow.ReleasePointerCapture();
 
-    if (device.PointerDeviceType() != winrt::Windows::Devices::Input::PointerDeviceType::Mouse) {
-        if (touches.find(pointerPoint.PointerId()) != touches.end()) {
-            auto &touch = touches.at(pointerPoint.PointerId());
-            touch.x     = position.X;
-            touch.y     = position.Y;
-            touch.state = 0;
-        }
+    if ((lastDevice = device.PointerDeviceType()) == winrt::Windows::Devices::Input::PointerDeviceType::Mouse) {
+        cusorPosition = pointerPoint.Position();
     }
-    else {
-        touchInfo.down[0] = 0;
-        touchInfo.count   = 0;
+
+    if (touches.count(pointerPoint.PointerId()) != 0) {
+        auto &touch = touches.at(pointerPoint.PointerId());
+        touch.x     = position.X;
+        touch.y     = position.Y;
+        touch.state = 0;
     }
 }
 
@@ -1264,9 +1277,9 @@ void D3D11RenderDevice::ShowCursor(bool32 visible)
 
 bool D3D11RenderDevice::GetCursorPos(Vector2 *pos)
 {
-    pos->x = cusorPosition.X;
-    pos->y = cusorPosition.Y;
-    return true;
+    pos->x = cusorPosition.X * dpi;
+    pos->y = cusorPosition.Y * dpi;
+    return lastDevice == winrt::Windows::Devices::Input::PointerDeviceType::Mouse;
 }
 
 void D3D11RenderDevice::SetWindowTitle()

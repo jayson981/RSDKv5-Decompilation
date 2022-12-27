@@ -99,7 +99,7 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
         // we confirmed the game actually is valid & running, lets start some callbacks
         RunModCallbacks(MODCB_ONGAMESTARTUP, NULL);
         videoSettings.shaderID = shader;
-        RenderDevice::InitShaders();
+        //RenderDevice::InitShaders();
         RenderDevice::SetWindowTitle();
 #else
         if (RenderDevice::Init()) {

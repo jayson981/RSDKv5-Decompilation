@@ -61,6 +61,7 @@ public:
     static winrt::Windows::UI::Core::CoreWindow coreWindow;
     static winrt::Windows::UI::Core::CoreDispatcher coreDispatcher;
 
+
 private:
     static bool InitShaders();
     static bool SetupRendering();
@@ -80,7 +81,7 @@ private:
 
     static void OnResized(winrt::Windows::UI::Core::CoreWindow const &sender, winrt::Windows::UI::Core::WindowSizeChangedEventArgs const &args);
 
-    static winrt::Windows::Foundation::Point TransformPointerPosition(winrt::Windows::Foundation::Point const &point);
+    static winrt::Windows::Foundation::Point TransformPointerPosition(winrt::Windows::UI::Input::PointerPoint const &point);
     static winrt::Windows::Foundation::Point cusorPosition;
 
     struct touch_t {
@@ -133,6 +134,10 @@ private:
 
     static RECT monitorDisplayRect;
     static LUID deviceIdentifier;
+
+    static winrt::Windows::Devices::Input::PointerDeviceType lastDevice;
+
+    static double dpi;
 };
 
 struct ShaderEntry : public ShaderEntryBase {

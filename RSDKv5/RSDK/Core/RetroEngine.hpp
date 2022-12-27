@@ -212,7 +212,7 @@ enum GameRegions {
 
 // Determines if the engine is RSDKv5 rev01 (all versions of mania pre-plus), rev02 (all versions of mania post-plus) or RSDKv5U (sonic origins)
 #ifndef RETRO_REVISION
-#define RETRO_REVISION (2)
+#define RETRO_REVISION (3)
 #endif
 
 // RSDKv5 Rev02 (Used prior to Sonic Mania Plus)

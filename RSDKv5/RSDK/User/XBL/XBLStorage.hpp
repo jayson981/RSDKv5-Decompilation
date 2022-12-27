@@ -6,12 +6,7 @@
 namespace RSDK::SKU
 {
 struct XBLUserStorage : UserStorage {
-    int32 TryAuth()
-    {
-        // init EGS authorization
-        authStatus = STATUS_CONTINUE;
-        return authStatus;
-    }
+    int32 TryAuth();
     int32 TryInitStorage()
     {
         // init EGS storage

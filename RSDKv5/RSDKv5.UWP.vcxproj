@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.221121.5\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.221121.5\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup Label="Globals">
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
@@ -138,39 +138,59 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_GAMING_DESKTOP;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">false</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">false</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsWinRT>
+      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</MultiProcessorCompilation>
+      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</MultiProcessorCompilation>
+      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</MultiProcessorCompilation>
+      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">libogg.lib;libtheora_static.lib;d3d11.lib;d3dcompiler.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/;C:\Program Files (x86)\Microsoft GDK\220604\GRDK\GameKit\Lib\amd64</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+      </IgnoreSpecificDefaultLibraries>
     </Link>
     <Link>
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">libogg.lib;libtheora_static.lib;d3d11.lib;d3dcompiler.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/;C:\Program Files (x86)\Microsoft GDK\220604\GRDK\GameKit\Lib\amd64</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+      </IgnoreSpecificDefaultLibraries>
     </Link>
     <Link>
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">libogg.lib;libtheora_static.lib;d3d11.lib;d3dcompiler.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/;C:\Program Files (x86)\Microsoft GDK\220604\GRDK\GameKit\Lib\amd64</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </IgnoreSpecificDefaultLibraries>
     </Link>
     <Link>
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">libogg.lib;libtheora_static.lib;d3d11.lib;d3dcompiler.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
     <ClCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_GAMING_DESKTOP;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">false</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">false</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsWinRT>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|x64'">libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">msvcrt.lib;vccorlib.lib;libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">msvcrt.lib;vccorlib.lib;libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">msvcrt.lib;vccorlib.lib;libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvcrt.lib;vccorlib.lib;libogg.lib;libtheora_static.lib;d3d11.lib;DXGI.lib;XInputUap.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/;C:\Program Files (x86)\Microsoft GDK\220604\GRDK\GameKit\Lib\amd64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/;C:\Program Files (x86)\Microsoft GDK\220604\GRDK\GameKit\Lib\amd64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/;C:\Program Files (x86)\Microsoft GDK\220604\GRDK\GameKit\Lib\amd64</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)dependencies/windows/SDL2/lib/$(PlatformTargetAsMSBuildArchitecture)/;$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/Release/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/Release/</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -184,29 +204,23 @@
     <Image Include="Assets\LargeTile.scale-125.png" />
     <Image Include="Assets\LargeTile.scale-150.png" />
     <Image Include="Assets\LargeTile.scale-200.png" />
-    <Image Include="Assets\LargeTile.scale-400.png" />
     <Image Include="Assets\SmallTile.scale-100.png" />
     <Image Include="Assets\SmallTile.scale-125.png" />
     <Image Include="Assets\SmallTile.scale-150.png" />
     <Image Include="Assets\SmallTile.scale-200.png" />
-    <Image Include="Assets\SmallTile.scale-400.png" />
     <Image Include="Assets\SplashScreen.scale-100.png" />
     <Image Include="Assets\SplashScreen.scale-125.png" />
     <Image Include="Assets\SplashScreen.scale-150.png" />
     <Image Include="Assets\SplashScreen.scale-200.png" />
-    <Image Include="Assets\SplashScreen.scale-400.png" />
     <Image Include="Assets\Square150x150Logo.scale-100.png" />
     <Image Include="Assets\Square150x150Logo.scale-125.png" />
     <Image Include="Assets\Square150x150Logo.scale-150.png" />
     <Image Include="Assets\Square150x150Logo.scale-200.png" />
-    <Image Include="Assets\Square150x150Logo.scale-400.png" />
     <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
-    <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
     <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
     <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
     <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
     <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
-    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-24.png" />
     <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
     <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
     <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
@@ -214,7 +228,6 @@
     <Image Include="Assets\Square44x44Logo.scale-125.png" />
     <Image Include="Assets\Square44x44Logo.scale-150.png" />
     <Image Include="Assets\Square44x44Logo.scale-200.png" />
-    <Image Include="Assets\Square44x44Logo.scale-400.png" />
     <Image Include="Assets\Square44x44Logo.targetsize-16.png" />
     <Image Include="Assets\Square44x44Logo.targetsize-24.png" />
     <Image Include="Assets\Square44x44Logo.targetsize-256.png" />
@@ -224,22 +237,16 @@
     <Image Include="Assets\StoreLogo.scale-125.png" />
     <Image Include="Assets\StoreLogo.scale-150.png" />
     <Image Include="Assets\StoreLogo.scale-200.png" />
-    <CopyFileToFolders Include="mods\ManiaTouchControls\Data\Sprites\Global\DPad.gif">
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
+    <CopyFileToFolders Include="mods\ManiaTouchControls\Data\Sprites\Global\TouchControls.gif">
+      <DestinationFolders>$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
     </CopyFileToFolders>
-    <Image Include="Assets\StoreLogo.scale-400.png" />
+    <CopyFileToFolders Include="mods\ManiaTouchControls\Data\Sprites\Global\TouchControls.bin">
+      <DestinationFolders>$(OutDir)\Mods\ManiaTouchControls\Data\Sprites\Global</DestinationFolders>
+    </CopyFileToFolders>
     <Image Include="Assets\WideTile.scale-100.png" />
     <Image Include="Assets\WideTile.scale-125.png" />
     <Image Include="Assets\WideTile.scale-150.png" />
     <Image Include="Assets\WideTile.scale-200.png" />
-    <Image Include="Assets\WideTile.scale-400.png" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\..\Sonic-Mania-Decompilation\build\ARM64\Release\Game\Game.dll" Condition="'$(Platform)'=='ARM64'">
@@ -353,22 +360,22 @@
       <DeploymentContent>true</DeploymentContent>
       <DestinationFolders>$(OutDir)\Mods\ManiaTouchControls</DestinationFolders>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\Mods\ManiaTouchControls\build\Win32\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='Win32'">
+    <CopyFileToFolders Include="..\..\RSDKv5-Example-Mods\ManiaTouchControls\build\Win32\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='Win32'">
       <FileType>Document</FileType>
       <DeploymentContent>true</DeploymentContent>
       <DestinationFolders>$(OutDir)Mods\ManiaTouchControls</DestinationFolders>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\Mods\ManiaTouchControls\build\x64\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='x64'">
+    <CopyFileToFolders Include="..\..\RSDKv5-Example-Mods\ManiaTouchControls\build\x64\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='x64'">
       <FileType>Document</FileType>
       <DeploymentContent>true</DeploymentContent>
       <DestinationFolders>$(OutDir)Mods\ManiaTouchControls</DestinationFolders>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\Mods\ManiaTouchControls\build\ARM\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='ARM'">
+    <CopyFileToFolders Include="..\..\RSDKv5-Example-Mods\ManiaTouchControls\build\ARM\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='ARM'">
       <FileType>Document</FileType>
       <DeploymentContent>true</DeploymentContent>
       <DestinationFolders>$(OutDir)Mods\ManiaTouchControls</DestinationFolders>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\Mods\ManiaTouchControls\build\ARM64\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='ARM64'">
+    <CopyFileToFolders Include="..\..\RSDKv5-Example-Mods\ManiaTouchControls\build\ARM64\Release\ManiaTouchControls.dll" Condition="'$(Platform)'=='ARM64'">
       <FileType>Document</FileType>
       <DeploymentContent>true</DeploymentContent>
       <DestinationFolders>$(OutDir)Mods\ManiaTouchControls</DestinationFolders>
@@ -382,15 +389,8 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
+    <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.221121.5\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.221121.5\build\native\Microsoft.Windows.CppWinRT.targets')" />
   </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets'))" />
-  </Target>
   <ItemGroup>
     <ClCompile Include="..\dependencies\all\iniparser\dictionary.cpp" />
     <ClCompile Include="..\dependencies\all\iniparser\iniparser.cpp" />
@@ -825,4 +825,11 @@
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\Mods\D3D11Shaders\Data\Shaders\DX11</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.221121.5\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.221121.5\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.221121.5\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.221121.5\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+  </Target>
 </Project>

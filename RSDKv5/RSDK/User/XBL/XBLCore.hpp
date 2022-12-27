@@ -12,6 +12,11 @@
 namespace RSDK::SKU
 {
 struct XBLCore : UserCore {
+    XBLCore()
+    {
+        
+    }
+
     void Shutdown()
     {
         // closes EGS API
