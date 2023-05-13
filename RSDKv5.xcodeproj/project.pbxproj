@@ -12,6 +12,7 @@
 		F2359A702A103A640009AB5E /* dictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23597B32A103A630009AB5E /* dictionary.cpp */; };
 		F2359BF72A103A660009AB5E /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23599742A103A640009AB5E /* tinyxml2.cpp */; };
 		F2359CEB2A103A800009AB5E /* miniz.c in Sources */ = {isa = PBXBuildFile; fileRef = F2359CE82A103A800009AB5E /* miniz.c */; };
+		F2359CEC2A1040420009AB5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2FD448F28C3E080003A887A /* Assets.xcassets */; };
 		F25BAC0F2A0FAD830004BA24 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F25BAC0E2A0FAD830004BA24 /* Settings.bundle */; };
 		F267723C2A07189D000AEBE5 /* ManiaTouchControls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F26771A52A07182E000AEBE5 /* ManiaTouchControls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F267723D2A07189D000AEBE5 /* UltrawideMania.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F155562A07174B00C57723 /* UltrawideMania.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -1581,6 +1582,7 @@
 			files = (
 				F25BAC0F2A0FAD830004BA24 /* Settings.bundle in Resources */,
 				F26780F82A072EF6000AEBE5 /* Data in Resources */,
+				F2359CEC2A1040420009AB5E /* Assets.xcassets in Resources */,
 				F2FD449328C3E080003A887A /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1762,6 +1764,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = RSDKv5/RSDKv5.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1816,6 +1819,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = RSDKv5/RSDKv5.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
