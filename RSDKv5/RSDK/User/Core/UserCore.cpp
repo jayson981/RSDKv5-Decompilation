@@ -327,7 +327,7 @@ void RSDK::LoadSettingsINI()
         engine.gameReleaseID        = iniparser_getint(ini, "Game:gameType", 1);
 #endif
 
-        sprintf_s(gameLogicName, sizeof(gameLogicName), "%s", iniparser_getstring(ini, "Game:gameLogic", "Game"));
+        sprintf_s(gameLogicName, sizeof(gameLogicName), "%s", iniparser_getstring(ini, "Game:gameLogic", "SonicMania"));
         sprintf_s(customSettings.username, sizeof(customSettings.username), "%s", iniparser_getstring(ini, "Game:username", ""));
 
         if (customSettings.region >= 0) {
@@ -341,14 +341,18 @@ void RSDK::LoadSettingsINI()
         engine.confirmFlip = customSettings.confirmButtonFlip;
         engine.XYFlip      = customSettings.xyButtonFlip;
 #else
-        sprintf_s(gameLogicName, sizeof(gameLogicName), "Game");
+        sprintf_s(gameLogicName, sizeof(gameLogicName), "SonicMania");
 #endif
 
+#ifdef TARGET_OS_MAC
         videoSettings.windowed       = iniparser_getboolean(ini, "Video:windowed", true);
+#else
+        videoSettings.windowed       = iniparser_getboolean(ini, "Video:windowed", false);
+#endif
         videoSettings.bordered       = iniparser_getboolean(ini, "Video:border", true);
         videoSettings.exclusiveFS    = iniparser_getboolean(ini, "Video:exclusiveFS", false);
         videoSettings.vsync          = iniparser_getboolean(ini, "Video:vsync", false);
-        videoSettings.tripleBuffered = iniparser_getboolean(ini, "Video:tripleBuffering", false);
+        videoSettings.tripleBuffered = iniparser_getboolean(ini, "Video:tripleBuffering", true);
 
         videoSettings.pixWidth = iniparser_getint(ini, "Video:pixWidth", DEFAULT_PIXWIDTH);
 
@@ -361,7 +365,7 @@ void RSDK::LoadSettingsINI()
         videoSettings.shaderID      = iniparser_getint(ini, "Video:screenShader", SHADER_NONE);
 
 #if !RETRO_USE_ORIGINAL_CODE
-        customSettings.maxPixWidth = iniparser_getint(ini, "Video:maxPixWidth", DEFAULT_PIXWIDTH);
+        customSettings.maxPixWidth = 520;
 #endif
 
         engine.streamsEnabled = iniparser_getboolean(ini, "Audio:streamsEnabled", true);
@@ -487,11 +491,15 @@ void RSDK::LoadSettingsINI()
         iniparser_freedict(ini);
     }
     else {
+#ifdef TARGET_OS_MAC
         videoSettings.windowed       = true;
+#else
+        videoSettings.windowed       = false;
+#endif
         videoSettings.bordered       = false;
-        videoSettings.exclusiveFS    = true;
+        videoSettings.exclusiveFS    = false;
         videoSettings.vsync          = true;
-        videoSettings.tripleBuffered = false;
+        videoSettings.tripleBuffered = true;
         videoSettings.shaderSupport  = true;
         videoSettings.pixWidth       = DEFAULT_PIXWIDTH;
         videoSettings.fsWidth        = 0;
@@ -518,10 +526,10 @@ void RSDK::LoadSettingsINI()
         engine.gameReleaseID = 0;
 #endif
 
-        sprintf_s(gameLogicName, sizeof(gameLogicName), "Game");
+        sprintf_s(gameLogicName, sizeof(gameLogicName), "SonicMania");
         customSettings.username[0] = 0;
 
-        customSettings.maxPixWidth = DEFAULT_PIXWIDTH;
+        customSettings.maxPixWidth = 520;
 
         if (customSettings.region >= 0) {
 #if RETRO_REV02
@@ -534,7 +542,7 @@ void RSDK::LoadSettingsINI()
         engine.confirmFlip = customSettings.confirmButtonFlip;
         engine.XYFlip      = customSettings.xyButtonFlip;
 #else
-        sprintf_s(gameLogicName, sizeof(gameLogicName), "Game");
+        sprintf_s(gameLogicName, sizeof(gameLogicName), "SonicMania");
 #endif
 
         for (int32 i = CONT_P1; i <= PLAYER_COUNT; ++i) {
@@ -594,7 +602,7 @@ void RSDK::SaveSettingsINI(bool32 writeToFile)
 
 #if !RETRO_USE_ORIGINAL_CODE
             if (strcmp(iniparser_getstring(ini, "Game:gameLogic", ";unknown;"), ";unknown;") != 0)
-                WriteText(file, "gameLogic=%s\n", iniparser_getstring(ini, "Game:gameLogic", "Game"));
+                WriteText(file, "gameLogic=%s\n", iniparser_getstring(ini, "Game:gameLogic", "SonicMania"));
 
             WriteText(file, "faceButtonFlip=%s\n", (customSettings.confirmButtonFlip ? "y" : "n"));
             // WriteText(file, "confirmButtonFlip=%s\n", (customSettings.confirmButtonFlip ? "y" : "n"));

@@ -1,11 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1230"
+   LastUpgradeVersion = "1430"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A4B463AB1A8FFFFB00298931"
+               BuildableName = "libogg.a"
+               BlueprintName = "libogg"
+               ReferencedContainer = "container:Dependencies/ogg/ios/Ogg.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "738835E30B18F870005C7A69"
+               BuildableName = "libvorbis.a"
+               BlueprintName = "libvorbis (static)"
+               ReferencedContainer = "container:Dependencies/vorbis/macosx/Vorbis.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "09C8F6420C82FBE500F72188"
+               BuildableName = "libtheoradec.a"
+               BlueprintName = "libtheoradec (static)"
+               ReferencedContainer = "container:Dependencies/theora/macosx/Theora.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F2F154A72A07112E00C57723"
+               BuildableName = "libGameAPI.a"
+               BlueprintName = "GameAPI"
+               ReferencedContainer = "container:ModProjects/GameAPI/GameAPI.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F2F155862A07181400C57723"
+               BuildableName = "ManiaTouchControls.framework"
+               BlueprintName = "ManiaTouchControls"
+               ReferencedContainer = "container:ModProjects/ManiaTouchControls/ManiaTouchControls.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F2F155262A07172D00C57723"
+               BuildableName = "UltrawideMania.framework"
+               BlueprintName = "UltrawideMania"
+               ReferencedContainer = "container:ModProjects/UltrawideMania/UltrawideMania.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F26772472A07207E000AEBE5"
+               BuildableName = "SonicMania.framework"
+               BlueprintName = "SonicMania"
+               ReferencedContainer = "container:SonicMania/SonicMania.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
@@ -14,7 +112,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C96881F025DF3C8700BEE4B8"
+               BlueprintIdentifier = "F2FD447C28C3E07E003A887A"
                BuildableName = "RSDKv5.app"
                BlueprintName = "RSDKv5"
                ReferencedContainer = "container:RSDKv5.xcodeproj">
@@ -31,12 +129,11 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
-      useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/rubberduckycooly/Documents/Github/Sonic-Mania-Decompilation/build"
+      useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
@@ -45,18 +142,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C96881F025DF3C8700BEE4B8"
+            BlueprintIdentifier = "F2FD447C28C3E07E003A887A"
             BuildableName = "RSDKv5.app"
             BlueprintName = "RSDKv5"
             ReferencedContainer = "container:RSDKv5.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "console=true;"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -68,7 +159,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C96881F025DF3C8700BEE4B8"
+            BlueprintIdentifier = "F2FD447C28C3E07E003A887A"
             BuildableName = "RSDKv5.app"
             BlueprintName = "RSDKv5"
             ReferencedContainer = "container:RSDKv5.xcodeproj">

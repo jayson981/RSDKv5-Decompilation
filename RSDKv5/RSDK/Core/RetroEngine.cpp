@@ -16,6 +16,13 @@ Link::Handle gameLogicHandle = NULL;
 #include <unistd.h>
 #endif
 
+#if RETRO_PLATFORM == RETRO_iOS
+#include <thread>
+#include <chrono>
+
+using namespace std::chrono_literals;
+#endif
+
 int32 *RSDK::globalVarsPtr = NULL;
 #if RETRO_REV0U
 void (*RSDK::globalVarsInitCB)(void *globals) = NULL;
@@ -65,6 +72,16 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
 #if RETRO_REV0U
         DetectEngineVersion();
 #endif
+        
+        {
+            FileInfo info{};
+            if (!LoadFile(&info, "Data/Game/GameConfig.bin", FMODE_RB)) {
+                showMissingDataFileAlert();
+            }
+            else {
+                CloseFile(&info);
+            }
+        }
 
         // By Default we use the dummy system so this'll never be false
         // its used in cases like steam where it gives the "Steam must be running to play this game" message and closes
@@ -79,6 +96,10 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
         }
 
         InitEngine();
+            
+        
+            
+            
 #if RETRO_USE_MOD_LOADER
         // we confirmed the game actually is valid & running, lets start some callbacks
         RunModCallbacks(MODCB_ONGAMESTARTUP, NULL);
@@ -105,7 +126,11 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
         if (!RenderDevice::isRunning)
             break;
 
-        if (RenderDevice::CheckFPSCap()) {
+        //while (!RenderDevice::CheckFPSCap()) {
+        //    std::this_thread::sleep_for(100us);
+        //}
+        
+        {
             RenderDevice::UpdateFPSCap();
 
             AudioDevice::FrameInit();
@@ -1223,10 +1248,10 @@ void RSDK::InitGameLink()
 #endif
         if (engine.useExternalCode) {
             char buffer[0x100];
-#if RETRO_PLATFORM == RETRO_WIN
-            strcpy_s(buffer, 0x100, gameLogicName);
+#if RETRO_PLATFORM == RETRO_WIN || RETRO_PLATFORM == RETRO_iOS
+            strncpy(buffer, gameLogicName, 0x100);
 #else
-        sprintf(buffer, "%s%s", SKU::userFileDir, gameLogicName);
+            sprintf(buffer, "%s%s", SKU::userFileDir, gameLogicName);
 #endif
             if (!gameLogicHandle)
                 gameLogicHandle = Link::Open(buffer);

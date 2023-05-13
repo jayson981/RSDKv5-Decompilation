@@ -242,7 +242,7 @@ void RSDK::LoadModSettings()
 
         if (mod->redirectSaveRAM) {
             if (SKU::userFileDir[0])
-                sprintf(customUserFileDir, "%smods/%s/", SKU::userFileDir, mod->folderName.c_str());
+                sprintf(customUserFileDir, "%smods/%s/", SKU::appFileDir, mod->folderName.c_str());
             else
                 sprintf(customUserFileDir, "mods/%s/", mod->folderName.c_str());
         }
@@ -364,14 +364,14 @@ bool32 RSDK::ScanModFolder(ModInfo *info, const char *targetFile, bool32 fromLoa
 
     if (fs::exists(dataPath) && fs::is_directory(dataPath)) {
         try {
-            if (loadingBar) {
-                currentScreen = &screens[0];
-                DrawRectangle(dx - 0x80 + 0x10, dy + 48, 0x100 - 0x20, 0x10, 0x000000, 0xFF, INK_NONE, true);
-                DrawDevString(fromLoadMod ? "Getting count..." : ("Scanning " + info->id + "...").c_str(), currentScreen->center.x, dy + 52, ALIGN_CENTER,
-                            0xFFFFFF);
-                RenderDevice::CopyFrameBuffer();
-                RenderDevice::FlipScreen();
-            }
+//            if (loadingBar) {
+//                currentScreen = &screens[0];
+//                DrawRectangle(dx - 0x80 + 0x10, dy + 48, 0x100 - 0x20, 0x10, 0x000000, 0xFF, INK_NONE, true);
+//                DrawDevString(fromLoadMod ? "Getting count..." : ("Scanning " + info->id + "...").c_str(), currentScreen->center.x, dy + 52, ALIGN_CENTER,
+//                            0xFFFFFF);
+//                RenderDevice::CopyFrameBuffer();
+//                RenderDevice::FlipScreen();
+//            }
 
             auto dirIterator = fs::recursive_directory_iterator(dataPath, fs::directory_options::follow_directory_symlink);
 
@@ -386,13 +386,13 @@ bool32 RSDK::ScanModFolder(ModInfo *info, const char *targetFile, bool32 fromLoa
 #endif
                     files.push_back(dirFile);
 
-                    if (loadingBar && ++size >= RENDER_COUNT * renders) {
-                        DrawRectangle(dx - 0x80 + 0x10, dy + 48, 0x100 - 0x20, 0x10, 0x000000, 0xFF, INK_NONE, true);
-                        DrawDevString((std::to_string(size) + " files").c_str(), currentScreen->center.x, dy + 52, ALIGN_CENTER, 0xFFFFFF);
-                        RenderDevice::CopyFrameBuffer();
-                        RenderDevice::FlipScreen();
-                        renders++;
-                    }
+//                    if (loadingBar && ++size >= RENDER_COUNT * renders) {
+//                        DrawRectangle(dx - 0x80 + 0x10, dy + 48, 0x100 - 0x20, 0x10, 0x000000, 0xFF, INK_NONE, true);
+//                        DrawDevString((std::to_string(size) + " files").c_str(), currentScreen->center.x, dy + 52, ALIGN_CENTER, 0xFFFFFF);
+//                        RenderDevice::CopyFrameBuffer();
+//                        RenderDevice::FlipScreen();
+//                        renders++;
+//                    }
 #if RETRO_PLATFORM != RETRO_ANDROID
                 }
 #endif
@@ -407,27 +407,27 @@ bool32 RSDK::ScanModFolder(ModInfo *info, const char *targetFile, bool32 fromLoa
                                [](unsigned char c) { return c == '\\' ? '/' : std::tolower(c); });
 
                 info->fileMap.insert(std::pair<std::string, std::string>(folderPath, dirFile.path().string()));
-                if (loadingBar && (size * bars) / BAR_THRESHOLD < ++i) {
-                    DrawRectangle(dx - 0x80 + 0x10, dy + 48, 0x100 - 0x20, 0x10, 0x000000, 0xFF, INK_NONE, true);
-                    DrawRectangle(dx - 0x80 + 0x10 + 2, dy + 50, (int32)((0x100 - 0x20 - 4) * (i / (float)size)), 0x10 - 4, 0x00FF00, 0xFF, INK_NONE,
-                                  true);
-                    while ((size * bars) / BAR_THRESHOLD < i) bars++;
-                    DrawDevString((std::to_string(i) + "/" + std::to_string(size)).c_str(), currentScreen->center.x, dy + 52, ALIGN_CENTER, 0xFFFFFF);
-                    RenderDevice::CopyFrameBuffer();
-                    RenderDevice::FlipScreen();
-                }
+//                if (loadingBar && (size * bars) / BAR_THRESHOLD < ++i) {
+//                    DrawRectangle(dx - 0x80 + 0x10, dy + 48, 0x100 - 0x20, 0x10, 0x000000, 0xFF, INK_NONE, true);
+//                    DrawRectangle(dx - 0x80 + 0x10 + 2, dy + 50, (int32)((0x100 - 0x20 - 4) * (i / (float)size)), 0x10 - 4, 0x00FF00, 0xFF, INK_NONE,
+//                                  true);
+//                    while ((size * bars) / BAR_THRESHOLD < i) bars++;
+//                    DrawDevString((std::to_string(i) + "/" + std::to_string(size)).c_str(), currentScreen->center.x, dy + 52, ALIGN_CENTER, 0xFFFFFF);
+//                    RenderDevice::CopyFrameBuffer();
+//                    RenderDevice::FlipScreen();
+//                }
             }
         } catch (fs::filesystem_error fe) {
             PrintLog(PRINT_ERROR, "Mod File Scanning Error: %s", fe.what());
         }
     }
 
-    if (loadingBar && fromLoadMod) {
-        DrawRectangle(dx - 0x80 + 0x10, dy + 48, 0x100 - 0x20, 0x10, 0x000080, 0xFF, INK_NONE, true);
-
-        RenderDevice::CopyFrameBuffer();
-        RenderDevice::FlipScreen();
-    }
+//    if (loadingBar && fromLoadMod) {
+//        DrawRectangle(dx - 0x80 + 0x10, dy + 48, 0x100 - 0x20, 0x10, 0x000080, 0xFF, INK_NONE, true);
+//
+//        RenderDevice::CopyFrameBuffer();
+//        RenderDevice::FlipScreen();
+//    }
 
     return true;
 }
@@ -502,7 +502,7 @@ void RSDK::LoadMods(bool newOnly, bool32 getVersion)
 
     using namespace std;
     char modBuf[0x100];
-    sprintf_s(modBuf, sizeof(modBuf), "%smods", SKU::userFileDir);
+    sprintf_s(modBuf, sizeof(modBuf), "%smods", SKU::appFileDir);
     fs::path modPath(modBuf);
 
     if (fs::exists(modPath) && fs::is_directory(modPath)) {
@@ -566,11 +566,11 @@ void RSDK::LoadMods(bool newOnly, bool32 getVersion)
         }
     }
 
-    int32 dy = currentScreen->center.y - 32;
-    DrawRectangle(currentScreen->center.x - 128, dy, 0x100, 0x48, 0x80, 0xFF, INK_NONE, true);
-    DrawDevString("Mod loading done!", currentScreen->center.x, dy + 28, ALIGN_CENTER, 0xFFFFFF);
-    RenderDevice::CopyFrameBuffer();
-    RenderDevice::FlipScreen();
+//    int32 dy = currentScreen->center.y - 32;
+//    DrawRectangle(currentScreen->center.x - 128, dy, 0x100, 0x48, 0x80, 0xFF, INK_NONE, true);
+//    DrawDevString("Mod loading done!", currentScreen->center.x, dy + 28, ALIGN_CENTER, 0xFFFFFF);
+//    RenderDevice::CopyFrameBuffer();
+//    RenderDevice::FlipScreen();
 
     LoadModSettings(); // implicit SortMods
 }
@@ -634,12 +634,13 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
     FileIO *f = fOpen((modDir + "/mod.ini").c_str(), "r");
     if (f) {
         int32 dy = currentScreen->center.y - 32;
-        DrawRectangle(currentScreen->center.x - 128, dy, 0x100, 0x48, 0x80, 0xFF, INK_NONE, true);
-
-        DrawDevString("Loading mod", currentScreen->center.x, dy + 16, ALIGN_CENTER, 0xFFFFFF);
-        DrawDevString((folder + "...").c_str(), currentScreen->center.x, dy + 28, ALIGN_CENTER, 0xFFFFFF);
-
-        DrawStatus("Parsing INI...");
+        
+//        DrawRectangle(currentScreen->center.x - 128, dy, 0x100, 0x48, 0x80, 0xFF, INK_NONE, true);
+//
+//        DrawDevString("Loading mod", currentScreen->center.x, dy + 16, ALIGN_CENTER, 0xFFFFFF);
+//        DrawDevString((folder + "...").c_str(), currentScreen->center.x, dy + 28, ALIGN_CENTER, 0xFFFFFF);
+//
+//        DrawStatus("Parsing INI...");
 
         fClose(f);
         auto ini = iniparser_load((modDir + "/mod.ini").c_str());
@@ -679,7 +680,7 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
             return true;
 
         // ASSETS
-        DrawStatus("Scanning mod folder...");
+//        DrawStatus("Scanning mod folder...");
         ScanModFolder(info, getVersion ? "Data/Game/GameConfig.bin" : nullptr, true);
 
         if (!getVersion) {
@@ -690,10 +691,10 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
                 std::string buf;
                 while (std::getline(stream, buf, ',')) {
                     buf = trim(buf);
-                    DrawStatus(("Starting logic" + buf + "...").c_str());
+//                    DrawStatus(("Starting logic" + buf + "...").c_str());
                     bool linked = false;
 
-                    fs::path file(modDir + "/" + buf);
+                    fs::path file(buf);
                     Link::Handle linkHandle = Link::Open(file.string().c_str());
 
                     if (linkHandle) {
@@ -750,13 +751,13 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
             }
 
             // SETTINGS
-            FileIO *set = fOpen((modDir + "/modSettings.ini").c_str(), "r");
+            FileIO *set = fOpen((std::string(SKU::userFileDir) + info->id + "_modSettings.ini").c_str(), "r");
             if (set) {
-                DrawStatus("Reading settings...");
+//                DrawStatus("Reading settings...");
 
                 fClose(set);
                 using namespace std;
-                auto ini  = iniparser_load((modDir + "/modSettings.ini").c_str());
+                auto ini  = iniparser_load((std::string(SKU::userFileDir) + info->id + "_modSettings.ini").c_str());
                 int32 sec = iniparser_getnsec(ini);
                 if (sec) {
                     for (int32 i = 0; i < sec; ++i) {
@@ -788,7 +789,7 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
                 std::string buf;
                 while (std::getline(stream, buf, ',')) {
                     buf = trim(buf);
-                    DrawStatus(("Reading config " + buf + "...").c_str());
+//                    DrawStatus(("Reading config " + buf + "...").c_str());
 
                     int32 mode = 0;
                     fs::path file;
@@ -841,7 +842,7 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
             }
 
             if (saveCfg && info->config.size()) {
-                DrawStatus("Saving config...");
+//                DrawStatus("Saving config...");
                 FileIO *cfg = fOpen((modDir + "/modConfig.cfg").c_str(), "wb");
                 uint8 ct    = info->config.size();
                 fWrite(&ct, 1, 1, cfg);
@@ -1525,7 +1526,7 @@ void RSDK::SaveSettings()
     if (!currentMod || !currentMod->settings.size() || !currentMod->active)
         return;
 
-    FileIO *file = fOpen((GetModPath_i(currentMod->id.c_str()) + "/modSettings.ini").c_str(), "w");
+    FileIO *file = fOpen((std::string(SKU::userFileDir) + currentMod->id + "_modSettings.ini").c_str(), "w");
 
     if (currentMod->settings[""].size()) {
         for (pair<string, string> pair : currentMod->settings[""]) WriteText(file, "%s = %s\n", pair.first.c_str(), pair.second.c_str());

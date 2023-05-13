@@ -9,10 +9,10 @@ struct DummyCore : UserCore {
         values[0]  = false;
         valueCount = 1;
 
-#if !RSDK_AUTOBUILD
-        // disable plus on autobuilds
-        for (int32 v = 0; v < valueCount; ++v) values[v] = true;
-#endif
+        if (getDLCEnabled()) {
+            // disable plus on autobuilds
+            for (int32 v = 0; v < valueCount; ++v) values[v] = true;
+        }
     }
 
     void StageLoad();

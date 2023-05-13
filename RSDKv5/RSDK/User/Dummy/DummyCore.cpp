@@ -91,13 +91,14 @@ const char *userValueNames[8] = { "Ext <PLUS>" };
 void DummyCore::StageLoad()
 {
     UserCore::StageLoad();
-
-#if !RSDK_AUTOBUILD
-    for (int32 v = 0; v < valueCount; ++v) AddViewableVariable(userValueNames[v], &values[v], VIEWVAR_BOOL, false, true);
-#else
-    // disable plus on autobuilds
-    for (int32 v = 0; v < valueCount; ++v) values[v] = false;
-#endif
+    
+    if (getDLCEnabled()) {
+        for (int32 v = 0; v < valueCount; ++v) AddViewableVariable(userValueNames[v], &values[v], VIEWVAR_BOOL, false, true);
+    }
+    else {
+        // disable plus on autobuilds
+        for (int32 v = 0; v < valueCount; ++v) values[v] = false;
+    }
 }
 
 bool32 DummyCore::CheckFocusLost() { return focusState != 0; }

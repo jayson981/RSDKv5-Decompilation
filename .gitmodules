@@ -4,3 +4,18 @@
 [submodule "dependencies/all/stb_vorbis"]
 	path = dependencies/all/stb_vorbis
 	url = https://github.com/nothings/stb
+[submodule "dependencies/ios/SDL"]
+	path = dependencies/ios/SDL
+	url = https://github.com/libsdl-org/SDL
+[submodule "Game"]
+	path = Game
+	url = https://github.com/WamWooWam/Sonic-Mania-Decompilation/
+[submodule "dependencies/ios/theora"]
+	path = dependencies/ios/theora
+	url = https://github.com/WamWooWam/theora
+[submodule "dependencies/ios/ogg"]
+	path = dependencies/ios/ogg
+	url = https://github.com/WamWooWam/ogg
+[submodule "dependencies/ios/vorbis"]
+	path = dependencies/ios/vorbis
+	url = https://github.com/WamWooWam/vorbis

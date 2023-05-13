@@ -436,10 +436,14 @@ private:
 public:
 #else
     typedef void *Handle;
-    static constexpr const char *prefix    = "lib";
 #if RETRO_PLATFORM == RETRO_OSX
+    static constexpr const char *prefix    = "lib";
     static constexpr const char *extention = ".dylib";
+#elif RETRO_PLATFORM == RETRO_iOS
+    static constexpr const char *prefix    = "";
+    static constexpr const char *extention = "";
 #else
+    static constexpr const char *prefix    = "lib";
     static constexpr const char *extention = ".so";
 #endif
 #endif
@@ -456,6 +460,10 @@ public:
             path = path.substr(path.find_last_of('/') + 1);
         path = "lib" + path;
 #endif // ! RETRO_PLATFORM == ANDROID
+#if RETRO_PLATFORM == RETRO_iOS
+        path = path + ".framework/" + path;
+#endif
+        
         ret  = (Handle)dlopen(path.c_str(), RTLD_LOCAL | RTLD_LAZY);
 #if RETRO_PLATFORM != RETRO_SWITCH
         // try loading the library globally on linux

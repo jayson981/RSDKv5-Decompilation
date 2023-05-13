@@ -877,22 +877,24 @@ void RSDK::Draw3DScene(uint16 sceneID)
         // This is an insertion sort, taken from here:
         // https://web.archive.org/web/20110108233032/http://rosettacode.org/wiki/Sorting_algorithms/Insertion_sort#C
 
-        Scene3DFace *a = scn->faceBuffer;
-
-        int i, j;
-        Scene3DFace temp;
-
-        for(i=1; i<scn->faceCount; i++)
-        {
-            temp = a[i];
-            j = i-1;
-            while(j>=0 && a[j].depth < temp.depth)
-            {
-                a[j+1] = a[j];
-                j -= 1;
-            }
-            a[j+1] = temp;
-        }
+//        Scene3DFace *a = scn->faceBuffer;
+//
+//        int i, j;
+//        Scene3DFace temp;
+//
+//        for(i=1; i<scn->faceCount; i++)
+//        {
+//            temp = a[i];
+//            j = i-1;
+//            while(j>=0 && a[j].depth < temp.depth)
+//            {
+//                a[j+1] = a[j];
+//                j -= 1;
+//            }
+//            a[j+1] = temp;
+//        }
+        
+        std::stable_sort(scn->faceBuffer, scn->faceBuffer + scn->faceCount, [](auto& a, auto& b){ return a.depth > b.depth; });
 
         // Finally, display the faces.
 

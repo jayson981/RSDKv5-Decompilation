@@ -1022,7 +1022,8 @@ void RSDK::SKU::UserDBStorage_SaveCB8(int32 status)
 
 void (*RSDK::SKU::preLoadSaveFileCB)();
 void (*RSDK::SKU::postLoadSaveFileCB)();
-char RSDK::SKU::userFileDir[0x100];
+char RSDK::SKU::userFileDir[0x200];
+char RSDK::SKU::appFileDir[0x200];
 
 bool32 RSDK::SKU::LoadUserFile(const char *filename, void *buffer, uint32 bufSize)
 {
@@ -1149,12 +1150,17 @@ bool32 RSDK::SKU::TrySaveUserFile(const char *filename, void *buffer, uint32 siz
 
 void RSDK::SKU::InitUserDirectory()
 {
-#if RETRO_PLATFORM == RETRO_OSX
-
-    char buffer[0x100];
-    sprintf_s(buffer, sizeof(buffer), "%s/RSDKv5/", getResourcesPath());
+#if RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_iOS
+    char buffer[0x200];
+    sprintf_s(buffer, sizeof(buffer), "%s/", getResourcesPath());
+    
     SKU::SetUserFileCallbacks(buffer, NULL, NULL);
 
+    sprintf_s(SKU::appFileDir, sizeof(SKU::appFileDir), "%s/Data/", getAppResourcesPath());
+
+    printf("user dir: %s\n", SKU::userFileDir);
+    printf("app dir: %s\n", SKU::appFileDir);
+    
 #elif RETRO_PLATFORM == RETRO_ANDROID
 
     // done by javaside

@@ -33,9 +33,11 @@ cmake/
 *.rsdk
 Sonic Mania/Static/*
 [Bb]yte[Cc]ode/
-[Dd]ata/
+
+# needed on iOS, be careful!
+#[Dd]ata/
 [Ss]cripts/
-[Mm]ods/
+#[Mm]ods/
 
 # Visual Studio Debugging
 RSDKv5/log.txt

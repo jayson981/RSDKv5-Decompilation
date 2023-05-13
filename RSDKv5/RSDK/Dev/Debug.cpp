@@ -97,7 +97,7 @@ void RSDK::PrintLog(int32 mode, const char *message, ...)
             jbyteArray array = jni->env->NewByteArray(len); // as per research, this gets freed automatically
             jni->env->SetByteArrayRegion(array, 0, len, (jbyte *)outputString);
             jni->env->CallVoidMethod(jni->thiz, writeLog, array, as);
-#elif RETRO_PLATFORM == RETRO_SWITCH
+#else
             printf("%s", outputString);
 #endif
         }
