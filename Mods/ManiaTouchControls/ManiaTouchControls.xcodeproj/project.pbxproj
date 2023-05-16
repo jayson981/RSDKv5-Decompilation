@@ -1,0 +1,650 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F26771F32A071856000AEBE5 /* dllmain.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771B12A071856000AEBE5 /* dllmain.c */; };
+		F26771F42A071856000AEBE5 /* Helpers.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771B22A071856000AEBE5 /* Helpers.c */; };
+		F26771F52A071856000AEBE5 /* ModConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771B32A071856000AEBE5 /* ModConfig.h */; };
+		F26771F62A071856000AEBE5 /* PBL_HUD.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771B52A071856000AEBE5 /* PBL_HUD.h */; };
+		F26771F72A071856000AEBE5 /* UIControl.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771B62A071856000AEBE5 /* UIControl.c */; };
+		F26771F82A071856000AEBE5 /* TitleSetup.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771B72A071856000AEBE5 /* TitleSetup.c */; };
+		F26771F92A071856000AEBE5 /* PuyoLevelSelect.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771B82A071856000AEBE5 /* PuyoLevelSelect.c */; };
+		F26771FA2A071856000AEBE5 /* TryAgainE.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771B92A071856000AEBE5 /* TryAgainE.c */; };
+		F26771FB2A071856000AEBE5 /* SpecialClear.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771BA2A071856000AEBE5 /* SpecialClear.h */; };
+		F26771FC2A071856000AEBE5 /* CPZBoss.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771BB2A071856000AEBE5 /* CPZBoss.h */; };
+		F26771FD2A071856000AEBE5 /* PuyoGame.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771BC2A071856000AEBE5 /* PuyoGame.c */; };
+		F26771FE2A071856000AEBE5 /* PBL_Setup.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771BD2A071856000AEBE5 /* PBL_Setup.c */; };
+		F26771FF2A071856000AEBE5 /* DebugMode.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771BE2A071856000AEBE5 /* DebugMode.h */; };
+		F26772002A071856000AEBE5 /* HUD.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771BF2A071856000AEBE5 /* HUD.h */; };
+		F26772012A071856000AEBE5 /* FXFade.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771C02A071856000AEBE5 /* FXFade.c */; };
+		F26772022A071856000AEBE5 /* UFO_Player.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771C12A071856000AEBE5 /* UFO_Player.c */; };
+		F26772032A071856000AEBE5 /* CreditsSetup.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771C22A071856000AEBE5 /* CreditsSetup.c */; };
+		F26772042A071856000AEBE5 /* UIVideo.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771C32A071856000AEBE5 /* UIVideo.c */; };
+		F26772052A071856000AEBE5 /* CutsceneSeq.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771C42A071856000AEBE5 /* CutsceneSeq.c */; };
+		F26772062A071856000AEBE5 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771C52A071856000AEBE5 /* Camera.h */; };
+		F26772072A071856000AEBE5 /* BSS_Player.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771C62A071856000AEBE5 /* BSS_Player.c */; };
+		F26772082A071856000AEBE5 /* UFO_HUD.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771C72A071856000AEBE5 /* UFO_HUD.c */; };
+		F26772092A071856000AEBE5 /* TryAgain.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771C82A071856000AEBE5 /* TryAgain.c */; };
+		F267720A2A071856000AEBE5 /* ActClear.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771C92A071856000AEBE5 /* ActClear.h */; };
+		F267720B2A071856000AEBE5 /* BSS_HUD.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771CA2A071856000AEBE5 /* BSS_HUD.h */; };
+		F267720C2A071856000AEBE5 /* DASetup.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771CB2A071856000AEBE5 /* DASetup.c */; };
+		F267720D2A071856000AEBE5 /* SaveGame.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771CC2A071856000AEBE5 /* SaveGame.h */; };
+		F267720E2A071856000AEBE5 /* LevelSelect.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771CD2A071856000AEBE5 /* LevelSelect.c */; };
+		F267720F2A071856000AEBE5 /* Player.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771CE2A071856000AEBE5 /* Player.h */; };
+		F26772102A071856000AEBE5 /* PBL_Player.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771CF2A071856000AEBE5 /* PBL_Player.c */; };
+		F26772112A071856000AEBE5 /* PBL_Crane.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771D02A071856000AEBE5 /* PBL_Crane.h */; };
+		F26772122A071856000AEBE5 /* PuyoBean.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771D12A071856000AEBE5 /* PuyoBean.h */; };
+		F26772132A071856000AEBE5 /* PBL_Flipper.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771D22A071856000AEBE5 /* PBL_Flipper.h */; };
+		F26772142A071856000AEBE5 /* Summary.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771D32A071856000AEBE5 /* Summary.c */; };
+		F26772152A071856000AEBE5 /* TitleSetup.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771D42A071856000AEBE5 /* TitleSetup.h */; };
+		F26772162A071856000AEBE5 /* UIControl.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771D52A071856000AEBE5 /* UIControl.h */; };
+		F26772172A071856000AEBE5 /* PBL_HUD.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771D62A071856000AEBE5 /* PBL_HUD.c */; };
+		F26772182A071856000AEBE5 /* FXFade.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771D72A071856000AEBE5 /* FXFade.h */; };
+		F26772192A071856000AEBE5 /* PBL_Setup.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771D82A071856000AEBE5 /* PBL_Setup.h */; };
+		F267721A2A071856000AEBE5 /* DebugMode.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771D92A071856000AEBE5 /* DebugMode.c */; };
+		F267721B2A071856000AEBE5 /* PuyoGame.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771DA2A071856000AEBE5 /* PuyoGame.h */; };
+		F267721C2A071856000AEBE5 /* HUD.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771DB2A071856000AEBE5 /* HUD.c */; };
+		F267721D2A071856000AEBE5 /* CPZBoss.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771DC2A071856000AEBE5 /* CPZBoss.c */; };
+		F267721E2A071856000AEBE5 /* SpecialClear.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771DD2A071856000AEBE5 /* SpecialClear.c */; };
+		F267721F2A071856000AEBE5 /* TryAgainE.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771DE2A071856000AEBE5 /* TryAgainE.h */; };
+		F26772202A071856000AEBE5 /* PuyoLevelSelect.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771DF2A071856000AEBE5 /* PuyoLevelSelect.h */; };
+		F26772212A071856000AEBE5 /* LevelSelect.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771E02A071856000AEBE5 /* LevelSelect.h */; };
+		F26772222A071856000AEBE5 /* SaveGame.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771E12A071856000AEBE5 /* SaveGame.c */; };
+		F26772232A071856000AEBE5 /* BSS_HUD.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771E22A071856000AEBE5 /* BSS_HUD.c */; };
+		F26772242A071856000AEBE5 /* ActClear.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771E32A071856000AEBE5 /* ActClear.c */; };
+		F26772252A071856000AEBE5 /* DASetup.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771E42A071856000AEBE5 /* DASetup.h */; };
+		F26772262A071856000AEBE5 /* UFO_HUD.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771E52A071856000AEBE5 /* UFO_HUD.h */; };
+		F26772272A071856000AEBE5 /* BSS_Player.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771E62A071856000AEBE5 /* BSS_Player.h */; };
+		F26772282A071856000AEBE5 /* CutsceneSeq.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771E72A071856000AEBE5 /* CutsceneSeq.h */; };
+		F26772292A071856000AEBE5 /* TryAgain.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771E82A071856000AEBE5 /* TryAgain.h */; };
+		F267722A2A071856000AEBE5 /* CreditsSetup.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771E92A071856000AEBE5 /* CreditsSetup.h */; };
+		F267722B2A071856000AEBE5 /* UIVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771EA2A071856000AEBE5 /* UIVideo.h */; };
+		F267722C2A071856000AEBE5 /* UFO_Player.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771EB2A071856000AEBE5 /* UFO_Player.h */; };
+		F267722D2A071856000AEBE5 /* Summary.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771EC2A071856000AEBE5 /* Summary.h */; };
+		F267722E2A071856000AEBE5 /* PBL_Flipper.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771ED2A071856000AEBE5 /* PBL_Flipper.c */; };
+		F267722F2A071856000AEBE5 /* PuyoBean.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771EE2A071856000AEBE5 /* PuyoBean.c */; };
+		F26772302A071856000AEBE5 /* PBL_Crane.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771EF2A071856000AEBE5 /* PBL_Crane.c */; };
+		F26772312A071856000AEBE5 /* Player.c in Sources */ = {isa = PBXBuildFile; fileRef = F26771F02A071856000AEBE5 /* Player.c */; };
+		F26772322A071856000AEBE5 /* PBL_Player.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771F12A071856000AEBE5 /* PBL_Player.h */; };
+		F26772332A071856000AEBE5 /* Helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = F26771F22A071856000AEBE5 /* Helpers.h */; };
+		F267723B2A07186D000AEBE5 /* libGameAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F267723A2A07186A000AEBE5 /* libGameAPI.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F26772392A07186A000AEBE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F26772352A07186A000AEBE5 /* GameAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F2F154A82A07112E00C57723;
+			remoteInfo = GameAPI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F26771B12A071856000AEBE5 /* dllmain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dllmain.c; sourceTree = "<group>"; };
+		F26771B22A071856000AEBE5 /* Helpers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Helpers.c; sourceTree = "<group>"; };
+		F26771B32A071856000AEBE5 /* ModConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModConfig.h; sourceTree = "<group>"; };
+		F26771B52A071856000AEBE5 /* PBL_HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBL_HUD.h; sourceTree = "<group>"; };
+		F26771B62A071856000AEBE5 /* UIControl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UIControl.c; sourceTree = "<group>"; };
+		F26771B72A071856000AEBE5 /* TitleSetup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TitleSetup.c; sourceTree = "<group>"; };
+		F26771B82A071856000AEBE5 /* PuyoLevelSelect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PuyoLevelSelect.c; sourceTree = "<group>"; };
+		F26771B92A071856000AEBE5 /* TryAgainE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TryAgainE.c; sourceTree = "<group>"; };
+		F26771BA2A071856000AEBE5 /* SpecialClear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialClear.h; sourceTree = "<group>"; };
+		F26771BB2A071856000AEBE5 /* CPZBoss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPZBoss.h; sourceTree = "<group>"; };
+		F26771BC2A071856000AEBE5 /* PuyoGame.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PuyoGame.c; sourceTree = "<group>"; };
+		F26771BD2A071856000AEBE5 /* PBL_Setup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PBL_Setup.c; sourceTree = "<group>"; };
+		F26771BE2A071856000AEBE5 /* DebugMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugMode.h; sourceTree = "<group>"; };
+		F26771BF2A071856000AEBE5 /* HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUD.h; sourceTree = "<group>"; };
+		F26771C02A071856000AEBE5 /* FXFade.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FXFade.c; sourceTree = "<group>"; };
+		F26771C12A071856000AEBE5 /* UFO_Player.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UFO_Player.c; sourceTree = "<group>"; };
+		F26771C22A071856000AEBE5 /* CreditsSetup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CreditsSetup.c; sourceTree = "<group>"; };
+		F26771C32A071856000AEBE5 /* UIVideo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UIVideo.c; sourceTree = "<group>"; };
+		F26771C42A071856000AEBE5 /* CutsceneSeq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CutsceneSeq.c; sourceTree = "<group>"; };
+		F26771C52A071856000AEBE5 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		F26771C62A071856000AEBE5 /* BSS_Player.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BSS_Player.c; sourceTree = "<group>"; };
+		F26771C72A071856000AEBE5 /* UFO_HUD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UFO_HUD.c; sourceTree = "<group>"; };
+		F26771C82A071856000AEBE5 /* TryAgain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TryAgain.c; sourceTree = "<group>"; };
+		F26771C92A071856000AEBE5 /* ActClear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActClear.h; sourceTree = "<group>"; };
+		F26771CA2A071856000AEBE5 /* BSS_HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSS_HUD.h; sourceTree = "<group>"; };
+		F26771CB2A071856000AEBE5 /* DASetup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DASetup.c; sourceTree = "<group>"; };
+		F26771CC2A071856000AEBE5 /* SaveGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveGame.h; sourceTree = "<group>"; };
+		F26771CD2A071856000AEBE5 /* LevelSelect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LevelSelect.c; sourceTree = "<group>"; };
+		F26771CE2A071856000AEBE5 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		F26771CF2A071856000AEBE5 /* PBL_Player.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PBL_Player.c; sourceTree = "<group>"; };
+		F26771D02A071856000AEBE5 /* PBL_Crane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBL_Crane.h; sourceTree = "<group>"; };
+		F26771D12A071856000AEBE5 /* PuyoBean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuyoBean.h; sourceTree = "<group>"; };
+		F26771D22A071856000AEBE5 /* PBL_Flipper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBL_Flipper.h; sourceTree = "<group>"; };
+		F26771D32A071856000AEBE5 /* Summary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Summary.c; sourceTree = "<group>"; };
+		F26771D42A071856000AEBE5 /* TitleSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleSetup.h; sourceTree = "<group>"; };
+		F26771D52A071856000AEBE5 /* UIControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIControl.h; sourceTree = "<group>"; };
+		F26771D62A071856000AEBE5 /* PBL_HUD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PBL_HUD.c; sourceTree = "<group>"; };
+		F26771D72A071856000AEBE5 /* FXFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXFade.h; sourceTree = "<group>"; };
+		F26771D82A071856000AEBE5 /* PBL_Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBL_Setup.h; sourceTree = "<group>"; };
+		F26771D92A071856000AEBE5 /* DebugMode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DebugMode.c; sourceTree = "<group>"; };
+		F26771DA2A071856000AEBE5 /* PuyoGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuyoGame.h; sourceTree = "<group>"; };
+		F26771DB2A071856000AEBE5 /* HUD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = HUD.c; sourceTree = "<group>"; };
+		F26771DC2A071856000AEBE5 /* CPZBoss.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CPZBoss.c; sourceTree = "<group>"; };
+		F26771DD2A071856000AEBE5 /* SpecialClear.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SpecialClear.c; sourceTree = "<group>"; };
+		F26771DE2A071856000AEBE5 /* TryAgainE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TryAgainE.h; sourceTree = "<group>"; };
+		F26771DF2A071856000AEBE5 /* PuyoLevelSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuyoLevelSelect.h; sourceTree = "<group>"; };
+		F26771E02A071856000AEBE5 /* LevelSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelect.h; sourceTree = "<group>"; };
+		F26771E12A071856000AEBE5 /* SaveGame.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SaveGame.c; sourceTree = "<group>"; };
+		F26771E22A071856000AEBE5 /* BSS_HUD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BSS_HUD.c; sourceTree = "<group>"; };
+		F26771E32A071856000AEBE5 /* ActClear.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ActClear.c; sourceTree = "<group>"; };
+		F26771E42A071856000AEBE5 /* DASetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DASetup.h; sourceTree = "<group>"; };
+		F26771E52A071856000AEBE5 /* UFO_HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UFO_HUD.h; sourceTree = "<group>"; };
+		F26771E62A071856000AEBE5 /* BSS_Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSS_Player.h; sourceTree = "<group>"; };
+		F26771E72A071856000AEBE5 /* CutsceneSeq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CutsceneSeq.h; sourceTree = "<group>"; };
+		F26771E82A071856000AEBE5 /* TryAgain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TryAgain.h; sourceTree = "<group>"; };
+		F26771E92A071856000AEBE5 /* CreditsSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsSetup.h; sourceTree = "<group>"; };
+		F26771EA2A071856000AEBE5 /* UIVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIVideo.h; sourceTree = "<group>"; };
+		F26771EB2A071856000AEBE5 /* UFO_Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UFO_Player.h; sourceTree = "<group>"; };
+		F26771EC2A071856000AEBE5 /* Summary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Summary.h; sourceTree = "<group>"; };
+		F26771ED2A071856000AEBE5 /* PBL_Flipper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PBL_Flipper.c; sourceTree = "<group>"; };
+		F26771EE2A071856000AEBE5 /* PuyoBean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PuyoBean.c; sourceTree = "<group>"; };
+		F26771EF2A071856000AEBE5 /* PBL_Crane.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PBL_Crane.c; sourceTree = "<group>"; };
+		F26771F02A071856000AEBE5 /* Player.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Player.c; sourceTree = "<group>"; };
+		F26771F12A071856000AEBE5 /* PBL_Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBL_Player.h; sourceTree = "<group>"; };
+		F26771F22A071856000AEBE5 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		F26772352A07186A000AEBE5 /* GameAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GameAPI.xcodeproj; path = ../GameAPI/GameAPI.xcodeproj; sourceTree = "<group>"; };
+		F2F155872A07181400C57723 /* ManiaTouchControls.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ManiaTouchControls.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F2F155842A07181400C57723 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F267723B2A07186D000AEBE5 /* libGameAPI.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F26771B42A071856000AEBE5 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				F26771B52A071856000AEBE5 /* PBL_HUD.h */,
+				F26771B62A071856000AEBE5 /* UIControl.c */,
+				F26771B72A071856000AEBE5 /* TitleSetup.c */,
+				F26771B82A071856000AEBE5 /* PuyoLevelSelect.c */,
+				F26771B92A071856000AEBE5 /* TryAgainE.c */,
+				F26771BA2A071856000AEBE5 /* SpecialClear.h */,
+				F26771BB2A071856000AEBE5 /* CPZBoss.h */,
+				F26771BC2A071856000AEBE5 /* PuyoGame.c */,
+				F26771BD2A071856000AEBE5 /* PBL_Setup.c */,
+				F26771BE2A071856000AEBE5 /* DebugMode.h */,
+				F26771BF2A071856000AEBE5 /* HUD.h */,
+				F26771C02A071856000AEBE5 /* FXFade.c */,
+				F26771C12A071856000AEBE5 /* UFO_Player.c */,
+				F26771C22A071856000AEBE5 /* CreditsSetup.c */,
+				F26771C32A071856000AEBE5 /* UIVideo.c */,
+				F26771C42A071856000AEBE5 /* CutsceneSeq.c */,
+				F26771C52A071856000AEBE5 /* Camera.h */,
+				F26771C62A071856000AEBE5 /* BSS_Player.c */,
+				F26771C72A071856000AEBE5 /* UFO_HUD.c */,
+				F26771C82A071856000AEBE5 /* TryAgain.c */,
+				F26771C92A071856000AEBE5 /* ActClear.h */,
+				F26771CA2A071856000AEBE5 /* BSS_HUD.h */,
+				F26771CB2A071856000AEBE5 /* DASetup.c */,
+				F26771CC2A071856000AEBE5 /* SaveGame.h */,
+				F26771CD2A071856000AEBE5 /* LevelSelect.c */,
+				F26771CE2A071856000AEBE5 /* Player.h */,
+				F26771CF2A071856000AEBE5 /* PBL_Player.c */,
+				F26771D02A071856000AEBE5 /* PBL_Crane.h */,
+				F26771D12A071856000AEBE5 /* PuyoBean.h */,
+				F26771D22A071856000AEBE5 /* PBL_Flipper.h */,
+				F26771D32A071856000AEBE5 /* Summary.c */,
+				F26771D42A071856000AEBE5 /* TitleSetup.h */,
+				F26771D52A071856000AEBE5 /* UIControl.h */,
+				F26771D62A071856000AEBE5 /* PBL_HUD.c */,
+				F26771D72A071856000AEBE5 /* FXFade.h */,
+				F26771D82A071856000AEBE5 /* PBL_Setup.h */,
+				F26771D92A071856000AEBE5 /* DebugMode.c */,
+				F26771DA2A071856000AEBE5 /* PuyoGame.h */,
+				F26771DB2A071856000AEBE5 /* HUD.c */,
+				F26771DC2A071856000AEBE5 /* CPZBoss.c */,
+				F26771DD2A071856000AEBE5 /* SpecialClear.c */,
+				F26771DE2A071856000AEBE5 /* TryAgainE.h */,
+				F26771DF2A071856000AEBE5 /* PuyoLevelSelect.h */,
+				F26771E02A071856000AEBE5 /* LevelSelect.h */,
+				F26771E12A071856000AEBE5 /* SaveGame.c */,
+				F26771E22A071856000AEBE5 /* BSS_HUD.c */,
+				F26771E32A071856000AEBE5 /* ActClear.c */,
+				F26771E42A071856000AEBE5 /* DASetup.h */,
+				F26771E52A071856000AEBE5 /* UFO_HUD.h */,
+				F26771E62A071856000AEBE5 /* BSS_Player.h */,
+				F26771E72A071856000AEBE5 /* CutsceneSeq.h */,
+				F26771E82A071856000AEBE5 /* TryAgain.h */,
+				F26771E92A071856000AEBE5 /* CreditsSetup.h */,
+				F26771EA2A071856000AEBE5 /* UIVideo.h */,
+				F26771EB2A071856000AEBE5 /* UFO_Player.h */,
+				F26771EC2A071856000AEBE5 /* Summary.h */,
+				F26771ED2A071856000AEBE5 /* PBL_Flipper.c */,
+				F26771EE2A071856000AEBE5 /* PuyoBean.c */,
+				F26771EF2A071856000AEBE5 /* PBL_Crane.c */,
+				F26771F02A071856000AEBE5 /* Player.c */,
+				F26771F12A071856000AEBE5 /* PBL_Player.h */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		F26772342A07186A000AEBE5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F26772352A07186A000AEBE5 /* GameAPI.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F26772362A07186A000AEBE5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F267723A2A07186A000AEBE5 /* libGameAPI.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F2F1557D2A07181400C57723 = {
+			isa = PBXGroup;
+			children = (
+				F2F155892A07181400C57723 /* ManiaTouchControls */,
+				F2F155882A07181400C57723 /* Products */,
+				F26772342A07186A000AEBE5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F2F155882A07181400C57723 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2F155872A07181400C57723 /* ManiaTouchControls.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F2F155892A07181400C57723 /* ManiaTouchControls */ = {
+			isa = PBXGroup;
+			children = (
+				F26771B12A071856000AEBE5 /* dllmain.c */,
+				F26771B22A071856000AEBE5 /* Helpers.c */,
+				F26771F22A071856000AEBE5 /* Helpers.h */,
+				F26771B32A071856000AEBE5 /* ModConfig.h */,
+				F26771B42A071856000AEBE5 /* Objects */,
+			);
+			path = ManiaTouchControls;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F2F155822A07181400C57723 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26772162A071856000AEBE5 /* UIControl.h in Headers */,
+				F26772192A071856000AEBE5 /* PBL_Setup.h in Headers */,
+				F26772282A071856000AEBE5 /* CutsceneSeq.h in Headers */,
+				F26772202A071856000AEBE5 /* PuyoLevelSelect.h in Headers */,
+				F26772182A071856000AEBE5 /* FXFade.h in Headers */,
+				F26772002A071856000AEBE5 /* HUD.h in Headers */,
+				F26772122A071856000AEBE5 /* PuyoBean.h in Headers */,
+				F26771FF2A071856000AEBE5 /* DebugMode.h in Headers */,
+				F26772272A071856000AEBE5 /* BSS_Player.h in Headers */,
+				F26771F52A071856000AEBE5 /* ModConfig.h in Headers */,
+				F267721B2A071856000AEBE5 /* PuyoGame.h in Headers */,
+				F26772252A071856000AEBE5 /* DASetup.h in Headers */,
+				F26772322A071856000AEBE5 /* PBL_Player.h in Headers */,
+				F26772212A071856000AEBE5 /* LevelSelect.h in Headers */,
+				F26772062A071856000AEBE5 /* Camera.h in Headers */,
+				F267721F2A071856000AEBE5 /* TryAgainE.h in Headers */,
+				F26771FB2A071856000AEBE5 /* SpecialClear.h in Headers */,
+				F26772132A071856000AEBE5 /* PBL_Flipper.h in Headers */,
+				F26771F62A071856000AEBE5 /* PBL_HUD.h in Headers */,
+				F26771FC2A071856000AEBE5 /* CPZBoss.h in Headers */,
+				F26772262A071856000AEBE5 /* UFO_HUD.h in Headers */,
+				F26772332A071856000AEBE5 /* Helpers.h in Headers */,
+				F26772112A071856000AEBE5 /* PBL_Crane.h in Headers */,
+				F26772152A071856000AEBE5 /* TitleSetup.h in Headers */,
+				F267720D2A071856000AEBE5 /* SaveGame.h in Headers */,
+				F267720F2A071856000AEBE5 /* Player.h in Headers */,
+				F267720B2A071856000AEBE5 /* BSS_HUD.h in Headers */,
+				F267720A2A071856000AEBE5 /* ActClear.h in Headers */,
+				F267722D2A071856000AEBE5 /* Summary.h in Headers */,
+				F267722B2A071856000AEBE5 /* UIVideo.h in Headers */,
+				F26772292A071856000AEBE5 /* TryAgain.h in Headers */,
+				F267722C2A071856000AEBE5 /* UFO_Player.h in Headers */,
+				F267722A2A071856000AEBE5 /* CreditsSetup.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		F2F155862A07181400C57723 /* ManiaTouchControls */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2F1558E2A07181400C57723 /* Build configuration list for PBXNativeTarget "ManiaTouchControls" */;
+			buildPhases = (
+				F2F155822A07181400C57723 /* Headers */,
+				F2F155832A07181400C57723 /* Sources */,
+				F2F155842A07181400C57723 /* Frameworks */,
+				F2F155852A07181400C57723 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ManiaTouchControls;
+			productName = ManiaTouchControls;
+			productReference = F2F155872A07181400C57723 /* ManiaTouchControls.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F2F1557E2A07181400C57723 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					F2F155862A07181400C57723 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = F2F155812A07181400C57723 /* Build configuration list for PBXProject "ManiaTouchControls" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F2F1557D2A07181400C57723;
+			productRefGroup = F2F155882A07181400C57723 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F26772362A07186A000AEBE5 /* Products */;
+					ProjectRef = F26772352A07186A000AEBE5 /* GameAPI.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				F2F155862A07181400C57723 /* ManiaTouchControls */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F267723A2A07186A000AEBE5 /* libGameAPI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGameAPI.a;
+			remoteRef = F26772392A07186A000AEBE5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F2F155852A07181400C57723 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F2F155832A07181400C57723 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26772052A071856000AEBE5 /* CutsceneSeq.c in Sources */,
+				F267720C2A071856000AEBE5 /* DASetup.c in Sources */,
+				F267720E2A071856000AEBE5 /* LevelSelect.c in Sources */,
+				F26772072A071856000AEBE5 /* BSS_Player.c in Sources */,
+				F26771F82A071856000AEBE5 /* TitleSetup.c in Sources */,
+				F26771F32A071856000AEBE5 /* dllmain.c in Sources */,
+				F26772312A071856000AEBE5 /* Player.c in Sources */,
+				F267721A2A071856000AEBE5 /* DebugMode.c in Sources */,
+				F26772012A071856000AEBE5 /* FXFade.c in Sources */,
+				F26772022A071856000AEBE5 /* UFO_Player.c in Sources */,
+				F26771FE2A071856000AEBE5 /* PBL_Setup.c in Sources */,
+				F26771F92A071856000AEBE5 /* PuyoLevelSelect.c in Sources */,
+				F26772032A071856000AEBE5 /* CreditsSetup.c in Sources */,
+				F26771F72A071856000AEBE5 /* UIControl.c in Sources */,
+				F267722E2A071856000AEBE5 /* PBL_Flipper.c in Sources */,
+				F26772092A071856000AEBE5 /* TryAgain.c in Sources */,
+				F267721D2A071856000AEBE5 /* CPZBoss.c in Sources */,
+				F26771FD2A071856000AEBE5 /* PuyoGame.c in Sources */,
+				F267721E2A071856000AEBE5 /* SpecialClear.c in Sources */,
+				F26771FA2A071856000AEBE5 /* TryAgainE.c in Sources */,
+				F26772242A071856000AEBE5 /* ActClear.c in Sources */,
+				F26772222A071856000AEBE5 /* SaveGame.c in Sources */,
+				F26771F42A071856000AEBE5 /* Helpers.c in Sources */,
+				F26772302A071856000AEBE5 /* PBL_Crane.c in Sources */,
+				F26772142A071856000AEBE5 /* Summary.c in Sources */,
+				F26772042A071856000AEBE5 /* UIVideo.c in Sources */,
+				F26772082A071856000AEBE5 /* UFO_HUD.c in Sources */,
+				F26772172A071856000AEBE5 /* PBL_HUD.c in Sources */,
+				F267722F2A071856000AEBE5 /* PuyoBean.c in Sources */,
+				F26772102A071856000AEBE5 /* PBL_Player.c in Sources */,
+				F26772232A071856000AEBE5 /* BSS_HUD.c in Sources */,
+				F267721C2A071856000AEBE5 /* HUD.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F2F1558C2A07181400C57723 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../GameAPI/\"";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F2F1558D2A07181400C57723 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../GameAPI/\"";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F2F1558F2A07181400C57723 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = VEKQNNJN69;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = org.wamwoowam.ManiaTouchControls;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F2F155902A07181400C57723 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = VEKQNNJN69;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = org.wamwoowam.ManiaTouchControls;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F2F155812A07181400C57723 /* Build configuration list for PBXProject "ManiaTouchControls" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2F1558C2A07181400C57723 /* Debug */,
+				F2F1558D2A07181400C57723 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2F1558E2A07181400C57723 /* Build configuration list for PBXNativeTarget "ManiaTouchControls" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2F1558F2A07181400C57723 /* Debug */,
+				F2F155902A07181400C57723 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F2F1557E2A07181400C57723 /* Project object */;
+}
