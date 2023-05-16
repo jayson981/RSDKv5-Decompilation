@@ -85,7 +85,7 @@ int32 RSDK_main(int32 argc, char **argv, void *linkLogicPtr)
 
     int32 exitCode = RSDK::RunRetroEngine(argc, argv);
 
-    RSDK::ReleaseCoreAPI();
+    //RSDK::ReleaseCoreAPI();
 
     return exitCode;
 }

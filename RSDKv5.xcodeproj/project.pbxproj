@@ -1019,13 +1019,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F2C0B5892A0FC86800783F5B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		F2F153962A070C3400C57723 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1073,13 +1066,12 @@
 		F2FD447428C3E07E003A887A = {
 			isa = PBXGroup;
 			children = (
-				F2C0B5892A0FC86800783F5B /* Products */,
-				F26772522A07208F000AEBE5 /* SonicMania.xcodeproj */,
-				F2FD447F28C3E07E003A887A /* RSDKv5 */,
 				F26780F72A072EEE000AEBE5 /* Data */,
-				F2F153BC2A070C7F00C57723 /* Mods */,
 				F2FD44BC28C3E266003A887A /* Frameworks */,
+				F2F153BC2A070C7F00C57723 /* Mods */,
 				F2FD447E28C3E07E003A887A /* Products */,
+				F2FD447F28C3E07E003A887A /* RSDKv5 */,
+				F26772522A07208F000AEBE5 /* SonicMania.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1094,17 +1086,17 @@
 		F2FD447F28C3E07E003A887A /* RSDKv5 */ = {
 			isa = PBXGroup;
 			children = (
-				F23C2E052A1032D40013439E /* dependencies */,
-				F25BABF62A0F9D270004BA24 /* Info.plist */,
-				F26780FA2A0731B6000AEBE5 /* RSDKv5.entitlements */,
-				F2FD451228C3EF08003A887A /* RSDK */,
+				F2FD448F28C3E080003A887A /* Assets.xcassets */,
 				F2FD44FA28C3E430003A887A /* cocoaHelpers.hpp */,
 				F2FD44F928C3E42F003A887A /* cocoaHelpers.mm */,
-				F23038442A1034C0002EB2D9 /* SDL_uikit_main.c */,
+				F23C2E052A1032D40013439E /* dependencies */,
+				F25BABF62A0F9D270004BA24 /* Info.plist */,
+				F2FD449128C3E080003A887A /* LaunchScreen.storyboard */,
 				F2FD44F428C3E395003A887A /* main.cpp */,
 				F2FD44F528C3E395003A887A /* main.hpp */,
-				F2FD448F28C3E080003A887A /* Assets.xcassets */,
-				F2FD449128C3E080003A887A /* LaunchScreen.storyboard */,
+				F2FD451228C3EF08003A887A /* RSDK */,
+				F26780FA2A0731B6000AEBE5 /* RSDKv5.entitlements */,
+				F23038442A1034C0002EB2D9 /* SDL_uikit_main.c */,
 				F25BAC0E2A0FAD830004BA24 /* Settings.bundle */,
 			);
 			path = RSDKv5;
@@ -1125,14 +1117,14 @@
 		F2FD451228C3EF08003A887A /* RSDK */ = {
 			isa = PBXGroup;
 			children = (
-				F2FD451328C3EF08003A887A /* Core */,
-				F2FD452928C3EF08003A887A /* Input */,
-				F2FD454428C3EF08003A887A /* User */,
-				F2FD458628C3EF08003A887A /* Storage */,
 				F2FD459028C3EF08003A887A /* Audio */,
+				F2FD451328C3EF08003A887A /* Core */,
 				F2FD45A228C3EF08003A887A /* Dev */,
-				F2FD45A628C3EF08003A887A /* Scene */,
 				F2FD45CD28C3EF08003A887A /* Graphics */,
+				F2FD452928C3EF08003A887A /* Input */,
+				F2FD45A628C3EF08003A887A /* Scene */,
+				F2FD458628C3EF08003A887A /* Storage */,
+				F2FD454428C3EF08003A887A /* User */,
 			);
 			path = RSDK;
 			sourceTree = "<group>";
@@ -1140,16 +1132,16 @@
 		F2FD451328C3EF08003A887A /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				F2FD452828C3EF08003A887A /* RetroEngine.hpp */,
-				F2FD451428C3EF08003A887A /* RetroEngine.cpp */,
-				F2FD451528C3EF08003A887A /* Link.hpp */,
 				F2FD452728C3EF08003A887A /* Link.cpp */,
-				F2FD452428C3EF08003A887A /* Math.hpp */,
+				F2FD451528C3EF08003A887A /* Link.hpp */,
 				F2FD451628C3EF08003A887A /* Math.cpp */,
-				F2FD451728C3EF08003A887A /* Reader.hpp */,
-				F2FD452528C3EF08003A887A /* Reader.cpp */,
-				F2FD452328C3EF08003A887A /* ModAPI.hpp */,
+				F2FD452428C3EF08003A887A /* Math.hpp */,
 				F2FD452628C3EF08003A887A /* ModAPI.cpp */,
+				F2FD452328C3EF08003A887A /* ModAPI.hpp */,
+				F2FD452528C3EF08003A887A /* Reader.cpp */,
+				F2FD451728C3EF08003A887A /* Reader.hpp */,
+				F2FD451428C3EF08003A887A /* RetroEngine.cpp */,
+				F2FD452828C3EF08003A887A /* RetroEngine.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1158,9 +1150,9 @@
 			isa = PBXGroup;
 			children = (
 				F2FD452A28C3EF08003A887A /* Input.cpp */,
-				F2FD453A28C3EF08003A887A /* SDL2 */,
 				F2FD453D28C3EF08003A887A /* Input.hpp */,
 				F2FD453E28C3EF08003A887A /* Keyboard */,
+				F2FD453A28C3EF08003A887A /* SDL2 */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -1195,18 +1187,18 @@
 		F2FD454528C3EF08003A887A /* Dummy */ = {
 			isa = PBXGroup;
 			children = (
-				F2FD454628C3EF08003A887A /* DummyAchievements.hpp */,
-				F2FD454728C3EF08003A887A /* DummyPresence.hpp */,
-				F2FD454828C3EF08003A887A /* DummyCore.cpp */,
-				F2FD454928C3EF08003A887A /* DummyLeaderboards.cpp */,
-				F2FD454A28C3EF08003A887A /* DummyStorage.hpp */,
-				F2FD454B28C3EF08003A887A /* DummyStats.cpp */,
-				F2FD454C28C3EF08003A887A /* DummyLeaderboards.hpp */,
-				F2FD454D28C3EF08003A887A /* DummyStorage.cpp */,
-				F2FD454E28C3EF08003A887A /* DummyStats.hpp */,
 				F2FD454F28C3EF08003A887A /* DummyAchievements.cpp */,
-				F2FD455028C3EF08003A887A /* DummyPresence.cpp */,
+				F2FD454628C3EF08003A887A /* DummyAchievements.hpp */,
+				F2FD454828C3EF08003A887A /* DummyCore.cpp */,
 				F2FD455128C3EF08003A887A /* DummyCore.hpp */,
+				F2FD454928C3EF08003A887A /* DummyLeaderboards.cpp */,
+				F2FD454C28C3EF08003A887A /* DummyLeaderboards.hpp */,
+				F2FD455028C3EF08003A887A /* DummyPresence.cpp */,
+				F2FD454728C3EF08003A887A /* DummyPresence.hpp */,
+				F2FD454B28C3EF08003A887A /* DummyStats.cpp */,
+				F2FD454E28C3EF08003A887A /* DummyStats.hpp */,
+				F2FD454D28C3EF08003A887A /* DummyStorage.cpp */,
+				F2FD454A28C3EF08003A887A /* DummyStorage.hpp */,
 			);
 			path = Dummy;
 			sourceTree = "<group>";
@@ -1214,18 +1206,18 @@
 		F2FD455F28C3EF08003A887A /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				F2FD456028C3EF08003A887A /* UserStorage.hpp */,
-				F2FD456128C3EF08003A887A /* UserLeaderboards.hpp */,
-				F2FD456228C3EF08003A887A /* UserPresence.hpp */,
-				F2FD456328C3EF08003A887A /* UserStats.hpp */,
 				F2FD456428C3EF08003A887A /* UserAchievements.cpp */,
-				F2FD456528C3EF08003A887A /* UserCore.hpp */,
-				F2FD456628C3EF08003A887A /* UserStats.cpp */,
 				F2FD456728C3EF08003A887A /* UserAchievements.hpp */,
 				F2FD456828C3EF08003A887A /* UserCore.cpp */,
-				F2FD456928C3EF08003A887A /* UserStorage.cpp */,
+				F2FD456528C3EF08003A887A /* UserCore.hpp */,
 				F2FD456A28C3EF08003A887A /* UserLeaderboards.cpp */,
+				F2FD456128C3EF08003A887A /* UserLeaderboards.hpp */,
 				F2FD456B28C3EF08003A887A /* UserPresence.cpp */,
+				F2FD456228C3EF08003A887A /* UserPresence.hpp */,
+				F2FD456628C3EF08003A887A /* UserStats.cpp */,
+				F2FD456328C3EF08003A887A /* UserStats.hpp */,
+				F2FD456928C3EF08003A887A /* UserStorage.cpp */,
+				F2FD456028C3EF08003A887A /* UserStorage.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1233,9 +1225,9 @@
 		F2FD458628C3EF08003A887A /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				F2FD458728C3EF08003A887A /* Text.cpp */,
 				F2FD458D28C3EF08003A887A /* Storage.cpp */,
 				F2FD458E28C3EF08003A887A /* Storage.hpp */,
+				F2FD458728C3EF08003A887A /* Text.cpp */,
 				F2FD458F28C3EF08003A887A /* Text.hpp */,
 			);
 			path = Storage;
@@ -1263,9 +1255,9 @@
 		F2FD45A228C3EF08003A887A /* Dev */ = {
 			isa = PBXGroup;
 			children = (
-				F2FD45A328C3EF08003A887A /* DevFont.hpp */,
-				F2FD45A428C3EF08003A887A /* Debug.hpp */,
 				F2FD45A528C3EF08003A887A /* Debug.cpp */,
+				F2FD45A428C3EF08003A887A /* Debug.hpp */,
+				F2FD45A328C3EF08003A887A /* DevFont.hpp */,
 			);
 			path = Dev;
 			sourceTree = "<group>";
@@ -1273,12 +1265,12 @@
 		F2FD45A628C3EF08003A887A /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				F2FD45A728C3EF08003A887A /* Scene.cpp */,
+				F2FD45CB28C3EF08003A887A /* Collision.cpp */,
 				F2FD45A828C3EF08003A887A /* Collision.hpp */,
 				F2FD45A928C3EF08003A887A /* Object.cpp */,
-				F2FD45C528C3EF08003A887A /* Objects */,
 				F2FD45CA28C3EF08003A887A /* Object.hpp */,
-				F2FD45CB28C3EF08003A887A /* Collision.cpp */,
+				F2FD45C528C3EF08003A887A /* Objects */,
+				F2FD45A728C3EF08003A887A /* Scene.cpp */,
 				F2FD45CC28C3EF08003A887A /* Scene.hpp */,
 			);
 			path = Scene;
@@ -1298,19 +1290,19 @@
 		F2FD45CD28C3EF08003A887A /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				F2FD45CF28C3EF08003A887A /* Palette.hpp */,
-				F2FD45D028C3EF08003A887A /* Drawing.hpp */,
-				F2FD45D128C3EF08003A887A /* Animation.hpp */,
-				F2FD45D228C3EF08003A887A /* Sprite.cpp */,
-				F2FD45E828C3EF08003A887A /* Video.cpp */,
-				F2FD45EC28C3EF08003A887A /* Drawing.cpp */,
 				F2FD45F028C3EF08003A887A /* Animation.cpp */,
-				F2FD45F128C3EF08003A887A /* Sprite.hpp */,
-				F2FD45F528C3EF08003A887A /* Video.hpp */,
-				F2FD45FC28C3EF08003A887A /* Scene3D.hpp */,
-				F2FD45CE28C3EF08003A887A /* Scene3D.cpp */,
-				F2FD45FD28C3EF08003A887A /* SDL2 */,
+				F2FD45D128C3EF08003A887A /* Animation.hpp */,
+				F2FD45EC28C3EF08003A887A /* Drawing.cpp */,
+				F2FD45D028C3EF08003A887A /* Drawing.hpp */,
 				F2FD460028C3EF08003A887A /* Palette.cpp */,
+				F2FD45CF28C3EF08003A887A /* Palette.hpp */,
+				F2FD45CE28C3EF08003A887A /* Scene3D.cpp */,
+				F2FD45FC28C3EF08003A887A /* Scene3D.hpp */,
+				F2FD45FD28C3EF08003A887A /* SDL2 */,
+				F2FD45D228C3EF08003A887A /* Sprite.cpp */,
+				F2FD45F128C3EF08003A887A /* Sprite.hpp */,
+				F2FD45E828C3EF08003A887A /* Video.cpp */,
+				F2FD45F528C3EF08003A887A /* Video.hpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";

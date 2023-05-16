@@ -8,4 +8,6 @@ bool getDLCEnabled();
 
 void showMissingDataFileAlert();
 
+int getDisplayRefresh();
+
 #endif

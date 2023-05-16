@@ -344,11 +344,7 @@ void RSDK::LoadSettingsINI()
         sprintf_s(gameLogicName, sizeof(gameLogicName), "SonicMania");
 #endif
 
-#ifdef TARGET_OS_MAC
-        videoSettings.windowed       = iniparser_getboolean(ini, "Video:windowed", true);
-#else
         videoSettings.windowed       = iniparser_getboolean(ini, "Video:windowed", false);
-#endif
         videoSettings.bordered       = iniparser_getboolean(ini, "Video:border", true);
         videoSettings.exclusiveFS    = iniparser_getboolean(ini, "Video:exclusiveFS", false);
         videoSettings.vsync          = iniparser_getboolean(ini, "Video:vsync", false);

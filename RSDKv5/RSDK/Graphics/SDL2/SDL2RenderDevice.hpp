@@ -42,12 +42,18 @@ public:
 
     static bool InitShaders();
     static void LoadShader(const char *fileName, bool32 linear);
+    
+    static void SetAnimationCallback(int interval, void (SDLCALL *callback)(void*), void *callbackParam);
 
     static inline void ShowCursor(bool32 shown) { SDL_ShowCursor(shown); }
     static inline bool GetCursorPos(Vector2 *pos)
     {
+#if RETRO_PLATFORM == RETRO_iOS
+        return false;
+#else
         SDL_GetMouseState(&pos->x, &pos->y);
         return true;
+#endif
     };
 
     static inline void SetWindowTitle() { SDL_SetWindowTitle(window, gameVerInfo.gameTitle); };

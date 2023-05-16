@@ -10,7 +10,7 @@ bool32 AudioDevice::Init()
     if (!contextInitialized) {
         contextInitialized = true;
         InitAudioChannels();
-    }
+    }    
 
     SDL_AudioSpec want;
     want.freq     = AUDIO_FREQUENCY;

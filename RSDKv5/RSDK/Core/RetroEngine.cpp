@@ -97,8 +97,6 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
 
         InitEngine();
             
-        
-            
             
 #if RETRO_USE_MOD_LOADER
         // we confirmed the game actually is valid & running, lets start some callbacks
@@ -120,226 +118,21 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
 
     RenderDevice::InitFPSCap();
 
+#if RETRO_PLATFORM == RETRO_iOS
+    RenderDevice::SetAnimationCallback(getDisplayRefresh() > 60 ? 2 : 1, &RSDK::ProcessFrame, nullptr);
+#else
     while (RenderDevice::isRunning) {
-        RenderDevice::ProcessEvents();
-
-        if (!RenderDevice::isRunning)
-            break;
-
-        //while (!RenderDevice::CheckFPSCap()) {
-        //    std::this_thread::sleep_for(100us);
-        //}
-        
-        {
-            RenderDevice::UpdateFPSCap();
-
-            AudioDevice::FrameInit();
-
-#if RETRO_REV02
-            SKU::userCore->FrameInit();
-
-            if (SKU::userCore->CheckEnginePause())
-                continue;
-
-                // Focus Checks
-#if !RETRO_USE_ORIGINAL_CODE
-            if (customSettings.disableFocusPause)
-                engine.focusState = 0;
-            else if (SKU::userCore->CheckFocusLost()) {
-#else
-            if (SKU::userCore->CheckFocusLost()) {
-#endif
-                if (!(engine.focusState & 1)) {
-                    engine.focusState = 1;
-
-#if !RETRO_USE_ORIGINAL_CODE
-                    for (int32 c = 0; c < CHANNEL_COUNT; ++c) {
-                        engine.focusPausedChannel[c] = false;
-                        if (!(channels[c].state & CHANNEL_PAUSED)) {
-                            PauseChannel(c);
-                            engine.focusPausedChannel[c] = true;
-                        }
-                    }
-#else
-                    PauseSound();
-#endif
-                }
-            }
-            else if (engine.focusState) {
-                engine.focusState = 0;
-
-#if !RETRO_USE_ORIGINAL_CODE
-                for (int32 c = 0; c < CHANNEL_COUNT; ++c) {
-                    if (engine.focusPausedChannel[c])
-                        ResumeChannel(c);
-                    engine.focusPausedChannel[c] = false;
-                }
-#else
-                ResumeSound();
-#endif
-            }
-#endif
-
-            if (!engine.initialized || (engine.focusState & 1)) {
-                if (videoSettings.windowState != WINDOWSTATE_ACTIVE)
-                    continue;
-            }
-            else {
-                if (!engine.hardPause) {
-                    // common stuff
-                    foreachStackPtr = foreachStackList;
-#if !RETRO_USE_ORIGINAL_CODE
-                    debugHitboxCount = 0;
-#endif
-
-#if RETRO_USE_MOD_LOADER
-#if RETRO_REV0U
-                    if (((engine.version == 5 && sceneInfo.state != ENGINESTATE_DEVMENU)
-                         || (engine.version != 5 && RSDK::Legacy::gameMode != RSDK::Legacy::ENGINE_DEVMENU))
-                        && devMenu.modsChanged) {
-                        engine.version = 0;
-#else
-                    if (sceneInfo.state != ENGINESTATE_DEVMENU && devMenu.modsChanged) {
-#endif
-                        devMenu.modsChanged = false;
-                        SaveMods();
-                        RefreshModFolders(true);
-                        LoadModSettings();
-                        for (int32 c = 0; c < CHANNEL_COUNT; ++c) StopChannel(c);
-#if RETRO_REV02
-                        forceHardReset = true;
-#endif
-
-#if RETRO_REV0U
-                        int32 preVersion = engine.version;
-
-                        DetectEngineVersion();
-                        if (!engine.version)
-                            engine.version = preVersion;
-
-                        SceneInfo pre      = sceneInfo;
-                        int32 preGameMode  = RSDK::Legacy::gameMode;
-                        int32 preStageMode = RSDK::Legacy::stageMode;
-
-                        // Clear some stuff
-                        sceneInfo.listData     = NULL;
-                        sceneInfo.listCategory = NULL;
-
-                        globalVarsPtr    = NULL;
-                        globalVarsInitCB = NULL;
-
-                        dataStorage[DATASET_STG].entryCount  = 0;
-                        dataStorage[DATASET_STG].usedStorage = 0;
-                        dataStorage[DATASET_SFX].entryCount  = 0;
-                        dataStorage[DATASET_SFX].usedStorage = 0;
-
-                        for (int32 o = 0; o < objectClassCount; ++o) {
-                            if (objectClassList[o].staticVars && *objectClassList[o].staticVars)
-                                (*objectClassList[o].staticVars) = NULL;
-                        }
-
-                        InitEngine();
-
-                        switch (engine.version) {
-                            default:
-                            case 5:
-                                sceneInfo.classCount = pre.classCount;
-                                if (pre.state == ENGINESTATE_LOAD) {
-                                    sceneInfo.activeCategory = pre.activeCategory;
-                                    sceneInfo.listPos        = pre.listPos;
-                                }
-                                break;
-                            case 4:
-                            case 3:
-                                if (preGameMode == RSDK::Legacy::ENGINE_MAINGAME && preStageMode == RSDK::Legacy::STAGEMODE_LOAD) {
-                                    sceneInfo.activeCategory = pre.activeCategory;
-                                    sceneInfo.listPos        = pre.listPos;
-                                }
-                                break;
-                        }
-
-#else
-                        SceneInfo pre = sceneInfo;
-                        InitEngine();
-                        sceneInfo.classCount = pre.classCount;
-                        if (pre.state == ENGINESTATE_LOAD) {
-                            sceneInfo.activeCategory = pre.activeCategory;
-                            sceneInfo.listPos        = pre.listPos;
-                        }
-#endif
-                        RenderDevice::SetWindowTitle();
-                        sceneInfo.state = ENGINESTATE_LOAD;
-                    }
-#endif
-
-                    // update device states and other stuff
-                    ProcessInputDevices();
-
-                    if (engine.devMenu)
-                        ProcessDebugCommands();
-
-#if RETRO_REV0U
-                    switch (engine.version) {
-                        default:
-                        case 5: ProcessEngine(); break;
-                        case 4: Legacy::v4::ProcessEngine(); break;
-                        case 3: Legacy::v3::ProcessEngine(); break;
-                    }
-#else
-                    ProcessEngine();
-#endif
-                }
-
-#if RETRO_PLATFORM == RETRO_ANDROID
-                HideLoadingIcon(); // best spot to do it
-#endif
-
-                if (videoSettings.windowState != WINDOWSTATE_ACTIVE)
-                    continue;
-
-#if !RETRO_USE_ORIGINAL_CODE
-                for (int32 t = 0; t < touchInfo.count; ++t) {
-                    if (touchInfo.down[t]) {
-                        int32 tx = (int32)(touchInfo.x[t] * screens->size.x);
-                        int32 ty = (int32)(touchInfo.y[t] * screens->size.y);
-
-                        if (tx <= 32 && ty <= 32) {
-                            if (engine.devMenu) {
-#if RETRO_REV0U
-                                if (sceneInfo.state != ENGINESTATE_DEVMENU && RSDK::Legacy::gameMode != RSDK::Legacy::ENGINE_DEVMENU)
-#else
-                                if (sceneInfo.state != ENGINESTATE_DEVMENU)
-#endif
-                                    OpenDevMenu();
-                            }
-                        }
-                    }
-                }
-#endif
-                if (engine.inFocus == 1) {
-                    // Uncomment this code to add the build number to dev menu
-                    // overrides the game subtitle, used in switch dev menu
-                    if (currentScreen && sceneInfo.state == ENGINESTATE_DEVMENU) {
-                        // Switch 1.00 build # is 17051, 1.04 is 18403
-                        // char buffer[0x40];
-                        // sprintf(buffer, "Build #%d", 18403);
-                        // DrawRectangle(currentScreen->center.x - 128, currentScreen->center.y - 48, 256, 8, 0x008000, 0xFF, INK_NONE, true);
-                        // DrawDevString(buffer, currentScreen->center.x, currentScreen->center.y - 48, 1, 0xF0F0F0);
-                    }
-
-                    RenderDevice::CopyFrameBuffer();
-                }
-            }
-
-            if ((engine.focusState & 1) || engine.inFocus == 1)
-                RenderDevice::ProcessDimming();
-
-            RenderDevice::FlipScreen();
-        }
+        ProcessFrame(nullptr);
     }
+        
+    Shutdown();
+#endif
+        
+    return 0;
+}
 
+void RSDK::Shutdown() {
     // Shutdown
-
     ReleaseInputDevices();
     AudioDevice::Release();
     RenderDevice::Release(false);
@@ -355,10 +148,224 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
 
     if (engine.consoleEnabled)
         ReleaseConsole();
-
-    return 0;
 }
+    
+void RSDK::ProcessFrame(void* unused) {
+    RenderDevice::ProcessEvents();
 
+    if (!RenderDevice::isRunning) {
+        Shutdown();
+        return;
+    }
+
+    //if(!RenderDevice::CheckFPSCap())
+    //    return;
+    //RenderDevice::UpdateFPSCap();
+
+    AudioDevice::FrameInit();
+
+#if RETRO_REV02
+    SKU::userCore->FrameInit();
+
+    if (SKU::userCore->CheckEnginePause())
+        return;
+
+    // Focus Checks
+#if !RETRO_USE_ORIGINAL_CODE
+    if (customSettings.disableFocusPause)
+        engine.focusState = 0;
+    else if (SKU::userCore->CheckFocusLost()) {
+#else
+    if (SKU::userCore->CheckFocusLost()) {
+#endif
+        if (!(engine.focusState & 1)) {
+            engine.focusState = 1;
+
+#if !RETRO_USE_ORIGINAL_CODE
+            for (int32 c = 0; c < CHANNEL_COUNT; ++c) {
+                engine.focusPausedChannel[c] = false;
+                if (!(channels[c].state & CHANNEL_PAUSED)) {
+                    PauseChannel(c);
+                    engine.focusPausedChannel[c] = true;
+                }
+            }
+#else
+            PauseSound();
+#endif
+        }
+    }
+    else if (engine.focusState) {
+        engine.focusState = 0;
+
+#if !RETRO_USE_ORIGINAL_CODE
+        for (int32 c = 0; c < CHANNEL_COUNT; ++c) {
+            if (engine.focusPausedChannel[c])
+                ResumeChannel(c);
+            engine.focusPausedChannel[c] = false;
+        }
+#else
+        ResumeSound();
+#endif
+    }
+#endif
+
+    if (!engine.initialized || (engine.focusState & 1)) {
+        if (videoSettings.windowState != WINDOWSTATE_ACTIVE)
+            return;
+    }
+    else {
+        if (!engine.hardPause) {
+            // common stuff
+            foreachStackPtr = foreachStackList;
+#if !RETRO_USE_ORIGINAL_CODE
+            debugHitboxCount = 0;
+#endif
+
+#if RETRO_USE_MOD_LOADER
+#if RETRO_REV0U
+            if (((engine.version == 5 && sceneInfo.state != ENGINESTATE_DEVMENU)
+                 || (engine.version != 5 && RSDK::Legacy::gameMode != RSDK::Legacy::ENGINE_DEVMENU))
+                && devMenu.modsChanged) {
+                engine.version = 0;
+#else
+            if (sceneInfo.state != ENGINESTATE_DEVMENU && devMenu.modsChanged) {
+#endif
+                devMenu.modsChanged = false;
+                SaveMods();
+                RefreshModFolders(true);
+                LoadModSettings();
+                for (int32 c = 0; c < CHANNEL_COUNT; ++c) StopChannel(c);
+#if RETRO_REV02
+                forceHardReset = true;
+#endif
+
+#if RETRO_REV0U
+                int32 preVersion = engine.version;
+
+                DetectEngineVersion();
+                if (!engine.version)
+                    engine.version = preVersion;
+
+                SceneInfo pre      = sceneInfo;
+                int32 preGameMode  = RSDK::Legacy::gameMode;
+                int32 preStageMode = RSDK::Legacy::stageMode;
+
+                // Clear some stuff
+                sceneInfo.listData     = NULL;
+                sceneInfo.listCategory = NULL;
+
+                globalVarsPtr    = NULL;
+                globalVarsInitCB = NULL;
+
+                dataStorage[DATASET_STG].entryCount  = 0;
+                dataStorage[DATASET_STG].usedStorage = 0;
+                dataStorage[DATASET_SFX].entryCount  = 0;
+                dataStorage[DATASET_SFX].usedStorage = 0;
+
+                for (int32 o = 0; o < objectClassCount; ++o) {
+                    if (objectClassList[o].staticVars && *objectClassList[o].staticVars)
+                        (*objectClassList[o].staticVars) = NULL;
+                }
+
+                InitEngine();
+
+                switch (engine.version) {
+                    default:
+                    case 5:
+                        sceneInfo.classCount = pre.classCount;
+                        if (pre.state == ENGINESTATE_LOAD) {
+                            sceneInfo.activeCategory = pre.activeCategory;
+                            sceneInfo.listPos        = pre.listPos;
+                        }
+                        break;
+                    case 4:
+                    case 3:
+                        if (preGameMode == RSDK::Legacy::ENGINE_MAINGAME && preStageMode == RSDK::Legacy::STAGEMODE_LOAD) {
+                            sceneInfo.activeCategory = pre.activeCategory;
+                            sceneInfo.listPos        = pre.listPos;
+                        }
+                        break;
+                }
+
+#else
+                SceneInfo pre = sceneInfo;
+                InitEngine();
+                sceneInfo.classCount = pre.classCount;
+                if (pre.state == ENGINESTATE_LOAD) {
+                    sceneInfo.activeCategory = pre.activeCategory;
+                    sceneInfo.listPos        = pre.listPos;
+                }
+#endif
+                RenderDevice::SetWindowTitle();
+                sceneInfo.state = ENGINESTATE_LOAD;
+            }
+#endif
+
+            // update device states and other stuff
+            ProcessInputDevices();
+
+            if (engine.devMenu)
+                ProcessDebugCommands();
+
+#if RETRO_REV0U
+            switch (engine.version) {
+                default:
+                case 5: ProcessEngine(); break;
+                case 4: Legacy::v4::ProcessEngine(); break;
+                case 3: Legacy::v3::ProcessEngine(); break;
+            }
+#else
+            ProcessEngine();
+#endif
+        }
+
+#if RETRO_PLATFORM == RETRO_ANDROID
+        HideLoadingIcon(); // best spot to do it
+#endif
+
+        if (videoSettings.windowState != WINDOWSTATE_ACTIVE)
+            return;
+
+#if !RETRO_USE_ORIGINAL_CODE
+        for (int32 t = 0; t < touchInfo.count; ++t) {
+            if (touchInfo.down[t]) {
+                int32 tx = (int32)(touchInfo.x[t] * screens->size.x);
+                int32 ty = (int32)(touchInfo.y[t] * screens->size.y);
+
+                if (tx <= 32 && ty <= 32) {
+                    if (engine.devMenu) {
+#if RETRO_REV0U
+                        if (sceneInfo.state != ENGINESTATE_DEVMENU && RSDK::Legacy::gameMode != RSDK::Legacy::ENGINE_DEVMENU)
+#else
+                        if (sceneInfo.state != ENGINESTATE_DEVMENU)
+#endif
+                            OpenDevMenu();
+                    }
+                }
+            }
+        }
+#endif
+        if (engine.inFocus == 1) {
+            // Uncomment this code to add the build number to dev menu
+            // overrides the game subtitle, used in switch dev menu
+            if (currentScreen && sceneInfo.state == ENGINESTATE_DEVMENU) {
+                // Switch 1.00 build # is 17051, 1.04 is 18403
+                // char buffer[0x40];
+                // sprintf(buffer, "Build #%d", 18403);
+                // DrawRectangle(currentScreen->center.x - 128, currentScreen->center.y - 48, 256, 8, 0x008000, 0xFF, INK_NONE, true);
+                // DrawDevString(buffer, currentScreen->center.x, currentScreen->center.y - 48, 1, 0xF0F0F0);
+            }
+
+            RenderDevice::CopyFrameBuffer();
+        }
+    }
+
+    if ((engine.focusState & 1) || engine.inFocus == 1)
+        RenderDevice::ProcessDimming();
+
+    RenderDevice::FlipScreen();
+}
+    
 void RSDK::ProcessEngine()
 {
     switch (sceneInfo.state) {

@@ -641,7 +641,10 @@ extern LogicLinkHandle linkGameLogic;
 // ============================
 
 int32 RunRetroEngine(int32 argc, char *argv[]);
+
+void ProcessFrame(void*);
 void ProcessEngine();
+void Shutdown();
 
 void ParseArguments(int32 argc, char *argv[]);
 

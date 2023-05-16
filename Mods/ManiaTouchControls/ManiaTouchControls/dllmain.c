@@ -38,7 +38,7 @@ DLLExport bool32 LinkModLogic(EngineInfo *info, const char *id);
 
 void InitModAPI(void)
 {
-    int extraWidth = (ScreenInfo->size.x - 424) / 3;
+    int extraWidth = (int)((ScreenInfo->size.x - 424) * 0.35);
     
     // Setup Config
     config.vDPadSize     = Mod.GetSettingsFloat("", "Config:vDPadSize", 1.0);

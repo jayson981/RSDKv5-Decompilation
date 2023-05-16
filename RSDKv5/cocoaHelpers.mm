@@ -1,9 +1,10 @@
 #ifdef __APPLE__
 
+#include <SDL2/SDL.h>
+#include "cocoaHelpers.hpp"
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#include "cocoaHelpers.hpp"
-#include <SDL2/SDL.h>
 
 const char* getResourcesPath(void)
 {
@@ -63,4 +64,12 @@ void showMissingDataFileAlert() {
     }
 }
 
+
+int getDisplayRefresh() {
+    UIScreen* screen = [UIScreen mainScreen];
+    if([screen respondsToSelector:@selector(maximumFramesPerSecond)])
+        return (int)[screen maximumFramesPerSecond];
+    
+    return 60;
+}
 #endif
