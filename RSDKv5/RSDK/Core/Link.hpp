@@ -436,10 +436,7 @@ private:
 public:
 #else
     typedef void *Handle;
-#if RETRO_PLATFORM == RETRO_OSX
-    static constexpr const char *prefix    = "lib";
-    static constexpr const char *extention = ".dylib";
-#elif RETRO_PLATFORM == RETRO_iOS
+#if RETRO_PLATFORM == RETRO_iOS || RETRO_PLATFORM == RETRO_OSX
     static constexpr const char *prefix    = "";
     static constexpr const char *extention = "";
 #else
@@ -460,7 +457,7 @@ public:
             path = path.substr(path.find_last_of('/') + 1);
         path = "lib" + path;
 #endif // ! RETRO_PLATFORM == ANDROID
-#if RETRO_PLATFORM == RETRO_iOS
+#if RETRO_PLATFORM == RETRO_iOS || RETRO_PLATFORM == RETRO_OSX
         path = path + ".framework/" + path;
 #endif
         

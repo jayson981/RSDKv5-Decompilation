@@ -1,20 +1,26 @@
 #ifdef __APPLE__
 
 #include <SDL2/SDL.h>
-#include "cocoaHelpers.hpp"
 
 #import <Foundation/Foundation.h>
+
+#if TARGET_OS_OSX
+#import <AppKit/AppKit.h>
+#else
 #import <UIKit/UIKit.h>
+#endif
+
+#include "cocoaHelpers.hpp"
 
 const char* getResourcesPath(void)
 {
-    static char pathStorage[256] = {0};
+    static char pathStorage[1024] = {0};
     
     if (!strlen(pathStorage)) {
         @autoreleasepool {
             NSFileManager *fileManager = [[NSFileManager alloc] init];
             NSArray *urls = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-            strncpy(pathStorage, [urls[0] fileSystemRepresentation], 256);
+            strncpy(pathStorage, [urls[0] fileSystemRepresentation], sizeof(pathStorage));
         }
     }
     
@@ -23,14 +29,14 @@ const char* getResourcesPath(void)
 
 const char* getAppResourcesPath(void)
 {
-    static char pathStorage[256] = {0};
+    static char pathStorage[1024] = {0};
     
     if (!strlen(pathStorage)) {
         @autoreleasepool {
             NSString *resourceDirectory = [[NSBundle mainBundle] resourcePath];
             
             char* str = (char*)[resourceDirectory UTF8String];
-            strncpy(pathStorage, str, 256);
+            strncpy(pathStorage, str, sizeof(pathStorage));
             
         }
     }
@@ -60,16 +66,18 @@ void showMissingDataFileAlert() {
     
     int buttonid;
     if (SDL_ShowMessageBox(&messageboxdata, &buttonid) < 0) {
-        SDL_Log("error displaying message box");
+        SDL_Log("error displaying message box??");
     }
 }
 
 
 int getDisplayRefresh() {
+#if !TARGET_OS_MACCATALYST && !TARGET_OS_OSX
     UIScreen* screen = [UIScreen mainScreen];
     if([screen respondsToSelector:@selector(maximumFramesPerSecond)])
         return (int)[screen maximumFramesPerSecond];
-    
+#endif
     return 60;
 }
 #endif
+ 

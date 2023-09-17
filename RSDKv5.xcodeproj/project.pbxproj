@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F203FD912AA1433800F7B17D /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F153A52A070C3400C57723 /* SDL2.framework */; platformFilter = ios; };
+		F203FD922AA1433800F7B17D /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F153A52A070C3400C57723 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F23038452A1034C0002EB2D9 /* SDL_uikit_main.c in Sources */ = {isa = PBXBuildFile; fileRef = F23038442A1034C0002EB2D9 /* SDL_uikit_main.c */; };
 		F2359A6E2A103A640009AB5E /* iniparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23597AF2A103A630009AB5E /* iniparser.cpp */; };
 		F2359A702A103A640009AB5E /* dictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23597B32A103A630009AB5E /* dictionary.cpp */; };
@@ -14,17 +16,14 @@
 		F2359CEB2A103A800009AB5E /* miniz.c in Sources */ = {isa = PBXBuildFile; fileRef = F2359CE82A103A800009AB5E /* miniz.c */; };
 		F2359CEC2A1040420009AB5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2FD448F28C3E080003A887A /* Assets.xcassets */; };
 		F25BAC0F2A0FAD830004BA24 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F25BAC0E2A0FAD830004BA24 /* Settings.bundle */; };
-		F267723C2A07189D000AEBE5 /* ManiaTouchControls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F26771A52A07182E000AEBE5 /* ManiaTouchControls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F267723C2A07189D000AEBE5 /* ManiaTouchControls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F26771A52A07182E000AEBE5 /* ManiaTouchControls.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F267723D2A07189D000AEBE5 /* UltrawideMania.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F155562A07174B00C57723 /* UltrawideMania.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F26780F32A0721EE000AEBE5 /* SonicMania.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F26772572A07208F000AEBE5 /* SonicMania.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F26780F82A072EF6000AEBE5 /* Data in Resources */ = {isa = PBXBuildFile; fileRef = F26780F72A072EEE000AEBE5 /* Data */; };
-		F294DAFF2A073CF200E4BABA /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F153A52A070C3400C57723 /* SDL2.framework */; };
-		F2B759F92A0734FA00710D50 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B759DD2A07341900710D50 /* libogg.a */; platformFilters = (ios, maccatalyst, macos, ); };
-		F2B759FA2A0734FB00710D50 /* libtheoradec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B759F82A07348900710D50 /* libtheoradec.a */; platformFilters = (ios, maccatalyst, macos, ); };
-		F2B759FB2A0734FB00710D50 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B759E82A07342000710D50 /* libvorbis.a */; platformFilters = (ios, maccatalyst, macos, ); };
+		F2B759F92A0734FA00710D50 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B759DD2A07341900710D50 /* libogg.a */; };
+		F2B759FA2A0734FB00710D50 /* libtheoradec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B759F82A07348900710D50 /* libtheoradec.a */; };
+		F2B759FB2A0734FB00710D50 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B759E82A07342000710D50 /* libvorbis.a */; };
 		F2C0B5882A0FC3D300783F5B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C0B5702A0FC3D200783F5B /* UIKit.framework */; platformFilter = ios; };
-		F2F153B72A070C6300C57723 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F153A52A070C3400C57723 /* SDL2.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F2F153BB2A070C7500C57723 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F153A52A070C3400C57723 /* SDL2.framework */; platformFilter = ios; };
 		F2FD449328C3E080003A887A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2FD449128C3E080003A887A /* LaunchScreen.storyboard */; platformFilter = ios; };
 		F2FD44F628C3E395003A887A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FD44F428C3E395003A887A /* main.cpp */; };
 		F2FD44FB28C3E430003A887A /* cocoaHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2FD44F928C3E42F003A887A /* cocoaHelpers.mm */; };
@@ -231,7 +230,7 @@
 				F26780F32A0721EE000AEBE5 /* SonicMania.framework in Embed Frameworks */,
 				F267723C2A07189D000AEBE5 /* ManiaTouchControls.framework in Embed Frameworks */,
 				F267723D2A07189D000AEBE5 /* UltrawideMania.framework in Embed Frameworks */,
-				F2F153B72A070C6300C57723 /* SDL2.framework in Embed Frameworks */,
+				F203FD922AA1433800F7B17D /* SDL2.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,6 +498,14 @@
 		F26772522A07208F000AEBE5 /* SonicMania.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SonicMania.xcodeproj; path = Game/SonicMania.xcodeproj; sourceTree = "<group>"; };
 		F26780F72A072EEE000AEBE5 /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
 		F26780FA2A0731B6000AEBE5 /* RSDKv5.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RSDKv5.entitlements; sourceTree = "<group>"; };
+		F26D38672AA12A2000A50E97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F26D38682AA12A2000A50E97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F26D386A2AA12A2000A50E97 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F26D386B2AA12A2000A50E97 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F26D386D2AA12A2200A50E97 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F26D38702AA12A2200A50E97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F26D38722AA12A2200A50E97 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F26D38742AA12A2200A50E97 /* RSDKv5_mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RSDKv5_mac.entitlements; sourceTree = "<group>"; };
 		F2B759D72A07341900710D50 /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = dependencies/ios/ogg/ios/Ogg.xcodeproj; sourceTree = "<group>"; };
 		F2B759DE2A07342000710D50 /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = dependencies/ios/vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
 		F2B759ED2A07348900710D50 /* Theora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Theora.xcodeproj; path = dependencies/ios/theora/macosx/Theora.xcodeproj; sourceTree = "<group>"; };
@@ -595,12 +602,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F203FD912AA1433800F7B17D /* SDL2.framework in Frameworks */,
 				F2B759F92A0734FA00710D50 /* libogg.a in Frameworks */,
 				F2C0B5882A0FC3D300783F5B /* UIKit.framework in Frameworks */,
 				F2B759FA2A0734FB00710D50 /* libtheoradec.a in Frameworks */,
-				F294DAFF2A073CF200E4BABA /* SDL2.framework in Frameworks */,
 				F2B759FB2A0734FB00710D50 /* libvorbis.a in Frameworks */,
-				F2F153BB2A070C7500C57723 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -990,6 +996,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F26D38662AA12A2000A50E97 /* RSDKv5-mac */ = {
+			isa = PBXGroup;
+			children = (
+				F26D38672AA12A2000A50E97 /* AppDelegate.h */,
+				F26D38682AA12A2000A50E97 /* AppDelegate.m */,
+				F26D386A2AA12A2000A50E97 /* ViewController.h */,
+				F26D386B2AA12A2000A50E97 /* ViewController.m */,
+				F26D386D2AA12A2200A50E97 /* Assets.xcassets */,
+				F26D386F2AA12A2200A50E97 /* Main.storyboard */,
+				F26D38722AA12A2200A50E97 /* main.m */,
+				F26D38742AA12A2200A50E97 /* RSDKv5_mac.entitlements */,
+			);
+			path = "RSDKv5-mac";
+			sourceTree = "<group>";
+		};
 		F2B759D82A07341900710D50 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1067,6 +1088,7 @@
 			isa = PBXGroup;
 			children = (
 				F26780F72A072EEE000AEBE5 /* Data */,
+				F26D38662AA12A2000A50E97 /* RSDKv5-mac */,
 				F2FD44BC28C3E266003A887A /* Frameworks */,
 				F2F153BC2A070C7F00C57723 /* Mods */,
 				F2FD447E28C3E07E003A887A /* Products */,
@@ -1626,6 +1648,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		F26D386F2AA12A2200A50E97 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F26D38702AA12A2200A50E97 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		F2FD449128C3E080003A887A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1794,6 +1824,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = org.wamwoowam.RSDKv5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1851,6 +1882,7 @@
 					"$(PROJECT_DIR)",
 				);
 				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = org.wamwoowam.RSDKv5;
 				PRODUCT_NAME = "$(TARGET_NAME)";

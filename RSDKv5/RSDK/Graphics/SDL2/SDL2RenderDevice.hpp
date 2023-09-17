@@ -43,16 +43,18 @@ public:
     static bool InitShaders();
     static void LoadShader(const char *fileName, bool32 linear);
     
+#if TARGET_OS_IPHONE
     static void SetAnimationCallback(int interval, void (SDLCALL *callback)(void*), void *callbackParam);
-
+#endif
+    
     static inline void ShowCursor(bool32 shown) { SDL_ShowCursor(shown); }
     static inline bool GetCursorPos(Vector2 *pos)
     {
-#if RETRO_PLATFORM == RETRO_iOS
+#if TARGET_OS_IPHONE
         return false;
 #else
         SDL_GetMouseState(&pos->x, &pos->y);
-        return true;
+        return true;        
 #endif
     };
 
