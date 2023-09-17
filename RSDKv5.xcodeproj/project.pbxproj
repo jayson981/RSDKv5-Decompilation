@@ -498,14 +498,6 @@
 		F26772522A07208F000AEBE5 /* SonicMania.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SonicMania.xcodeproj; path = Game/SonicMania.xcodeproj; sourceTree = "<group>"; };
 		F26780F72A072EEE000AEBE5 /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
 		F26780FA2A0731B6000AEBE5 /* RSDKv5.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RSDKv5.entitlements; sourceTree = "<group>"; };
-		F26D38672AA12A2000A50E97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		F26D38682AA12A2000A50E97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F26D386A2AA12A2000A50E97 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F26D386B2AA12A2000A50E97 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		F26D386D2AA12A2200A50E97 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F26D38702AA12A2200A50E97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F26D38722AA12A2200A50E97 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F26D38742AA12A2200A50E97 /* RSDKv5_mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RSDKv5_mac.entitlements; sourceTree = "<group>"; };
 		F2B759D72A07341900710D50 /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = dependencies/ios/ogg/ios/Ogg.xcodeproj; sourceTree = "<group>"; };
 		F2B759DE2A07342000710D50 /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = dependencies/ios/vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
 		F2B759ED2A07348900710D50 /* Theora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Theora.xcodeproj; path = dependencies/ios/theora/macosx/Theora.xcodeproj; sourceTree = "<group>"; };
@@ -996,21 +988,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F26D38662AA12A2000A50E97 /* RSDKv5-mac */ = {
-			isa = PBXGroup;
-			children = (
-				F26D38672AA12A2000A50E97 /* AppDelegate.h */,
-				F26D38682AA12A2000A50E97 /* AppDelegate.m */,
-				F26D386A2AA12A2000A50E97 /* ViewController.h */,
-				F26D386B2AA12A2000A50E97 /* ViewController.m */,
-				F26D386D2AA12A2200A50E97 /* Assets.xcassets */,
-				F26D386F2AA12A2200A50E97 /* Main.storyboard */,
-				F26D38722AA12A2200A50E97 /* main.m */,
-				F26D38742AA12A2200A50E97 /* RSDKv5_mac.entitlements */,
-			);
-			path = "RSDKv5-mac";
-			sourceTree = "<group>";
-		};
 		F2B759D82A07341900710D50 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1088,7 +1065,6 @@
 			isa = PBXGroup;
 			children = (
 				F26780F72A072EEE000AEBE5 /* Data */,
-				F26D38662AA12A2000A50E97 /* RSDKv5-mac */,
 				F2FD44BC28C3E266003A887A /* Frameworks */,
 				F2F153BC2A070C7F00C57723 /* Mods */,
 				F2FD447E28C3E07E003A887A /* Products */,
@@ -1648,14 +1624,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F26D386F2AA12A2200A50E97 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F26D38702AA12A2200A50E97 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F2FD449128C3E080003A887A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

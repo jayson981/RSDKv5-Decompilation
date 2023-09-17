@@ -780,13 +780,13 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
                 int32 sec = iniparser_getnsec(ini);
                 if (sec) {
                     for (int32 i = 0; i < sec; ++i) {
-                        const char *secn  = iniparser_getsecname(modSettingsIni, i);
-                        int32 len         = iniparser_getsecnkeys(modSettingsIni, secn);
+                        const char *secn  = iniparser_getsecname(ini, i);
+                        int32 len         = iniparser_getsecnkeys(ini, secn);
                         const char **keys = new const char *[len];
-                        iniparser_getseckeys(modSettingsIni, secn, keys);
+                        iniparser_getseckeys(ini, secn, keys);
                         map<string, string> secset;
                         for (int32 j = 0; j < len; ++j)
-                            secset.insert(pair<string, string>(keys[j] + strlen(secn) + 1, iniparser_getstring(modSettingsIni, keys[j], "")));
+                            secset.insert(pair<string, string>(keys[j] + strlen(secn) + 1, iniparser_getstring(ini, keys[j], "")));
                         info->settings.insert(pair<string, map<string, string>>(secn, secset));
                         delete[] keys;
                     }
@@ -794,11 +794,11 @@ bool32 RSDK::LoadMod(ModInfo *info, std::string modsPath, std::string folder, bo
                 else {
                     // either you use categories or you don't, i don't make the rules
                     map<string, string> secset;
-                    for (int32 j = 0; j < modSettingsIni->n; ++j)
-                        secset.insert(pair<string, string>(modSettingsIni->key[j] + 1, modSettingsIni->val[j]));
+                    for (int32 j = 0; j < ini->n; ++j)
+                        secset.insert(pair<string, string>(ini->key[j] + 1, ini->val[j]));
                     info->settings.insert(pair<string, map<string, string>>("", secset));
                 }
-                iniparser_freedict(modSettingsIni);
+                iniparser_freedict(ini);
             }
             // CONFIG
             loadCfg(info, modDir + "/modConfig.cfg");
