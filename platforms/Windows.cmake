@@ -1,6 +1,6 @@
 project(RetroEngine)
 
-add_executable(RetroEngine ${RETRO_FILES})
+add_executable(RetroEngine WIN32 ${RETRO_FILES})
 
 set(RETRO_SUBSYSTEM "DX9" CACHE STRING "The subsystem to use")
 option(USE_MINIAUDIO "Whether or not to use MiniAudio or default to XAudio." OFF)
@@ -90,7 +90,7 @@ elseif(RETRO_SUBSYSTEM STREQUAL "VK")
 
     find_package(Vulkan REQUIRED)
 
-    target_compile_definitions(RetroEngine VULKAN_USE_GLFW=1)
+    target_compile_definitions(RetroEngine PRIVATE VULKAN_USE_GLFW=1)
     target_link_libraries(RetroEngine
         glfw
         Vulkan::Vulkan
@@ -118,16 +118,8 @@ target_link_libraries(RetroEngine
     comctl32
 )
 
-if(RETRO_MOD_LOADER)
-    set_target_properties(RetroEngine PROPERTIES
-        CXX_STANDARD 17
-        CXX_STANDARD_REQUIRED ON
-    )
-endif()
-
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(RetroEngine PRIVATE -Wno-microsoft-cast -Wno-microsoft-exception-spec)
 endif()
     
 target_sources(RetroEngine PRIVATE ${RETRO_NAME}/${RETRO_NAME}.rc)
-target_link_options(RetroEngine PRIVATE /subsystem:windows)
