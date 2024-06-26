@@ -491,9 +491,9 @@ public:
         // put it again!
         path += extention;
 
-        Handle ret = NULL;
+        Handle ret = nullptr;
         if (prefix) {
-            int32 last = path.find_last_of('/') + 1;
+            auto last = path.find_last_of('/') + 1;
             if (last == std::string::npos + 1)
                 ret = PlatformLoadLibrary(prefix + path);
             else

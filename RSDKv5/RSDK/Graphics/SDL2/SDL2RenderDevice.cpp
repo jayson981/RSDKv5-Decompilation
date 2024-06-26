@@ -29,10 +29,6 @@ bool RenderDevice::Init()
     int flags = SDL_WINDOW_METAL;
 
 #if RETRO_PLATFORM == RETRO_ANDROID || RETRO_PLATFORM == RETRO_iOS
-#if RETRO_PLATFORM == RETRO_iOS
-#if !TARGET_OS_MACCATALYST
-#endif
-    
     videoSettings.windowed = false;
     SDL_DisplayMode dm;
     SDL_GetDesktopDisplayMode(0, &dm);
@@ -44,9 +40,7 @@ bool RenderDevice::Init()
 
     videoSettings.windowWidth = ((float)SCREEN_YSIZE * h / w);
     
-#if RETRO_PLATFORM == RETRO_iOS
-#endif
-#endif
+    flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 #elif RETRO_PLATFORM == RETRO_SWITCH
     videoSettings.windowed     = false;
     videoSettings.windowWidth  = 1920;
